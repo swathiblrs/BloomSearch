@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bloom-filter-demo"
+version = "0.1.0"
+description = "A dependency-free Bloom filter implementation with a command-line demo"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Swathi BS" }]
+
+[project.scripts]
+bloom-filter = "bloom_filter.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["bloom_filter*"]
+
