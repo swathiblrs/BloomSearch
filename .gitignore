@@ -6,4 +6,5 @@ dist/
 build/
 *.egg-info/
 *.bloom.json
-
+*.bloom-index.json
+.env

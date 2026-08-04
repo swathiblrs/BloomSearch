@@ -1,0 +1,27 @@
+[
+  {
+    "id": "bloom-intro",
+    "title": "Introduction to Bloom Filters",
+    "text": "A Bloom filter is a memory-efficient probabilistic data structure for set membership. It may return false positives but does not return false negatives for inserted values.",
+    "url": "https://example.test/bloom-filter"
+  },
+  {
+    "id": "crawler",
+    "title": "Avoiding Duplicate URLs in a Web Crawler",
+    "text": "A crawler can place normalized visited URLs in a Bloom filter. Definite misses are fetched, while probable matches are verified against persistent storage.",
+    "url": "https://example.test/web-crawler"
+  },
+  {
+    "id": "bm25",
+    "title": "BM25 Keyword Ranking",
+    "text": "BM25 ranks documents using term frequency, inverse document frequency, and document length normalization.",
+    "url": "https://example.test/bm25"
+  },
+  {
+    "id": "lora",
+    "title": "Hosted LoRA Search Reranking",
+    "text": "A remotely hosted model with LoRA adapters can assign relevance scores to query and document pairs without running a model on the search server.",
+    "url": "https://example.test/lora-reranking"
+  }
+]
+

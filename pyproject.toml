@@ -13,7 +13,7 @@ authors = [{ name = "Swathi BS" }]
 
 [project.scripts]
 bloom-filter = "bloom_filter.cli:main"
+bloom-search = "bloom_search.cli:main"
 
 [tool.setuptools.packages.find]
-include = ["bloom_filter*"]
-
+include = ["bloom_filter*", "bloom_search*"]

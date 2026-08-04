@@ -1,87 +1,320 @@
-# Bloom Filter in Python
+# 🔎 BloomSearch — Bloom Filter Accelerated AI Search Engine
 
-A compact, dependency-free implementation of the probabilistic data structure described in `BLOOM FILTER.pptx`.
+An API-first intelligent search engine that uses Bloom filters to reduce unnecessary index work, BM25 for keyword retrieval, NLP tokenization, and remotely hosted LoRA/QLoRA-capable language models for query rewriting, semantic reranking, and result explanations.
 
-A Bloom filter answers one question very quickly:
+## 🌟 Why This Project Exists
 
-- **Definitely not present** — at least one required bit is zero.
-- **Probably present** — all required bits are one, although this can be a false positive.
+Search engines spend time revisiting duplicate content, scanning index segments that cannot contain the requested terms, and ranking documents that are only weakly related to the user's intent.
 
-Inserted values do not produce false negatives as long as the filter is not modified outside this library. Standard Bloom filters do not support deletion because clearing a shared bit can make another inserted value disappear.
+BloomSearch demonstrates how a memory-efficient probabilistic data structure can improve that pipeline without replacing the search index or trusting probabilistic matches as final answers.
 
-## Features
+The project can:
 
-- Automatically calculates the optimal bit-array size and number of hashes.
-- Stores bits compactly in a `bytearray`.
-- Uses deterministic BLAKE2b double hashing.
-- Reports fill ratio and estimated false-positive probability.
-- Saves and reloads filters as versioned JSON files.
-- Includes a CLI, slide-inspired demo, and unit tests.
+- Detect exact duplicate documents before indexing
+- Divide documents into independently searchable index segments
+- Use a Bloom filter to skip segments that definitely lack query terms
+- Rank keyword matches with BM25
+- Rewrite unclear queries through a hosted language-model API
+- Rerank candidate documents through the same hosted API
+- Generate a short relevance explanation for every returned result
+- Connect to a provider-hosted LoRA or QLoRA fine-tuned model
+- Persist indexes as portable JSON files
+- Report Bloom-filter capacity, fill ratio, and estimated false-positive rate
 
-## Quick start
+## 🏗️ Architecture Overview
 
-Python 3.10 or newer is required. No third-party runtime packages are needed.
+High-level search workflow:
+
+```text
+User query
+    -> Hosted model API rewrites and expands the query
+    -> Segment Bloom filters skip definitely irrelevant segments
+    -> BM25 retrieves keyword-matched candidate documents
+    -> Hosted model API reranks candidates by semantic relevance
+    -> BloomSearch returns ranked results with explanations
+```
+
+Indexing workflow:
+
+```text
+JSON documents
+    -> Normalize and fingerprint content
+    -> Bloom-filter duplicate precheck
+    -> Exact verification of probable duplicates
+    -> NLP tokenization
+    -> Build segmented inverted index and term Bloom filters
+    -> Save portable search index
+```
+
+Core stack:
+
+- Python 3.10+
+- Custom Bloom filter backed by a compact `bytearray`
+- BLAKE2b double hashing for deterministic Bloom-filter positions
+- SHA-256 content fingerprints for document deduplication
+- Regular-expression NLP tokenization
+- Segmented inverted index
+- BM25 keyword ranking
+- OpenAI-compatible `/chat/completions` API protocol
+- User-selected hosted model or hosted LoRA/QLoRA adapter
+- Standard-library HTTP and JSON support
+- `unittest` test suite with a fake hosted-model client
+
+## 🤖 Key Features
+
+### 🌸 Bloom-Filter Search Optimization
+
+- Automatically calculates the bit-array size and hash count from capacity and target error rate
+- Stores filter state compactly as bits rather than Python objects
+- Assigns an independent term Bloom filter to every index segment
+- Skips a segment when all rewritten query terms are definitely absent
+- Uses Bloom filters only as a precheck because probable matches may be false positives
+- Reports bit usage, fill ratio, hash count, and estimated current false-positive probability
+
+### 🔤 NLP and BM25 Retrieval
+
+- Normalizes text to lowercase searchable tokens
+- Indexes document titles and content
+- Records per-document term frequencies and document lengths
+- Calculates inverse document frequency across all segments
+- Applies BM25 term-frequency and length normalization
+- Returns the strongest candidates before an API reranking call
+
+### 🧠 API-Hosted LLM Reranking
+
+- Sends no model weights or inference work to the local machine
+- Rewrites informal queries while preserving user intent and named entities
+- Scores BM25 candidates from `0` to `1` by semantic relevance
+- Produces short result explanations
+- Rejects invented document identifiers from model responses
+- Supports JSON returned directly or inside a Markdown code fence
+- Keeps the model provider configurable through environment variables
+
+### 🧩 LoRA and QLoRA Support
+
+BloomSearch does not train or load adapters locally. Users can fine-tune and deploy an adapter with their preferred cloud platform, then configure the deployed model ID.
+
+Recommended fine-tuning tasks:
+
+- **Query rewriting:** informal request → focused search query
+- **Search reranking:** query and document → relevance score and explanation
+- **Domain adaptation:** general search query → terminology appropriate for a selected document collection
+
+At runtime, BloomSearch treats a hosted base model, LoRA adapter, and QLoRA-trained model in the same way: each is a remote model identifier behind an API.
+
+## 💡 Example Use Cases
+
+Example searches:
+
+- "How can a crawler avoid visiting the same URL twice?"
+- "What data structure can check membership without storing every object?"
+- "How does BM25 rank keyword matches?"
+- "Can a hosted LoRA model improve search-result ranking?"
+- "Why can a Bloom filter say an absent term might exist?"
+
+Useful project domains include:
+
+| Domain | Search Collection | BloomSearch Contribution |
+|---|---|---|
+| Technical documentation | Manuals and API guides | Skips irrelevant index segments and reranks matching pages |
+| Academic search | Paper titles and abstracts | Removes exact duplicates and improves query wording |
+| News archives | Articles and summaries | Filters repeated content and ranks topical matches |
+| Product catalogs | Product descriptions | Rewrites natural-language shopping queries |
+| Educational search | Notes and course material | Explains why each lesson matches the question |
+
+## 📂 Project Structure
+
+```text
+bloom_filter/
+ ├── core.py              # Bloom filter implementation and persistence
+ ├── cli.py               # Standalone Bloom-filter commands
+ └── __main__.py          # python -m bloom_filter entry point
+
+bloom_search/
+ ├── api.py               # Provider-neutral hosted-model API client
+ ├── cli.py               # Index build, statistics, and search commands
+ ├── engine.py            # Query rewriting and candidate reranking workflow
+ ├── index.py             # Segmented index, deduplication, tokenization, and BM25
+ └── __main__.py          # python -m bloom_search entry point
+
+examples/
+ └── documents.json       # Small sample search collection
+
+tests/
+ ├── test_bloom_filter.py # Data-structure and persistence tests
+ └── test_bloom_search.py # Index, BM25, Bloom skipping, and API workflow tests
+```
+
+## 🚀 Getting Started
+
+### ✅ Prerequisites
+
+- Python 3.10 or newer
+- An account with a compatible hosted model provider
+- An API key
+- A hosted model or adapter that can follow JSON output instructions
+- An OpenAI-compatible `/chat/completions` endpoint
+
+No local LLM server, GPU, PyTorch installation, tokenizer download, or model download is required.
+
+### 🔧 Local Setup
+
+Clone the repository:
 
 ```bash
-python -m bloom_filter demo
+git clone https://github.com/swathiblrs/Bloom-Filter.git
+cd Bloom-Filter
+```
+
+Optionally install the package in editable mode:
+
+```bash
+python -m pip install -e .
+```
+
+Configure the hosted model API:
+
+```bash
+export BLOOMSEARCH_API_BASE="https://your-provider.example/v1"
+export BLOOMSEARCH_API_KEY="your-api-key"
+export BLOOMSEARCH_MODEL="your-hosted-model-or-adapter-id"
+```
+
+Do not commit API keys. The `.env` filename is ignored, but BloomSearch reads variables from the process environment rather than loading `.env` automatically.
+
+The provider is intentionally not hard-coded. Any service may be used if it accepts OpenAI-style chat messages at `/chat/completions` and returns the standard `choices[0].message.content` response shape.
+
+## 🔍 Run BloomSearch
+
+Build an index from the included sample documents:
+
+```bash
+python -m bloom_search build \
+  examples/documents.json \
+  demo.bloom-index.json \
+  --segment-size 2
+```
+
+Inspect the index and its segment Bloom filters:
+
+```bash
+python -m bloom_search stats demo.bloom-index.json
+```
+
+Search through the configured hosted model API:
+
+```bash
+python -m bloom_search search \
+  demo.bloom-index.json \
+  "how can crawlers avoid visiting the same URL"
+```
+
+Search is intentionally unavailable without API configuration. Index building and statistics do not require an API call.
+
+## 📄 Input Document Format
+
+Collections are JSON arrays. Every document needs an `id`, `title`, and `text`; `url` is optional.
+
+```json
+[
+  {
+    "id": "crawler",
+    "title": "Avoiding Duplicate URLs in a Web Crawler",
+    "text": "A crawler can use a Bloom filter to precheck visited URLs.",
+    "url": "https://example.test/web-crawler"
+  }
+]
+```
+
+## 🔌 Hosted Model Contract
+
+The query-rewrite call asks for:
+
+```json
+{
+  "rewritten_query": "How do Bloom filters prevent duplicate crawler URLs?"
+}
+```
+
+The reranking call asks for:
+
+```json
+{
+  "results": [
+    {
+      "id": "crawler",
+      "relevance_score": 0.98,
+      "explanation": "This document directly describes visited-URL filtering."
+    }
+  ]
+}
+```
+
+BloomSearch clamps relevance scores to the range `0`–`1`, ignores unknown IDs, and removes duplicate model results.
+
+## 🧪 Testing
+
+Run the complete automated test suite:
+
+```bash
 python -m unittest discover -s tests -v
 ```
 
-Create a persistent filter for 10,000 expected values with a 1% target false-positive rate:
+The test suite validates:
+
+- Bloom-filter sizing formulas
+- No false negatives for inserted values
+- String and byte membership behavior
+- Filter serialization and restoration
+- Parameter validation
+- BM25 result ordering
+- Bloom-filter index-segment skipping
+- Exact duplicate-document removal
+- Search-index persistence
+- API-based query rewriting and reranking
+- Hosted-model interactions through a fake client
+
+Tests do not contact an external provider and do not run a local language model.
+
+## 🧮 Standalone Bloom-Filter CLI
+
+Run the original presentation example:
+
+```bash
+python -m bloom_filter demo
+```
+
+Create and query a persistent filter:
 
 ```bash
 python -m bloom_filter create usernames.bloom.json --capacity 10000 --error-rate 0.01
-python -m bloom_filter add usernames.bloom.json swathi disha divyashree deeksha
+python -m bloom_filter add usernames.bloom.json swathi disha
 python -m bloom_filter check usernames.bloom.json swathi unknown-user
 python -m bloom_filter stats usernames.bloom.json
 ```
 
-## Python API
+## ⚡ Performance and Reliability
 
-```python
-from bloom_filter import BloomFilter
+- Bloom filters can skip index segments without loading or scanning their document terms
+- BM25 limits the number of candidates sent to the hosted model
+- API requests have a configurable client timeout
+- Invalid HTTP, network, and JSON responses produce explicit errors
+- Probable Bloom-filter matches are never treated as authoritative duplicate decisions
+- No API credentials are stored in the search index
 
-bloom = BloomFilter(capacity=1_000, error_rate=0.01)
-bloom.add("geeks")
+## 🔮 Future Improvements
 
-if "geeks" in bloom:
-    print("probably present")
-else:
-    print("definitely not present")
-```
+- Add a permitted web crawler with a visited-URL Bloom filter
+- Create larger benchmark collections and relevance judgments
+- Measure Precision@K, Recall@K, MRR, and NDCG
+- Compare latency with and without segment Bloom filters
+- Add configurable stop words, stemming, and language-specific tokenizers
+- Add incremental index segments without rebuilding existing segments
+- Add API retries with bounded exponential backoff
+- Add support for provider-specific authentication headers through configuration
+- Export query-rewrite and reranking datasets for hosted LoRA/QLoRA training
+- Add an optional web interface while keeping inference API-only
 
-## Mathematics
+## 🙌 Acknowledgements
 
-For expected insertions `n` and desired false-positive probability `p`, the implementation uses:
-
-```text
-m = ceil(-(n * ln(p)) / (ln(2)^2))
-k = round((m / n) * ln(2))
-```
-
-where `m` is the number of bits and `k` is the number of hash positions. The estimated current false-positive rate after `n` add operations is:
-
-```text
-(1 - exp(-k * n / m))^k
-```
-
-Capacity is a design target, not a hard limit. Adding substantially more values increases false positives.
-
-## Good project extensions
-
-- A counting Bloom filter for safe deletion.
-- A scalable Bloom filter that adds layers as capacity grows.
-- FastAPI endpoints for username or malicious-URL prechecks.
-- Benchmarks against a Python `set` for memory and lookup speed.
-
-## LLM integration ideas
-
-The Bloom filter should remain the deterministic, fast gate. An LLM is useful after that gate:
-
-1. **RAG duplicate-document guard:** normalize a document, query the filter by content fingerprint, and skip embedding likely duplicates. Ask an LLM to explain duplicate clusters or propose canonical titles.
-2. **Prompt/cache routing:** use a filter to check whether a normalized request may already be cached. On a probable match, verify against the real cache before returning anything.
-3. **Security triage:** use a filter as a local precheck for known risky URLs, package names, or leaked-password fingerprints. Send only probable matches to a classifier or analyst-facing LLM explanation; never treat the Bloom result alone as proof.
-4. **Natural-language observability:** give an LLM the output of `stats()` and recent insertion counts so it can explain saturation and recommend a larger capacity or lower target error rate.
-
-Because Bloom filters can produce false positives, every consequential LLM workflow must verify probable matches against an authoritative store.
-
+Built as an educational search-engine project combining Bloom filters, information retrieval, NLP, BM25 ranking, and API-hosted language-model intelligence. The design keeps probabilistic filtering deterministic and local while requiring all LLM inference and optional LoRA/QLoRA adaptation to remain with the user's selected provider.
