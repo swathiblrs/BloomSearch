@@ -2,8 +2,6 @@
 
 An API-first intelligent search engine that uses Bloom filters to reduce unnecessary index work, BM25 for keyword retrieval, NLP tokenization, and remotely hosted LoRA/QLoRA-capable language models for query rewriting, semantic reranking, and result explanations.
 
-**No LLM is downloaded or executed locally.** Users choose their own compatible API provider and hosted model.
-
 ## 🌟 Why This Project Exists
 
 Search engines spend time revisiting duplicate content, scanning index segments that cannot contain the requested terms, and ranking documents that are only weakly related to the user's intent.
