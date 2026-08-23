@@ -21,6 +21,70 @@ The project can:
 - Persist indexes as portable JSON files
 - Report Bloom-filter capacity, fill ratio, and estimated false-positive rate
 
+## 🌸 What Is a Bloom Filter?
+
+A Bloom filter is a compact data structure used to answer a membership question:
+
+> **Have I probably seen this item before?**
+
+Instead of storing every item, it stores a bit array containing only `0` and `1`. When an item is added, several hash functions convert it into positions in that array, and the bits at those positions are changed to `1`.
+
+For example, start with a 10-bit array:
+
+```text
+Index: 0 1 2 3 4 5 6 7 8 9
+Bits:  0 0 0 0 0 0 0 0 0 0
+```
+
+Suppose the hash positions for `apple` are `1`, `4`, and `7`. Adding it sets those bits:
+
+```text
+Index: 0 1 2 3 4 5 6 7 8 9
+Bits:  0 1 0 0 1 0 0 1 0 0
+```
+
+To check another value, the same hash positions are calculated:
+
+- If **any required bit is `0`**, the value is **definitely not present**.
+- If **all required bits are `1`**, the value is **probably present**.
+
+The answer is "probably present" because different items can share the same bit positions. An item that was never added may therefore appear present. This is called a **false positive**.
+
+| Bloom-filter result | Meaning |
+|---|---|
+| Definitely not present | The item was not added to the filter |
+| Probably present | The item may have been added and should be verified |
+| False positive | The filter says "probably present," but the item is absent |
+| False negative | Not expected in a standard Bloom filter when it is used correctly |
+
+Bloom filters are useful when memory is limited and a fast negative answer can avoid expensive work. They are commonly applied to web crawling, databases, caches, storage systems, distributed systems, and search indexes.
+
+### Is a Bloom Filter Only Used in Java?
+
+No. A Bloom filter is an **algorithm and data-structure concept**, not a Java feature. It can be implemented in any language that supports arrays, bits, and hashing, including:
+
+- Python
+- Java
+- C and C++
+- Go
+- Rust
+- JavaScript and TypeScript
+- C#
+
+This project implements the Bloom filter entirely in Python. Java projects may use Bloom-filter libraries such as those available in common Java ecosystems, but the underlying idea is language-independent.
+
+### Why Use It in a Search Engine?
+
+Imagine a search index split into 1,000 segments. Searching every segment for every query wastes time. BloomSearch gives each segment a small Bloom filter containing the terms found in that segment.
+
+For a query such as `python bloom filter`, the engine checks the segment filters first:
+
+- If none of those terms can exist in a segment, BloomSearch skips it.
+- If one or more terms may exist, BloomSearch searches that segment with BM25.
+- A false positive may cause an extra segment search, but it does not remove a correct result.
+
+This makes the Bloom filter a safe optimization layer: it can eliminate definitely irrelevant work, while BM25 and the hosted model remain responsible for ranking actual documents.
+
 ## 🏗️ Architecture Overview
 
 High-level search workflow:
