@@ -59,20 +59,6 @@ The answer is "probably present" because different items can share the same bit 
 
 Bloom filters are useful when memory is limited and a fast negative answer can avoid expensive work. They are commonly applied to web crawling, databases, caches, storage systems, distributed systems, and search indexes.
 
-### Is a Bloom Filter Only Used in Java?
-
-No. A Bloom filter is an **algorithm and data-structure concept**, not a Java feature. It can be implemented in any language that supports arrays, bits, and hashing, including:
-
-- Python
-- Java
-- C and C++
-- Go
-- Rust
-- JavaScript and TypeScript
-- C#
-
-This project implements the Bloom filter entirely in Python. Java projects may use Bloom-filter libraries such as those available in common Java ecosystems, but the underlying idea is language-independent.
-
 ### Why Use It in a Search Engine?
 
 Imagine a search index split into 1,000 segments. Searching every segment for every query wastes time. BloomSearch gives each segment a small Bloom filter containing the terms found in that segment.
