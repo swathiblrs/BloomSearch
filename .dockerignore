@@ -1,0 +1,10 @@
+.git
+.gitignore
+.venv
+__pycache__
+*.py[cod]
+*.bloom-index.json
+.env
+tmp
+tests
+

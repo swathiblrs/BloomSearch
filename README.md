@@ -107,6 +107,8 @@ Core stack:
 - BM25 keyword ranking
 - OpenAI-compatible `/chat/completions` API protocol
 - User-selected hosted model or hosted LoRA/QLoRA adapter
+- FastAPI browser interface
+- Docker and user-owned Google Cloud Run deployment
 - Standard-library HTTP and JSON support
 - `unittest` test suite with a fake hosted-model client
 
@@ -185,10 +187,17 @@ bloom_search/
  ├── cli.py               # Index build, statistics, and search commands
  ├── engine.py            # Query rewriting and candidate reranking workflow
  ├── index.py             # Segmented index, deduplication, tokenization, and BM25
+ ├── web.py               # FastAPI routes and per-request user API configuration
  └── __main__.py          # python -m bloom_search entry point
 
 examples/
  └── documents.json       # Small sample search collection
+
+web/
+ └── index.html           # Browser search interface
+
+deploy/
+ └── google-cloud-run.md  # User-owned Cloud Run deployment guide
 
 tests/
  ├── test_bloom_filter.py # Data-structure and persistence tests
@@ -260,6 +269,32 @@ python -m bloom_search search \
 ```
 
 Search is intentionally unavailable without API configuration. Index building and statistics do not require an API call.
+
+## 🌐 Browser Interface
+
+Install the web dependencies and start the application:
+
+```bash
+python -m pip install -e ".[web]"
+uvicorn bloom_search.web:app --reload
+```
+
+Open `http://localhost:8000`. Each user enters their own compatible API base URL, API key, and hosted model ID. The credential is used only for that search request and is not persisted by BloomSearch.
+
+## ☁️ User-Owned Google Cloud Deployment
+
+This repository does not operate a shared paid cloud service. Anyone who wants a public deployment creates it inside their own Google Cloud project and pays their own infrastructure and hosted-model charges.
+
+The included [Google Cloud Run deployment guide](deploy/google-cloud-run.md) uses Docker with:
+
+- Minimum instances set to `0`
+- Maximum instances capped at `1`
+- No repository-owner API key
+- No Secrets Manager dependency
+- API credentials supplied by the user per search request
+- Public HTTPS provider URLs only; private-network targets are rejected
+
+These limits reduce accidental usage but do not guarantee that Google Cloud will charge the deploying user zero dollars. Nothing is deployed automatically by this repository.
 
 ## 📄 Input Document Format
 
@@ -363,7 +398,6 @@ python -m bloom_filter stats usernames.bloom.json
 - Add API retries with bounded exponential backoff
 - Add support for provider-specific authentication headers through configuration
 - Export query-rewrite and reranking datasets for hosted LoRA/QLoRA training
-- Add an optional web interface while keeping inference API-only
 
 ## 🙌 Acknowledgements
 

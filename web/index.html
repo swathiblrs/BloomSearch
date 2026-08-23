@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BloomSearch</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #07110d; color: #ecfff6; }
+    main { width: min(900px, calc(100% - 32px)); margin: 48px auto; }
+    h1 { font-size: clamp(2.2rem, 7vw, 4.8rem); margin: 0; letter-spacing: -.05em; }
+    .accent { color: #62e6a7; }
+    .lead { color: #a9c7b8; max-width: 700px; line-height: 1.6; }
+    form, .panel { margin-top: 28px; padding: 24px; border: 1px solid #214535; border-radius: 18px; background: #0d1c15; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    label { display: grid; gap: 7px; color: #b8d5c7; font-size: .9rem; }
+    .wide { grid-column: 1 / -1; }
+    input { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid #35634e; background: #07110d; color: white; }
+    button { margin-top: 18px; padding: 12px 18px; border: 0; border-radius: 10px; background: #62e6a7; color: #04110b; font-weight: 800; cursor: pointer; }
+    button:disabled { opacity: .5; cursor: wait; }
+    .note { color: #8fac9e; font-size: .84rem; line-height: 1.5; }
+    #status { margin-top: 20px; color: #ffcf70; white-space: pre-wrap; }
+    article { padding: 18px 0; border-top: 1px solid #214535; }
+    article:first-child { border-top: 0; }
+    article h3 { margin: 0 0 8px; }
+    article p { color: #b8d5c7; }
+    .score { color: #62e6a7; font-weight: 700; }
+    @media (max-width: 680px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Bloom<span class="accent">Search</span></h1>
+  <p class="lead">Bloom filters skip irrelevant index segments, BM25 retrieves candidates, and your chosen hosted model rewrites and reranks the results.</p>
+
+  <form id="search-form">
+    <div class="grid">
+      <label>API base URL
+        <input id="api-base" type="url" placeholder="https://provider.example/v1" required>
+      </label>
+      <label>Hosted model ID
+        <input id="model" placeholder="your-model-or-adapter-id" required>
+      </label>
+      <label class="wide">API key
+        <input id="api-key" type="password" autocomplete="off" placeholder="Your provider API key" required>
+      </label>
+      <label class="wide">Search query
+        <input id="query" value="How can a crawler avoid visiting the same URL twice?" required maxlength="500">
+      </label>
+    </div>
+    <p class="note">Your key is sent over HTTPS to this deployment and then to the API provider you specify. BloomSearch does not save it. For strongest isolation, deploy this project in your own cloud account.</p>
+    <button id="submit" type="submit">Search</button>
+  </form>
+
+  <div id="status"></div>
+  <section id="results" class="panel" hidden></section>
+</main>
+<script>
+  const form = document.querySelector('#search-form');
+  const button = document.querySelector('#submit');
+  const status = document.querySelector('#status');
+  const results = document.querySelector('#results');
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    button.disabled = true;
+    status.textContent = 'Searching…';
+    results.hidden = true;
+    results.replaceChildren();
+    try {
+      const response = await fetch('/api/search', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          api_base: document.querySelector('#api-base').value,
+          api_key: document.querySelector('#api-key').value,
+          model: document.querySelector('#model').value,
+          query: document.querySelector('#query').value,
+          limit: 5
+        })
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.detail || 'Search failed');
+      status.textContent = `Rewritten query: ${data.rewritten_query}\nSegments skipped: ${data.segments_skipped}`;
+      for (const item of data.results) {
+        const article = document.createElement('article');
+        const title = document.createElement('h3');
+        title.textContent = item.document.title;
+        const score = document.createElement('div');
+        score.className = 'score';
+        score.textContent = `Relevance ${(item.relevance_score * 100).toFixed(0)}% · BM25 ${item.bm25_score.toFixed(3)}`;
+        const explanation = document.createElement('p');
+        explanation.textContent = item.explanation;
+        article.append(title, score, explanation);
+        results.append(article);
+      }
+      if (!data.results.length) results.textContent = 'No matching documents found.';
+      results.hidden = false;
+    } catch (error) {
+      status.textContent = error.message;
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
+
