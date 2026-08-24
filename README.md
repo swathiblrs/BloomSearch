@@ -72,6 +72,16 @@ For a query such as `python bloom filter`, the engine checks the segment filters
 
 This makes the Bloom filter a safe optimization layer: it can eliminate definitely irrelevant work, while BM25 and the hosted model remain responsible for ranking actual documents.
 
+## 🔬 Research Question
+
+> **Can certainty-aware learned Bloom filters reduce search computation, latency, memory usage, and hosted-LLM token cost while preserving retrieval quality, particularly Recall@10?**
+
+BloomSearch investigates this question through a cascade that progressively narrows the search space before BM25 retrieval and optional semantic reranking:
+
+![Certainty-Aware Cascaded BloomSearch research pipeline](assets/bloomsearch-research-flow.svg)
+
+The project measures the trade-off between efficiency and retrieval quality using segment checks, searched-document count, latency, Bloom-filter memory, Recall@10, and estimated hosted-model input tokens. The current bundled results come from a deterministic synthetic benchmark and are preliminary rather than publication-level evidence.
+
 ## 🏗️ Architecture Overview
 
 High-level search workflow:

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="420" viewBox="0 0 1600 420" role="img" aria-labelledby="title desc">
+  <title id="title">BloomSearch research pipeline</title>
+  <desc id="desc">A user query passes through optional hosted LLM query rewriting, a learned segment classifier, certainty-aware Counting Bloom filters, segment pruning, BM25 retrieval, optional hosted LLM reranking, and ranked search results.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#eef2ff"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2563eb"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="170%">
+      <feDropShadow dx="0" dy="7" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <style>
+      .heading { font: 700 28px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; }
+      .subheading { font: 400 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #475569; }
+      .label { font: 650 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #0f172a; text-anchor: middle; }
+      .small { font: 500 12px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #64748b; text-anchor: middle; }
+      .step { font: 700 11px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #fff; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="420" rx="28" fill="url(#background)"/>
+  <rect x="52" y="42" width="6" height="54" rx="3" fill="url(#accent)"/>
+  <text x="78" y="65" class="heading">Certainty-Aware Cascaded BloomSearch</text>
+  <text x="78" y="91" class="subheading">Progressively remove irrelevant work before lexical retrieval and optional semantic reranking</text>
+
+  <g stroke="#64748b" stroke-width="3" fill="none" marker-end="url(#arrow)">
+    <path d="M190 228 H222"/>
+    <path d="M378 228 H410"/>
+    <path d="M566 228 H598"/>
+    <path d="M754 228 H786"/>
+    <path d="M942 228 H974"/>
+    <path d="M1130 228 H1162"/>
+    <path d="M1318 228 H1350"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="34" y="164" width="156" height="128" rx="18" fill="#fff" stroke="#bfdbfe" stroke-width="2"/>
+    <rect x="222" y="164" width="156" height="128" rx="18" fill="#fff" stroke="#c7d2fe" stroke-width="2"/>
+    <rect x="410" y="164" width="156" height="128" rx="18" fill="#fff" stroke="#ddd6fe" stroke-width="2"/>
+    <rect x="598" y="164" width="156" height="128" rx="18" fill="#fff" stroke="#d8b4fe" stroke-width="2"/>
+    <rect x="786" y="164" width="156" height="128" rx="18" fill="#fff" stroke="#fecdd3" stroke-width="2"/>
+    <rect x="974" y="164" width="156" height="128" rx="18" fill="#fff" stroke="#fed7aa" stroke-width="2"/>
+    <rect x="1162" y="164" width="156" height="128" rx="18" fill="#fff" stroke="#bbf7d0" stroke-width="2"/>
+    <rect x="1350" y="164" width="156" height="128" rx="18" fill="#fff" stroke="#99f6e4" stroke-width="2"/>
+  </g>
+
+  <g>
+    <circle cx="66" cy="190" r="14" fill="#2563eb"/><text x="66" y="194" class="step">1</text>
+    <circle cx="254" cy="190" r="14" fill="#4f46e5"/><text x="254" y="194" class="step">2</text>
+    <circle cx="442" cy="190" r="14" fill="#7c3aed"/><text x="442" y="194" class="step">3</text>
+    <circle cx="630" cy="190" r="14" fill="#9333ea"/><text x="630" y="194" class="step">4</text>
+    <circle cx="818" cy="190" r="14" fill="#e11d48"/><text x="818" y="194" class="step">5</text>
+    <circle cx="1006" cy="190" r="14" fill="#ea580c"/><text x="1006" y="194" class="step">6</text>
+    <circle cx="1194" cy="190" r="14" fill="#16a34a"/><text x="1194" y="194" class="step">7</text>
+    <circle cx="1378" cy="190" r="14" fill="#0d9488"/><text x="1378" y="194" class="step">8</text>
+  </g>
+
+  <g class="label">
+    <text x="112" y="232">User query</text>
+    <text x="300" y="220"><tspan x="300">Hosted LLM</tspan><tspan x="300" dy="21">query rewriting</tspan></text>
+    <text x="488" y="220"><tspan x="488">Learned segment</tspan><tspan x="488" dy="21">classifier</tspan></text>
+    <text x="676" y="210"><tspan x="676">Certainty-aware</tspan><tspan x="676" dy="21">Counting</tspan><tspan x="676" dy="21">Bloom filters</tspan></text>
+    <text x="864" y="220"><tspan x="864">Discard unlikely</tspan><tspan x="864" dy="21">segments</tspan></text>
+    <text x="1052" y="220"><tspan x="1052">BM25 candidate</tspan><tspan x="1052" dy="21">retrieval</tspan></text>
+    <text x="1240" y="220"><tspan x="1240">Hosted LLM</tspan><tspan x="1240" dy="21">reranking</tspan></text>
+    <text x="1378" y="220"><tspan x="1378">Ranked</tspan><tspan x="1378" dy="21">results</tspan></text>
+  </g>
+
+  <g class="small">
+    <text x="300" y="274">Optional</text>
+    <text x="676" y="274">Fast membership signal</text>
+    <text x="1240" y="274">Optional</text>
+  </g>
+
+  <rect x="474" y="336" width="652" height="46" rx="23" fill="#fff" stroke="#cbd5e1"/>
+  <text x="800" y="365" class="subheading" text-anchor="middle">Goal: reduce segments, latency, memory, and LLM tokens while preserving Recall@10</text>
+</svg>
