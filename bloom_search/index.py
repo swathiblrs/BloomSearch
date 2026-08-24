@@ -93,13 +93,26 @@ class SearchIndex:
         terms = tokenize(query)
         if not terms:
             return [], len(self.segments)
-        candidates: list[tuple[IndexSegment, Document]] = []
+        selected_indices: list[int] = []
         skipped = 0
-        for segment in self.segments:
+        for index, segment in enumerate(self.segments):
             if not any(term in segment.term_filter for term in terms):
                 skipped += 1
                 continue
-            candidates.extend((segment, document) for document in segment.documents)
+            selected_indices.append(index)
+        return self.search_bm25_selected(query, selected_indices, limit), skipped
+
+    def search_bm25_selected(
+        self, query: str, segment_indices: Iterable[int], limit: int = 20
+    ) -> list[tuple[Document, float]]:
+        """Score documents from explicitly selected segments using global IDF."""
+        terms = tokenize(query)
+        if not terms:
+            return []
+        selected = [self.segments[index] for index in segment_indices]
+        candidates = [
+            (segment, document) for segment in selected for document in segment.documents
+        ]
 
         total_documents = max(1, self.document_count)
         document_frequency: dict[str, int] = defaultdict(int)
@@ -127,7 +140,7 @@ class SearchIndex:
             if score:
                 scored.append((document, score))
         scored.sort(key=lambda item: item[1], reverse=True)
-        return scored[:limit], skipped
+        return scored[:limit]
 
     def save(self, path: str | Path) -> None:
         data = {

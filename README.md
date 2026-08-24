@@ -20,6 +20,7 @@ The project can:
 - Connect to a provider-hosted LoRA or QLoRA fine-tuned model
 - Persist indexes as portable JSON files
 - Report Bloom-filter capacity, fill ratio, and estimated false-positive rate
+- Run a reproducible certainty-aware learned-filter research benchmark
 
 ## 🌸 What Is a Bloom Filter?
 
@@ -154,6 +155,18 @@ Recommended fine-tuning tasks:
 
 At runtime, BloomSearch treats a hosted base model, LoRA adapter, and QLoRA-trained model in the same way: each is a remote model identifier behind an API.
 
+### 🧪 Certainty-Aware Research Extension
+
+The research implementation adds 16-bit Counting Bloom filters, a collision-certainty signal, a dependency-free logistic segment classifier, threshold calibration against a target segment-recall constraint, and a smaller cost-aware reranker candidate budget.
+
+Run the reproducible experiment without an API key:
+
+```bash
+python -m bloom_search benchmark
+```
+
+See [research methodology](research/README.md) and [latest measured results](research/RESULTS.md). The bundled experiment is synthetic and must not be interpreted as a production benchmark.
+
 ## 💡 Example Use Cases
 
 Example searches:
@@ -179,6 +192,7 @@ Useful project domains include:
 ```text
 bloom_filter/
  ├── core.py              # Bloom filter implementation and persistence
+ ├── counting.py          # Counting filter and collision-certainty heuristic
  ├── cli.py               # Standalone Bloom-filter commands
  └── __main__.py          # python -m bloom_filter entry point
 
@@ -187,6 +201,7 @@ bloom_search/
  ├── cli.py               # Index build, statistics, and search commands
  ├── engine.py            # Query rewriting and candidate reranking workflow
  ├── index.py             # Segmented index, deduplication, tokenization, and BM25
+ ├── research.py          # Learned cascade, benchmark, and evaluation metrics
  ├── web.py               # FastAPI routes and per-request user API configuration
  └── __main__.py          # python -m bloom_search entry point
 
@@ -201,7 +216,13 @@ deploy/
 
 tests/
  ├── test_bloom_filter.py # Data-structure and persistence tests
- └── test_bloom_search.py # Index, BM25, Bloom skipping, and API workflow tests
+ ├── test_bloom_search.py # Index, BM25, Bloom skipping, and API workflow tests
+ └── test_research.py     # Counting filter and learned-cascade tests
+
+research/
+ ├── README.md            # Research question, baselines, and limitations
+ ├── RESULTS.md           # Human-readable latest result
+ └── results/latest.json  # Reproducible machine-readable metrics
 ```
 
 ## 🚀 Getting Started

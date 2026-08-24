@@ -10,6 +10,7 @@ from pathlib import Path
 from .api import HostedModelClient, ModelAPIError
 from .engine import BloomSearchEngine
 from .index import Document, SearchIndex
+from .research import write_results
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -26,11 +27,24 @@ def _parser() -> argparse.ArgumentParser:
     search.add_argument("--limit", type=int, default=5)
     stats = commands.add_parser("stats", help="show index and Bloom-filter statistics")
     stats.add_argument("index", type=Path)
+    benchmark = commands.add_parser(
+        "benchmark", help="run the certainty-aware synthetic research benchmark"
+    )
+    benchmark.add_argument(
+        "--output", type=Path, default=Path("research/results/latest.json")
+    )
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
+    if args.command == "benchmark":
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        results = write_results(args.output)
+        print(json.dumps(results, indent=2))
+        print(f"Results written to {args.output}")
+        return 0
+
     if args.command == "build":
         raw = json.loads(args.documents.read_text(encoding="utf-8"))
         index = SearchIndex.build(
@@ -68,4 +82,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

@@ -1,0 +1,67 @@
+{
+  "benchmark": {
+    "type": "deterministic synthetic topical benchmark",
+    "documents": 600,
+    "segments": 12,
+    "training_queries": 300,
+    "test_queries": 300,
+    "configured_filter_error_rate": 0.15,
+    "observed_standard_filter_false_positive_rate": 0.1317
+  },
+  "cascade": {
+    "calibrated_probability_threshold": 0.846868,
+    "standard_bloom_logical_bytes": 384,
+    "counting_cascade_logical_bytes": 6032,
+    "classifier_weights": [
+      -1.03356,
+      4.681395,
+      -1.097087,
+      -0.6601,
+      -1.419227,
+      -0.557081,
+      -0.413421
+    ]
+  },
+  "systems": {
+    "bm25_all_segments": {
+      "queries": 300,
+      "avg_segments_searched": 12.0,
+      "avg_documents_scored": 600.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0,
+      "avg_estimated_reranker_tokens": 452.32,
+      "avg_local_latency_ms": 0.3671
+    },
+    "standard_bloom_bm25": {
+      "queries": 300,
+      "avg_segments_searched": 12.0,
+      "avg_documents_scored": 600.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0,
+      "avg_estimated_reranker_tokens": 452.32,
+      "avg_local_latency_ms": 0.4067
+    },
+    "counting_bloom_bm25": {
+      "queries": 300,
+      "avg_segments_searched": 12.0,
+      "avg_documents_scored": 600.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0,
+      "avg_estimated_reranker_tokens": 452.32,
+      "avg_local_latency_ms": 0.3993
+    },
+    "certainty_cascade_bm25": {
+      "queries": 300,
+      "avg_segments_searched": 1.0,
+      "avg_documents_scored": 50.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "ndcg_at_10": 1.0,
+      "avg_estimated_reranker_tokens": 226.58,
+      "avg_local_latency_ms": 0.3604
+    }
+  }
+}

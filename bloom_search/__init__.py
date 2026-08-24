@@ -2,6 +2,13 @@
 
 from .engine import BloomSearchEngine, SearchResult
 from .index import Document, SearchIndex
+from .research import CertaintyAwareCascade, QueryCase
 
-__all__ = ["BloomSearchEngine", "Document", "SearchIndex", "SearchResult"]
-
+__all__ = [
+    "BloomSearchEngine",
+    "CertaintyAwareCascade",
+    "Document",
+    "QueryCase",
+    "SearchIndex",
+    "SearchResult",
+]
