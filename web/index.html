@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BloomSearch</title>
+  <title>Adaptive BloomSearch</title>
   <style>
     :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
     * { box-sizing: border-box; }
@@ -16,7 +16,7 @@
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     label { display: grid; gap: 7px; color: #b8d5c7; font-size: .9rem; }
     .wide { grid-column: 1 / -1; }
-    input { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid #35634e; background: #07110d; color: white; }
+    input, select { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid #35634e; background: #07110d; color: white; }
     button { margin-top: 18px; padding: 12px 18px; border: 0; border-radius: 10px; background: #62e6a7; color: #04110b; font-weight: 800; cursor: pointer; }
     button:disabled { opacity: .5; cursor: wait; }
     .note { color: #8fac9e; font-size: .84rem; line-height: 1.5; }
@@ -26,31 +26,65 @@
     article h3 { margin: 0 0 8px; }
     article p { color: #b8d5c7; }
     .score { color: #62e6a7; font-weight: 700; }
+    details { margin-top: 18px; }
+    summary { cursor: pointer; color: #62e6a7; font-weight: 700; }
+    a { color: #8ff0bf; }
     @media (max-width: 680px) { .grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
 <main>
-  <h1>Bloom<span class="accent">Search</span></h1>
-  <p class="lead">Bloom filters skip irrelevant index segments, BM25 retrieves candidates, and your chosen hosted model rewrites and reranks the results.</p>
+  <h1>Adaptive Bloom<span class="accent">Search</span></h1>
+  <p class="lead">Build searchable collections from public websites, skip irrelevant index segments with Bloom filters, and retrieve ranked pages with BM25. Hosted-model settings are optional.</p>
 
   <form id="search-form">
     <div class="grid">
-      <label>API base URL
-        <input id="api-base" type="url" placeholder="https://provider.example/v1" required>
-      </label>
-      <label>Hosted model ID
-        <input id="model" placeholder="your-model-or-adapter-id" required>
-      </label>
-      <label class="wide">API key
-        <input id="api-key" type="password" autocomplete="off" placeholder="Your provider API key" required>
+      <label class="wide">Search collection
+        <select id="collection"></select>
       </label>
       <label class="wide">Search query
         <input id="query" value="How can a crawler avoid visiting the same URL twice?" required maxlength="500">
       </label>
     </div>
-    <p class="note">Your key is sent over HTTPS to this deployment and then to the API provider you specify. BloomSearch does not save it. For strongest isolation, deploy this project in your own cloud account.</p>
-    <button id="submit" type="submit">Search</button>
+    <details>
+      <summary>Optional hosted rewriting and reranking</summary>
+      <div class="grid" style="margin-top:14px">
+        <label>API base URL
+          <input id="api-base" type="url" placeholder="https://provider.example/v1">
+        </label>
+        <label>Hosted model ID
+          <input id="model" placeholder="your-model-or-adapter-id">
+        </label>
+        <label class="wide">API key
+          <input id="api-key" type="password" autocomplete="off" placeholder="Your provider API key">
+        </label>
+      </div>
+    </details>
+    <p class="note">Search is free and works without an API key. If all three hosted-model fields are supplied, the key is used only for that request and is not saved.</p>
+    <button id="submit" type="submit">Search collection</button>
+  </form>
+
+  <form id="crawl-form">
+    <h2>Create a collection from a website</h2>
+    <div class="grid">
+      <label class="wide">Starting URL
+        <input id="crawl-url" type="url" placeholder="https://docs.example.org/" required>
+      </label>
+      <label>Collection name
+        <input id="crawl-collection" pattern="[a-z0-9][a-z0-9_-]{0,63}" placeholder="project-docs" required>
+      </label>
+      <label>Maximum pages
+        <input id="max-pages" type="number" min="1" max="500" value="25" required>
+      </label>
+      <label>Maximum link depth
+        <input id="max-depth" type="number" min="0" max="5" value="2" required>
+      </label>
+      <label><span>Replace existing collection</span>
+        <input id="replace" type="checkbox" style="width:auto">
+      </label>
+    </div>
+    <p class="note">The crawler remains on the starting domain, respects robots.txt, waits between requests, rejects private-network targets, and stops at the limits above.</p>
+    <button id="crawl-submit" type="submit">Crawl and index</button>
   </form>
 
   <div id="status"></div>
@@ -61,6 +95,22 @@
   const button = document.querySelector('#submit');
   const status = document.querySelector('#status');
   const results = document.querySelector('#results');
+  const collection = document.querySelector('#collection');
+
+  async function refreshCollections(selected) {
+    const response = await fetch('/api/collections');
+    const data = await response.json();
+    collection.replaceChildren();
+    for (const item of data) {
+      const option = document.createElement('option');
+      option.value = item.name;
+      option.textContent = `${item.name} (${item.documents} documents)`;
+      if (item.name === selected) option.selected = true;
+      collection.append(option);
+    }
+  }
+
+  refreshCollections('demo').catch(error => { status.textContent = error.message; });
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -69,27 +119,39 @@
     results.hidden = true;
     results.replaceChildren();
     try {
+      const payload = {
+        collection: collection.value,
+        query: document.querySelector('#query').value,
+        limit: 10
+      };
+      const apiBase = document.querySelector('#api-base').value.trim();
+      const apiKey = document.querySelector('#api-key').value;
+      const model = document.querySelector('#model').value.trim();
+      if (apiBase || apiKey || model) Object.assign(payload, {api_base: apiBase, api_key: apiKey, model});
       const response = await fetch('/api/search', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          api_base: document.querySelector('#api-base').value,
-          api_key: document.querySelector('#api-key').value,
-          model: document.querySelector('#model').value,
-          query: document.querySelector('#query').value,
-          limit: 5
-        })
+        body: JSON.stringify(payload)
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.detail || 'Search failed');
-      status.textContent = `Rewritten query: ${data.rewritten_query}\nSegments skipped: ${data.segments_skipped}`;
+      status.textContent = `Mode: ${data.mode}\nCollection: ${data.collection}\nQuery used: ${data.rewritten_query}\nSegments skipped: ${data.segments_skipped}`;
       for (const item of data.results) {
         const article = document.createElement('article');
         const title = document.createElement('h3');
-        title.textContent = item.document.title;
+        if (item.document.url) {
+          const link = document.createElement('a');
+          link.href = item.document.url;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = item.document.title;
+          title.append(link);
+        } else title.textContent = item.document.title;
         const score = document.createElement('div');
         score.className = 'score';
-        score.textContent = `Relevance ${(item.relevance_score * 100).toFixed(0)}% · BM25 ${item.bm25_score.toFixed(3)}`;
+        score.textContent = item.relevance_score == null
+          ? `BM25 ${item.bm25_score.toFixed(3)}`
+          : `Relevance ${(item.relevance_score * 100).toFixed(0)}% · BM25 ${item.bm25_score.toFixed(3)}`;
         const explanation = document.createElement('p');
         explanation.textContent = item.explanation;
         article.append(title, score, explanation);
@@ -103,7 +165,35 @@
       button.disabled = false;
     }
   });
+
+  const crawlForm = document.querySelector('#crawl-form');
+  const crawlButton = document.querySelector('#crawl-submit');
+  crawlForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    crawlButton.disabled = true;
+    status.textContent = 'Crawling and building the collection. This can take a few minutes…';
+    try {
+      const response = await fetch('/api/crawl', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          start_url: document.querySelector('#crawl-url').value,
+          collection: document.querySelector('#crawl-collection').value,
+          max_pages: Number(document.querySelector('#max-pages').value),
+          max_depth: Number(document.querySelector('#max-depth').value),
+          replace: document.querySelector('#replace').checked
+        })
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.detail || 'Crawl failed');
+      await refreshCollections(data.collection);
+      status.textContent = `Indexed ${data.pages_crawled} crawled pages in “${data.collection}”. Total searchable documents: ${data.documents}.`;
+    } catch (error) {
+      status.textContent = error.message;
+    } finally {
+      crawlButton.disabled = false;
+    }
+  });
 </script>
 </body>
 </html>
-

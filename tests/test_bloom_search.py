@@ -57,7 +57,16 @@ class SearchIndexTests(unittest.TestCase):
         self.assertEqual(output["results"][0].document.id, "crawler")
         self.assertEqual(client.calls, 2)
 
+    def test_snippet_focuses_on_matching_text(self):
+        document = Document(
+            "long",
+            "Long document",
+            "Introduction " * 40 + "Bloom filters avoid unnecessary lookups. " + "Ending " * 40,
+        )
+        snippet = SearchIndex.snippet(document, "Bloom lookups", length=100)
+        self.assertIn("Bloom filters", snippet)
+        self.assertLessEqual(len(snippet), 106)
+
 
 if __name__ == "__main__":
     unittest.main()
-

@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 
 from .api import HostedModelClient, ModelAPIError
+from .crawler import WebCrawler
 from .engine import BloomSearchEngine
 from .index import Document, SearchIndex
 from .research import write_results
@@ -21,10 +22,18 @@ def _parser() -> argparse.ArgumentParser:
     build.add_argument("index", type=Path)
     build.add_argument("--segment-size", type=int, default=100)
     build.add_argument("--error-rate", type=float, default=0.01)
-    search = commands.add_parser("search", help="search using the configured hosted model API")
+    search = commands.add_parser("search", help="search locally with BM25 and Bloom filters")
     search.add_argument("index", type=Path)
     search.add_argument("query")
     search.add_argument("--limit", type=int, default=5)
+    search.add_argument("--hosted", action="store_true", help="use configured hosted rewrite/rerank API")
+    crawl = commands.add_parser("crawl", help="crawl one public domain and build a searchable index")
+    crawl.add_argument("start_url")
+    crawl.add_argument("index", type=Path)
+    crawl.add_argument("--documents", type=Path, help="optional JSON copy of crawled documents")
+    crawl.add_argument("--max-pages", type=int, default=50)
+    crawl.add_argument("--max-depth", type=int, default=2)
+    crawl.add_argument("--segment-size", type=int, default=100)
     stats = commands.add_parser("stats", help="show index and Bloom-filter statistics")
     stats.add_argument("index", type=Path)
     benchmark = commands.add_parser(
@@ -56,6 +65,25 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Indexed {index.document_count} unique documents in {len(index.segments)} segments")
         return 0
 
+    if args.command == "crawl":
+        documents = WebCrawler(
+            max_pages=args.max_pages,
+            max_depth=args.max_depth,
+        ).crawl(args.start_url)
+        if not documents:
+            parser.error("the crawl did not produce searchable HTML pages")
+        index = SearchIndex.build(documents, segment_size=args.segment_size)
+        args.index.parent.mkdir(parents=True, exist_ok=True)
+        index.save(args.index)
+        if args.documents:
+            args.documents.parent.mkdir(parents=True, exist_ok=True)
+            args.documents.write_text(
+                json.dumps([asdict(document) for document in documents], indent=2) + "\n",
+                encoding="utf-8",
+            )
+        print(f"Crawled and indexed {index.document_count} pages in {len(index.segments)} segments")
+        return 0
+
     index = SearchIndex.load(args.index)
     if args.command == "stats":
         print(
@@ -70,12 +98,27 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 0
 
-    try:
-        output = BloomSearchEngine(index, HostedModelClient()).search(args.query, limit=args.limit)
-    except (ValueError, ModelAPIError) as error:
-        parser.error(str(error))
-    serializable = dict(output)
-    serializable["results"] = [asdict(result) for result in output["results"]]
+    if args.hosted:
+        try:
+            output = BloomSearchEngine(index, HostedModelClient()).search(args.query, limit=args.limit)
+        except (ValueError, ModelAPIError) as error:
+            parser.error(str(error))
+        serializable = dict(output)
+        serializable["results"] = [asdict(result) for result in output["results"]]
+    else:
+        results, skipped = index.search_bm25(args.query, limit=args.limit)
+        serializable = {
+            "query": args.query,
+            "segments_skipped": skipped,
+            "results": [
+                {
+                    "document": asdict(document),
+                    "bm25_score": score,
+                    "snippet": index.snippet(document, args.query),
+                }
+                for document, score in results
+            ],
+        }
     print(json.dumps(serializable, indent=2))
     return 0
 

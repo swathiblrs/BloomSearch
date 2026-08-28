@@ -8,3 +8,4 @@ build/
 *.bloom.json
 *.bloom-index.json
 .env
+data/collections/

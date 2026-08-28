@@ -102,6 +102,22 @@ class SearchIndex:
             selected_indices.append(index)
         return self.search_bm25_selected(query, selected_indices, limit), skipped
 
+    @staticmethod
+    def snippet(document: Document, query: str, *, length: int = 240) -> str:
+        """Return a compact result snippet centered on the first matching term."""
+        text = " ".join(document.text.split())
+        if len(text) <= length:
+            return text
+        lowered = text.lower()
+        positions = [lowered.find(term) for term in tokenize(query)]
+        positions = [position for position in positions if position >= 0]
+        center = min(positions, default=0)
+        start = max(0, center - length // 3)
+        end = min(len(text), start + length)
+        prefix = "..." if start else ""
+        suffix = "..." if end < len(text) else ""
+        return prefix + text[start:end].strip() + suffix
+
     def search_bm25_selected(
         self, query: str, segment_indices: Iterable[int], limit: int = 20
     ) -> list[tuple[Document, float]]:

@@ -1,6 +1,6 @@
 # 🔎 BloomSearch — Bloom Filter Accelerated AI Search Engine
 
-An API-first intelligent search engine that uses Bloom filters to reduce unnecessary index work, BM25 for keyword retrieval, NLP tokenization, and remotely hosted LoRA/QLoRA-capable language models for query rewriting, semantic reranking, and result explanations.
+A collection search engine that uses a controlled web crawler, persistent named indexes, Bloom filters to reduce unnecessary index work, BM25 for free keyword retrieval, and optional user-funded hosted models for query rewriting and semantic reranking.
 
 ## 🌟 Why This Project Exists
 
@@ -21,6 +21,10 @@ The project can:
 - Persist indexes as portable JSON files
 - Report Bloom-filter capacity, fill ratio, and estimated false-positive rate
 - Run a reproducible certainty-aware learned-filter research benchmark
+- Crawl a user-selected public website while respecting domain, depth, page, and robots.txt limits
+- Save and search multiple persistent collections
+- Search with BM25 and Bloom filters without an API key
+- Display source links and query-focused result snippets
 
 ## 🌸 What Is a Bloom Filter?
 
@@ -87,24 +91,37 @@ The project measures the trade-off between efficiency and retrieval quality usin
 High-level search workflow:
 
 ```text
-User query
-    -> Hosted model API rewrites and expands the query
+User selects a collection and enters a query
+    -> Optional hosted model API rewrites the query
     -> Segment Bloom filters skip definitely irrelevant segments
     -> BM25 retrieves keyword-matched candidate documents
-    -> Hosted model API reranks candidates by semantic relevance
-    -> BloomSearch returns ranked results with explanations
+    -> Optional hosted model API reranks candidates by semantic relevance
+    -> BloomSearch returns ranked source pages and snippets
 ```
 
 Indexing workflow:
 
 ```text
-JSON documents
+JSON documents or a controlled website crawl
     -> Normalize and fingerprint content
     -> Bloom-filter duplicate precheck
     -> Exact verification of probable duplicates
     -> NLP tokenization
     -> Build segmented inverted index and term Bloom filters
     -> Save portable search index
+```
+
+Crawler workflow:
+
+```text
+Public starting URL
+    -> Validate public HTTP/HTTPS destination
+    -> Check robots.txt
+    -> Visit only the starting domain
+    -> Use Bloom filter plus exact set for visited URLs
+    -> Extract titles, visible text, and links
+    -> Stop at configured page and depth limits
+    -> Build a persistent searchable collection
 ```
 
 Core stack:
@@ -207,6 +224,8 @@ bloom_filter/
  └── __main__.py          # python -m bloom_filter entry point
 
 bloom_search/
+ ├── collections.py       # Persistent named document collections
+ ├── crawler.py           # Bounded, domain-limited, robots-aware crawler
  ├── api.py               # Provider-neutral hosted-model API client
  ├── cli.py               # Index build, statistics, and search commands
  ├── engine.py            # Query rewriting and candidate reranking workflow
@@ -227,6 +246,7 @@ deploy/
 tests/
  ├── test_bloom_filter.py # Data-structure and persistence tests
  ├── test_bloom_search.py # Index, BM25, Bloom skipping, and API workflow tests
+ ├── test_crawler.py      # Offline crawler, collection, and search tests
  └── test_research.py     # Counting filter and learned-cascade tests
 
 research/
@@ -240,10 +260,8 @@ research/
 ### ✅ Prerequisites
 
 - Python 3.10 or newer
-- An account with a compatible hosted model provider
-- An API key
-- A hosted model or adapter that can follow JSON output instructions
-- An OpenAI-compatible `/chat/completions` endpoint
+
+The crawler, indexing, Bloom-filter pruning, BM25 search, collection storage, snippets, and browser interface require no paid API. A compatible hosted model account is optional and is used only when the user enables rewriting and reranking.
 
 No local LLM server, GPU, PyTorch installation, tokenizer download, or model download is required.
 
@@ -262,7 +280,7 @@ Optionally install the package in editable mode:
 python -m pip install -e .
 ```
 
-Configure the hosted model API:
+Optionally configure a hosted model API:
 
 ```bash
 export BLOOMSEARCH_API_BASE="https://your-provider.example/v1"
@@ -291,7 +309,7 @@ Inspect the index and its segment Bloom filters:
 python -m bloom_search stats demo.bloom-index.json
 ```
 
-Search through the configured hosted model API:
+Search locally without an API key:
 
 ```bash
 python -m bloom_search search \
@@ -299,7 +317,19 @@ python -m bloom_search search \
   "how can crawlers avoid visiting the same URL"
 ```
 
-Search is intentionally unavailable without API configuration. Index building and statistics do not require an API call.
+Add `--hosted` to use the configured hosted rewrite and rerank API.
+
+Build an index from a permitted public website:
+
+```bash
+python -m bloom_search crawl \
+  https://docs.python.org/3/ \
+  python-docs.bloom-index.json \
+  --max-pages 50 \
+  --max-depth 2
+```
+
+The crawler stays on the starting domain, checks `robots.txt`, waits between requests, rejects private-network destinations, accepts HTML only, limits response size, and uses both a Bloom filter and an exact set to track visited URLs.
 
 ## 🌐 Browser Interface
 
@@ -310,7 +340,7 @@ python -m pip install -e ".[web]"
 uvicorn bloom_search.web:app --reload
 ```
 
-Open `http://localhost:8000`. Each user enters their own compatible API base URL, API key, and hosted model ID. The credential is used only for that search request and is not persisted by BloomSearch.
+Open `http://localhost:8000`. Search the bundled `demo` collection immediately without credentials. The page can also crawl a bounded public website into a named collection. Hosted API fields are optional; when supplied, the credential is used only for that request and is not persisted.
 
 ## ☁️ User-Owned Google Cloud Deployment
 
@@ -389,6 +419,9 @@ The test suite validates:
 - Search-index persistence
 - API-based query rewriting and reranking
 - Hosted-model interactions through a fake client
+- Domain-limited crawling through a fake in-memory website
+- Persistent collection creation and restoration
+- Search snippets centered on matching terms
 
 Tests do not contact an external provider and do not run a local language model.
 
@@ -420,7 +453,6 @@ python -m bloom_filter stats usernames.bloom.json
 
 ## 🔮 Future Improvements
 
-- Add a permitted web crawler with a visited-URL Bloom filter
 - Create larger benchmark collections and relevance judgments
 - Measure Precision@K, Recall@K, MRR, and NDCG
 - Compare latency with and without segment Bloom filters
