@@ -3,25 +3,102 @@
     "id": "bloom-intro",
     "title": "Introduction to Bloom Filters",
     "text": "A Bloom filter is a memory-efficient probabilistic data structure for set membership. It may return false positives but does not return false negatives for inserted values.",
-    "url": "https://example.test/bloom-filter"
+    "url": "https://en.wikipedia.org/wiki/Bloom_filter"
   },
   {
     "id": "crawler",
     "title": "Avoiding Duplicate URLs in a Web Crawler",
     "text": "A crawler can place normalized visited URLs in a Bloom filter. Definite misses are fetched, while probable matches are verified against persistent storage.",
-    "url": "https://example.test/web-crawler"
+    "url": "https://en.wikipedia.org/wiki/Web_crawler"
   },
   {
     "id": "bm25",
     "title": "BM25 Keyword Ranking",
     "text": "BM25 ranks documents using term frequency, inverse document frequency, and document length normalization.",
-    "url": "https://example.test/bm25"
+    "url": "https://en.wikipedia.org/wiki/Okapi_BM25"
   },
   {
     "id": "lora",
     "title": "Hosted LoRA Search Reranking",
     "text": "A remotely hosted model with LoRA adapters can assign relevance scores to query and document pairs without running a model on the search server.",
-    "url": "https://example.test/lora-reranking"
+    "url": "https://arxiv.org/abs/2106.09685"
+  },
+  {
+    "id": "fastapi",
+    "title": "FastAPI",
+    "text": "FastAPI is a modern Python framework for building web APIs. BloomSearch uses FastAPI to serve the browser page and provide JSON endpoints for search, collection statistics, and controlled website crawling. It validates incoming request data with Pydantic and connects the user interface to the Python search engine.",
+    "url": "https://fastapi.tiangolo.com/"
+  },
+  {
+    "id": "python",
+    "title": "Python Programming Language",
+    "text": "Python is an interpreted, high-level, general-purpose programming language. Python emphasizes readable code and supports multiple programming styles. It is commonly used for web development, automation, data analysis, machine learning, artificial intelligence, and scientific computing.",
+    "url": "https://www.python.org/about/"
+  },
+  {
+    "id": "pydantic",
+    "title": "Pydantic",
+    "text": "Pydantic is a Python data-validation library that uses type annotations. BloomSearch uses Pydantic models to validate search and crawler API requests, including required text, URL formats, collection names, limits, and optional credentials.",
+    "url": "https://docs.pydantic.dev/latest/"
+  },
+  {
+    "id": "html",
+    "title": "HTML",
+    "text": "HTML, or HyperText Markup Language, defines the structure and meaning of a web page. BloomSearch uses HTML for the search form, status information, and result cards displayed in the browser.",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/HTML"
+  },
+  {
+    "id": "css",
+    "title": "CSS",
+    "text": "CSS, or Cascading Style Sheets, controls the visual presentation of web pages. BloomSearch uses CSS for its colors, spacing, responsive layout, typography, buttons, forms, and search-result panels.",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/CSS"
+  },
+  {
+    "id": "javascript",
+    "title": "JavaScript",
+    "text": "JavaScript adds interactive behavior to web pages. BloomSearch uses browser JavaScript to submit a query to the FastAPI endpoint, process the JSON response, and render links, snippets, scores, and errors without reloading the page.",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+  },
+  {
+    "id": "tokenization",
+    "title": "Tokenization",
+    "text": "Tokenization divides text into smaller searchable units called tokens. BloomSearch lowercases document and query text and extracts word-like terms. Those tokens are inserted into segment Bloom filters and used by BM25 for lexical matching and ranking.",
+    "url": "https://huggingface.co/docs/transformers/main/en/tokenizer_summary"
+  },
+  {
+    "id": "collection-storage",
+    "title": "Collection Storage",
+    "text": "Collection storage keeps crawled documents and their generated search indexes in named collections. BloomSearch persists documents and segmented index data as JSON so a collection can be loaded and searched again without repeating the crawl.",
+    "url": "https://github.com/swathiblrs/Bloom-Filter"
+  },
+  {
+    "id": "query-routing",
+    "title": "Automatic Query Routing",
+    "text": "Automatic query routing chooses the appropriate source for each request. BloomSearch sends current-weather queries to Open-Meteo and sends general information queries to the indexed collection with the strongest BM25 evidence. This gives users one search box for multiple retrieval paths.",
+    "url": "https://github.com/swathiblrs/Bloom-Filter"
+  },
+  {
+    "id": "open-meteo",
+    "title": "Open-Meteo Live Weather",
+    "text": "Open-Meteo provides weather forecast and current-condition APIs. BloomSearch extracts the location from a weather query, resolves it through the geocoding API, and retrieves current temperature, apparent temperature, humidity, precipitation, conditions, and wind speed without requiring an API key.",
+    "url": "https://open-meteo.com/en/docs"
+  },
+  {
+    "id": "hosted-models",
+    "title": "Hosted-Model Query Rewriting and Reranking",
+    "text": "Query rewriting produces a clearer search query, while reranking reorders BM25 candidates using a language model's relevance judgments. BloomSearch supports these as optional hosted-model operations when the user supplies a compatible provider URL, model identifier, and API key for the request.",
+    "url": "https://huggingface.co/docs/inference-providers/index"
+  },
+  {
+    "id": "unit-testing",
+    "title": "Unit Testing",
+    "text": "Unit testing checks small parts of a program automatically and detects regressions when code changes. BloomSearch uses Python's unittest framework to test Bloom-filter behavior, persistence, BM25 retrieval, crawling, collection routing, weather parsing, and out-of-scope rejection.",
+    "url": "https://docs.python.org/3/library/unittest.html"
+  },
+  {
+    "id": "project-components",
+    "title": "Adaptive BloomSearch Project Components",
+    "text": "Adaptive BloomSearch is implemented in Python. FastAPI provides the web server and API endpoints, while HTML, CSS, and JavaScript provide the browser interface. A web crawler collects allowed public pages and a URL Bloom filter helps avoid duplicate visits. The collection store persists documents and indexes. Tokenization converts text and queries into searchable terms. Segment Bloom filters skip index segments that definitely lack query terms, and BM25 ranks matching documents. A query router sends weather questions to the no-key Open-Meteo live API and sends general questions to the best indexed collection. Optional hosted model support can rewrite queries and rerank results when a user supplies provider credentials. Unit tests verify Bloom filters, indexing, crawling, routing, weather, and retrieval behavior.",
+    "url": "https://github.com/swathiblrs/Bloom-Filter"
   }
 ]
-

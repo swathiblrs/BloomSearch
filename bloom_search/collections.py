@@ -8,7 +8,7 @@ from pathlib import Path
 import re
 from typing import Iterable
 
-from .index import Document, SearchIndex
+from .index import Document, SearchIndex, has_meaningful_match
 
 
 COLLECTION_NAME = re.compile(r"^[a-z0-9][a-z0-9_-]{0,63}$")
@@ -86,3 +86,19 @@ class CollectionStore:
             collections.append(CollectionInfo(path.name, index.document_count, len(index.segments)))
         return collections
 
+    def best_collection(self, query: str) -> str:
+        """Choose the indexed collection with the strongest BM25 match."""
+        best_name = ""
+        best_score = -1.0
+        for item in self.list():
+            results, _ = self.load_index(item.name).search_bm25(query, limit=1)
+            score = (
+                results[0][1]
+                if results and has_meaningful_match(query, results[0][0])
+                else 0.0
+            )
+            if score > best_score:
+                best_name, best_score = item.name, score
+        if not best_name:
+            raise KeyError("no searchable collections are available")
+        return best_name

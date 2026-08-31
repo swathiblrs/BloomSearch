@@ -18,7 +18,8 @@ from .api import HostedModelClient, ModelAPIError
 from .collections import CollectionStore
 from .crawler import WebCrawler
 from .engine import BloomSearchEngine
-from .index import Document, SearchIndex
+from .index import Document, SearchIndex, has_meaningful_match
+from .weather import WeatherService, is_weather_query, weather_location
 
 
 ROOT = Path(os.getenv("BLOOMSEARCH_ROOT", Path.cwd())).resolve()
@@ -47,11 +48,12 @@ app = FastAPI(
 
 class SearchRequest(BaseModel):
     query: str = Field(min_length=1, max_length=500)
-    collection: str = Field(default="demo", pattern=r"^[a-z0-9][a-z0-9_-]{0,63}$")
+    collection: str = Field(default="auto", pattern=r"^[a-z0-9][a-z0-9_-]{0,63}$")
     api_base: HttpUrl | None = None
     api_key: SecretStr | None = None
     model: str | None = Field(default=None, min_length=1, max_length=300)
     limit: int = Field(default=10, ge=1, le=50)
+    location: str = Field(default="", max_length=200)
 
 
 class CrawlRequest(BaseModel):
@@ -150,7 +152,36 @@ def crawl(request: CrawlRequest) -> dict[str, object]:
 @app.post("/api/search")
 def search(request: SearchRequest) -> JSONResponse:
     try:
-        index = STORE.load_index(request.collection)
+        if is_weather_query(request.query):
+            weather = WeatherService().current(weather_location(request.query, request.location))
+            return JSONResponse(
+                {
+                    "mode": "live-weather",
+                    "collection": "Open-Meteo live data",
+                    "query": request.query,
+                    "rewritten_query": request.query,
+                    "segments_skipped": 0,
+                    "results": [
+                        {
+                            "document": {
+                                "id": "live-weather",
+                                "title": f"Current weather for {weather.location}",
+                                "text": weather.summary,
+                                "url": "https://open-meteo.com/",
+                            },
+                            "bm25_score": 0.0,
+                            "relevance_score": None,
+                            "explanation": weather.summary,
+                        }
+                    ],
+                }
+            )
+        selected_collection = (
+            STORE.best_collection(request.query)
+            if request.collection == "auto"
+            else request.collection
+        )
+        index = STORE.load_index(selected_collection)
         api_fields = (request.api_base, request.api_key, request.model)
         if any(api_fields) and not all(api_fields):
             raise ValueError("api_base, api_key, and model must be supplied together")
@@ -165,15 +196,20 @@ def search(request: SearchRequest) -> JSONResponse:
             output = BloomSearchEngine(index, client).search(request.query, limit=request.limit)
             serializable = dict(output)
             serializable["mode"] = "hosted"
-            serializable["collection"] = request.collection
+            serializable["collection"] = selected_collection
             serializable["results"] = [asdict(result) for result in output["results"]]
             return JSONResponse(serializable)
 
         results, skipped = index.search_bm25(request.query, request.limit)
+        results = [
+            (document, score)
+            for document, score in results
+            if has_meaningful_match(request.query, document)
+        ]
         return JSONResponse(
             {
                 "mode": "lexical",
-                "collection": request.collection,
+                "collection": selected_collection,
                 "query": request.query,
                 "rewritten_query": request.query,
                 "segments_skipped": skipped,

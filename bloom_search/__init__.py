@@ -3,6 +3,7 @@
 from .engine import BloomSearchEngine, SearchResult
 from .collections import CollectionInfo, CollectionStore
 from .crawler import WebCrawler
+from .weather import WeatherResult, WeatherService, weather_location
 from .index import Document, SearchIndex
 from .research import CertaintyAwareCascade, QueryCase
 
@@ -16,4 +17,7 @@ __all__ = [
     "SearchIndex",
     "SearchResult",
     "WebCrawler",
+    "WeatherResult",
+    "WeatherService",
+    "weather_location",
 ]

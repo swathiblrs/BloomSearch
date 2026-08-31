@@ -15,10 +15,24 @@ from bloom_filter import BloomFilter
 
 
 TOKEN_PATTERN = re.compile(r"[a-z0-9]+(?:'[a-z0-9]+)?")
+STOP_WORDS = {
+    "a", "an", "and", "are", "as", "at", "be", "can", "do", "does", "for", "from",
+    "how", "i", "in", "is", "it", "me", "my", "of", "on", "or", "the", "this", "to",
+    "was", "what", "when", "where", "which", "who", "why", "will", "with", "you", "your",
+}
 
 
 def tokenize(text: str) -> list[str]:
     return TOKEN_PATTERN.findall(text.lower())
+
+
+def has_meaningful_match(query: str, document: "Document") -> bool:
+    """Reject results supported only by generic stop words."""
+    query_terms = {term for term in tokenize(query) if term not in STOP_WORDS}
+    if not query_terms:
+        return False
+    document_terms = set(tokenize(f"{document.title} {document.text}"))
+    return bool(query_terms & document_terms)
 
 
 @dataclass(frozen=True, slots=True)

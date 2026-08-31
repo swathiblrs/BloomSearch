@@ -4,6 +4,7 @@ from pathlib import Path
 
 from bloom_search.collections import CollectionStore
 from bloom_search.crawler import FetchedPage, WebCrawler, canonicalize_url
+from bloom_search.index import Document, has_meaningful_match
 
 
 class FakeWebsite:
@@ -64,7 +65,24 @@ class CrawlerTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 store.save_documents("../escape", [])
 
+    def test_automatically_selects_best_matching_collection(self):
+        with tempfile.TemporaryDirectory() as directory:
+            store = CollectionStore(directory)
+            store.save_documents(
+                "python-docs",
+                [Document("python", "Python", "Functions and modules")],
+            )
+            store.save_documents(
+                "garden-docs",
+                [Document("garden", "Gardening", "Tomato soil and watering")],
+            )
+            self.assertEqual(store.best_collection("How should I water tomatoes?"), "garden-docs")
+
+    def test_rejects_match_supported_only_by_common_words(self):
+        document = Document("bloom", "Bloom filters", "A Bloom filter is a data structure")
+        self.assertFalse(has_meaningful_match("What is my name?", document))
+        self.assertTrue(has_meaningful_match("What is a Bloom filter?", document))
+
 
 if __name__ == "__main__":
     unittest.main()
-
