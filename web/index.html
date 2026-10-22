@@ -74,7 +74,12 @@
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.detail || 'Search failed');
-      status.textContent = `Mode: ${data.mode}\nCollection: ${data.collection}\nQuery used: ${data.rewritten_query}\nSegments skipped: ${data.segments_skipped}`;
+      const layerOne = data.nlp_policy?.layer_one?.action;
+      const layerTwo = data.nlp_policy?.layer_two?.action;
+      const policyStatus = layerOne
+        ? `\nNLP action: ${layerOne}${layerTwo ? ` → ${layerTwo}` : ''}\nHosted calls: ${data.nlp_policy.hosted_calls}`
+        : '';
+      status.textContent = `Mode: ${data.mode}\nCollection: ${data.collection}\nQuery used: ${data.rewritten_query}\nSegments skipped: ${data.segments_skipped}${policyStatus}`;
       for (const item of data.results) {
         const article = document.createElement('article');
         const title = document.createElement('h3');
@@ -96,7 +101,9 @@
         article.append(title, score, explanation);
         results.append(article);
       }
-      if (!data.results.length) results.textContent = 'Sorry, cannot find the answer.';
+      if (!data.results.length) {
+        results.textContent = data.clarification_question || 'Sorry, cannot find the answer.';
+      }
       results.hidden = false;
     } catch (error) {
       status.textContent = error.message;

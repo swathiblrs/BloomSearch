@@ -92,10 +92,12 @@ High-level search workflow:
 
 ```text
 User selects a collection and enters a query
-    -> Optional hosted model API rewrites the query
+    -> NLP action policy selects keep, rewrite, or clarify
+    -> Optional hosted model API rewrites only when selected
     -> Segment Bloom filters skip definitely irrelevant segments
     -> BM25 retrieves keyword-matched candidate documents
-    -> Optional hosted model API reranks candidates by semantic relevance
+    -> Rerank-benefit gate evaluates BM25 uncertainty
+    -> Optional hosted model API reranks only when selected
     -> BloomSearch returns ranked source pages and snippets
 ```
 
@@ -159,6 +161,17 @@ Core stack:
 - Calculates inverse document frequency across all segments
 - Applies BM25 term-frequency and length normalization
 - Returns the strongest candidates before an API reranking call
+
+### 🎛️ Selective NLP Action Policy
+
+- Extracts normalized query-length, meaningful-term, context-dependence, ambiguity,
+  BM25-confidence, score-margin, and Bloom-coverage features
+- Selects **keep**, **rewrite**, or **clarify** before retrieval
+- Uses a separate uncertainty gate to select **rerank** or **return BM25** afterward
+- Returns structured decision metadata for component-level evaluation
+- Falls back safely to free lexical retrieval when a hosted API is not supplied
+- Includes a dependency-free trainable softmax classifier with JSON save/load support
+- Uses a conservative rule-based baseline until a classifier is trained on labeled public data
 
 ### 🧠 API-Hosted LLM Reranking
 
@@ -230,6 +243,7 @@ bloom_search/
  ├── cli.py               # Index build, statistics, and search commands
  ├── engine.py            # Query rewriting and candidate reranking workflow
  ├── index.py             # Segmented index, deduplication, tokenization, and BM25
+ ├── nlp_policy.py        # Joint keep/rewrite/clarify/rerank action policy
  ├── research.py          # Learned cascade, benchmark, and evaluation metrics
  ├── web.py               # FastAPI routes and per-request user API configuration
  └── __main__.py          # python -m bloom_search entry point
@@ -247,6 +261,7 @@ tests/
  ├── test_bloom_filter.py # Data-structure and persistence tests
  ├── test_bloom_search.py # Index, BM25, Bloom skipping, and API workflow tests
  ├── test_crawler.py      # Offline crawler, collection, and search tests
+ ├── test_nlp_policy.py   # Action policy and trainable classifier tests
  └── test_research.py     # Counting filter and learned-cascade tests
 
 research/
