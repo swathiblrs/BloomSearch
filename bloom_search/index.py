@@ -169,7 +169,12 @@ class SearchIndex:
                 score += inverse_frequency * frequency * (k1 + 1) / denominator
             if score:
                 scored.append((document, score))
-        scored.sort(key=lambda item: item[1], reverse=True)
+        # Sort by BM25 score (highest first).
+        # # Break ties using document ID for consistent results.
+        scored.sort(
+            key=lambda item: (-item[1], str(item[0].id))
+        )
+        
         return scored[:limit]
 
     def save(self, path: str | Path) -> None:

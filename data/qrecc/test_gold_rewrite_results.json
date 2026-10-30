@@ -1,0 +1,1701 @@
+{
+  "examples": 188,
+  "top_k": 10,
+  "original_hit_at_10": 0.648936170212766,
+  "gold_rewrite_hit_at_10": 0.8031914893617021,
+  "rewrite_only_wins": 29,
+  "results": [
+    {
+      "conversation_id": 1,
+      "turn_id": 1,
+      "original_query": "What is a physician's assistant?",
+      "gold_rewrite": "What is a physician's assistant?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 1,
+      "turn_id": 2,
+      "original_query": "What are the educational requirements required to become one?",
+      "gold_rewrite": "What are the educational requirements required to become a physician's assistant?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 1,
+      "turn_id": 3,
+      "original_query": "What does it cost?",
+      "gold_rewrite": "What does it cost to become a physician's assistant?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 1,
+      "turn_id": 4,
+      "original_query": "What's the average starting salary in the UK?",
+      "gold_rewrite": "What's the average starting salary for a physician's assistant in the UK?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 1,
+      "turn_id": 5,
+      "original_query": "What about in the US?",
+      "gold_rewrite": "What's the average starting salary for a physician's assistant in the US?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 1,
+      "turn_id": 6,
+      "original_query": "What school subjects are needed to become a registered nurse?",
+      "gold_rewrite": "What school subjects are needed to become a registered nurse?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 1,
+      "turn_id": 7,
+      "original_query": "What is the PA average salary vs an RN?",
+      "gold_rewrite": "What is the physician's assistant average salary vs a registered nurse?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 1,
+      "turn_id": 8,
+      "original_query": "What the difference between a PA and a nurse practitioner?",
+      "gold_rewrite": "What the difference between a physician assistant and a nurse practitioner?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 1,
+      "turn_id": 9,
+      "original_query": "Do NPs or PAs make more?",
+      "gold_rewrite": "Do nurse practitioners or physician assistants make more?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 1,
+      "turn_id": 10,
+      "original_query": "Is a PA above a NP?",
+      "gold_rewrite": "Is a physician assistants above a nurse practitioner?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 1,
+      "turn_id": 11,
+      "original_query": "What is the fastest way to become a NP?",
+      "gold_rewrite": "What is the fastest way to become a nurse practitioner?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 1,
+      "turn_id": 12,
+      "original_query": "How much longer does it take to become a doctor after being an NP?",
+      "gold_rewrite": "How much longer does it take to become a doctor after being a nurse practitioner?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 2,
+      "turn_id": 1,
+      "original_query": "What are the main breeds of goat?",
+      "gold_rewrite": "What are the main breeds of goat?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 2,
+      "turn_id": 2,
+      "original_query": "Tell me about boer goats.",
+      "gold_rewrite": "Tell me about boer goats",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 2,
+      "turn_id": 3,
+      "original_query": "What breed is good for meat?",
+      "gold_rewrite": "What breed of goats is good for meat",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 2,
+      "turn_id": 4,
+      "original_query": "Are angora goats good for it?",
+      "gold_rewrite": "Are angora goats good for meat?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 2,
+      "turn_id": 5,
+      "original_query": "What about boer goats?",
+      "gold_rewrite": "Are boer goats good for meat?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 2,
+      "turn_id": 6,
+      "original_query": "What are pygmies used for?",
+      "gold_rewrite": "What are pygmy goats used for?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 2,
+      "turn_id": 7,
+      "original_query": "What is the best for fiber production?",
+      "gold_rewrite": "What is the best goat for fiber production?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 2,
+      "turn_id": 8,
+      "original_query": "How long do Angora goats live?",
+      "gold_rewrite": "How long do Angora goats live?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 2,
+      "turn_id": 9,
+      "original_query": "Can you milk them?",
+      "gold_rewrite": "Can you milk Angora goats?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 2,
+      "turn_id": 10,
+      "original_query": "How many can you have per acre?",
+      "gold_rewrite": "How many goats can you have per acre?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 2,
+      "turn_id": 11,
+      "original_query": "Are they profitable?",
+      "gold_rewrite": "Are goats profitable?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 1,
+      "original_query": "Tell me about the types of irregular heart beat.",
+      "gold_rewrite": "Tell me about the types of irregular heart beat.",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 2,
+      "original_query": "How serious is an irregular heart beat?",
+      "gold_rewrite": "How serious is an irregular heart beat?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 3,
+      "original_query": "What are the different types of tachycardia?",
+      "gold_rewrite": "What are the different types of tachycardia?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 4,
+      "original_query": "What is atrial flutter?",
+      "gold_rewrite": "What is atrial flutter?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 5,
+      "original_query": "What causes it?",
+      "gold_rewrite": "What causes irregular heartbeat?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 6,
+      "original_query": "What's the difference between flutter and fibrillation?",
+      "gold_rewrite": "What's the difference between flutter and fibrillation?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 7,
+      "original_query": "How does afib affect an ECG?",
+      "gold_rewrite": "How does atrial fibrillation affect electrocardiography?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 8,
+      "original_query": "Does it shorten your life?",
+      "gold_rewrite": "Does atrial flutter shorten your life?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 9,
+      "original_query": "What triggers it?",
+      "gold_rewrite": "What triggers atrial flutter?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 10,
+      "original_query": "How do you stop an attack?",
+      "gold_rewrite": "How do you stop an atrial flutter attack?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 11,
+      "original_query": "What is the best exercise for it?",
+      "gold_rewrite": "What is the best exercise for atrial flutter?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 4,
+      "turn_id": 1,
+      "original_query": "What was the neolithic revolution?",
+      "gold_rewrite": "What was the neolithic revolution?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 4,
+      "turn_id": 2,
+      "original_query": "When did it start and end?",
+      "gold_rewrite": "When did the Neolithic revolution start and end?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 4,
+      "turn_id": 3,
+      "original_query": "Why did it start?",
+      "gold_rewrite": "Why did the Neolithic revolution start?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 4,
+      "turn_id": 4,
+      "original_query": "What did the neolithic invent?",
+      "gold_rewrite": "What did the neolithic invent?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 4,
+      "turn_id": 5,
+      "original_query": "What tools were used?",
+      "gold_rewrite": "What tools were used in the neolithic event?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 4,
+      "turn_id": 6,
+      "original_query": "When was it brought to the british isles?",
+      "gold_rewrite": "When was the neolithic event brought to the British isles?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 4,
+      "turn_id": 7,
+      "original_query": "Describe the period that follows it.",
+      "gold_rewrite": "Describe the period that follows the neolithic event?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 4,
+      "turn_id": 8,
+      "original_query": "What was its significance?",
+      "gold_rewrite": "What was the significance of the neolithic event?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 4,
+      "turn_id": 9,
+      "original_query": "What were the houses like?",
+      "gold_rewrite": "What were the houses like in the neolithic event?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 1,
+      "original_query": "What are the best ways to cook a turkey?",
+      "gold_rewrite": "What are the best ways to cook a turkey?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 2,
+      "original_query": "Should I brine a turkey before smoking it?",
+      "gold_rewrite": "Should I brine a turkey before smoking it?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 3,
+      "original_query": "How much salt do I use to brine it?",
+      "gold_rewrite": "How much salt do I use to brine a turkey?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 4,
+      "original_query": "What kind of wood should I use?",
+      "gold_rewrite": "What kind of wood should I use to brine a turkey?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 5,
+      "original_query": "How long should it be smoked for?",
+      "gold_rewrite": "How long should a turkey be smoked for?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 6,
+      "original_query": "Is smoked turkey healthy?",
+      "gold_rewrite": "Is smoked turkey healthy?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 7,
+      "original_query": "What can you do with leftovers?",
+      "gold_rewrite": "What can you do with leftovers or a turkey?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 8,
+      "original_query": "How long are leftovers good for in the fridge?",
+      "gold_rewrite": "How long are leftovers a turkey good for in the fridge?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 9,
+      "original_query": "What's a recipe for smoked turkey soup?",
+      "gold_rewrite": "What's a recipe for smoked turkey soup?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 10,
+      "original_query": "How about one for chili?",
+      "gold_rewrite": "How about a recipe for chili?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 6,
+      "turn_id": 1,
+      "original_query": "What are the most important US supreme court cases?",
+      "gold_rewrite": "What are the most important US supreme court cases?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 6,
+      "turn_id": 2,
+      "original_query": "What did Plessy v. Ferguson establish?",
+      "gold_rewrite": "What did Plessy v. Ferguson establish?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 6,
+      "turn_id": 3,
+      "original_query": "How about Marbury vs Madison?",
+      "gold_rewrite": "What did the Marbury vs Madison case establish?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 6,
+      "turn_id": 4,
+      "original_query": "Was it unanimous?",
+      "gold_rewrite": "Was the Marbury vs Madison case unanimous?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 6,
+      "turn_id": 5,
+      "original_query": "What was the implication of Roe vs Wade?",
+      "gold_rewrite": "What was the implication of Roe vs Wade?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 6,
+      "turn_id": 6,
+      "original_query": "What were the main arguments?",
+      "gold_rewrite": "What were the main arguments of the Roe vs. Wade?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 6,
+      "turn_id": 7,
+      "original_query": "What was the point of Brown v Board of Ed?",
+      "gold_rewrite": "What was the point of Brown v Board of Ed?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 6,
+      "turn_id": 8,
+      "original_query": "What were the main arguments?",
+      "gold_rewrite": "What were the main arguments of Brown v Board of Ed?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 6,
+      "turn_id": 9,
+      "original_query": "Why is it important today?",
+      "gold_rewrite": "Why is the Brown v Board of Ed important today?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 1,
+      "original_query": "What are the different types of macromolecules?",
+      "gold_rewrite": "What are the different types of macromolecules?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 2,
+      "original_query": "Tell me about the characteristics of carbohydrates.",
+      "gold_rewrite": "Tell me about the characteristics of carbohydrates.",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 3,
+      "original_query": "What are they composed of?",
+      "gold_rewrite": "What are carbohydrates composed of?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 4,
+      "original_query": "What is their basic structure?",
+      "gold_rewrite": "What are carbohydrates basic structure?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 5,
+      "original_query": "What are the main types with examples of each?",
+      "gold_rewrite": "What are the main types of carbohydrates with examples of each?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 6,
+      "original_query": "Tell me about lipids.",
+      "gold_rewrite": "Tell me about lipids.",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 7,
+      "original_query": "What is their function?",
+      "gold_rewrite": "What are the functions of lipids.",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 8,
+      "original_query": "What are the types of lipids?",
+      "gold_rewrite": "What are the types of lipids?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 9,
+      "original_query": "What is the most common?",
+      "gold_rewrite": "What is the most common lipid?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 10,
+      "original_query": "What is the difference between them and carbohydrates?",
+      "gold_rewrite": "What is the difference between lipids and carbohydrates?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 11,
+      "original_query": "Why are carbs better?",
+      "gold_rewrite": "Why are carbs better than lipids?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 8,
+      "turn_id": 1,
+      "original_query": "What was the Securities Act of 1933?",
+      "gold_rewrite": "What was the Securities Act of 1933?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 8,
+      "turn_id": 2,
+      "original_query": "What is exempt from it?",
+      "gold_rewrite": "What is exempt for the Securities Act of 1933?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 8,
+      "turn_id": 3,
+      "original_query": "Why was it needed?",
+      "gold_rewrite": "Why was the Securities Act of 1933 needed?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 8,
+      "turn_id": 4,
+      "original_query": "What was the reason for creating the 1934 act?",
+      "gold_rewrite": "What was the reason for creating the 1934 act?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 8,
+      "turn_id": 5,
+      "original_query": "What is the largest securities exchange in the world?",
+      "gold_rewrite": "What is the largest securities exchange in the world?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 8,
+      "turn_id": 6,
+      "original_query": "How and when when was it created?",
+      "gold_rewrite": "How and when was the largest securities exchange in the world created?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 8,
+      "turn_id": 7,
+      "original_query": "What was the first stock market?",
+      "gold_rewrite": "What was the first stock market?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 1,
+      "original_query": "Why is statistics important?",
+      "gold_rewrite": "Why is statistics important?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 2,
+      "original_query": "Why should one study it?",
+      "gold_rewrite": "Why should one study statistics?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 3,
+      "original_query": "Tell me about its career options.",
+      "gold_rewrite": "Tell me about the career options for statistics?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 4,
+      "original_query": "Are Data Scientists in high demand?",
+      "gold_rewrite": "Are Data Scientists in high demand?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 5,
+      "original_query": "How much do they make on average in a year?",
+      "gold_rewrite": "How much do Data Scientists make on average in a year?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 6,
+      "original_query": "What is range in statistics?",
+      "gold_rewrite": "What is range in statistics?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 8,
+      "original_query": "What are quartiles?",
+      "gold_rewrite": "What are quartiles?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 9,
+      "original_query": "How do you find the lower and upper quartile?",
+      "gold_rewrite": "How do you find the lower and upper quartile?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 1,
+      "original_query": "How does water freeze?",
+      "gold_rewrite": "How does water freeze?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 2,
+      "original_query": "What happens to its molecules?",
+      "gold_rewrite": "How happens to waters molecules when it freezes?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 3,
+      "original_query": "Why isn't the bottom of the ocean frozen?",
+      "gold_rewrite": "Why isn't the bottom of the ocean frozen?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 4,
+      "original_query": "Can the bottom of the ocean freeze?",
+      "gold_rewrite": "Can the bottom of the ocean freeze?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 5,
+      "original_query": "Where is the coldest place on Earth?",
+      "gold_rewrite": "Where is the coldest place on Earth?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 7,
+      "original_query": "Why is Antarctica so cold?",
+      "gold_rewrite": "Why is Antarctica so cold?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 8,
+      "original_query": "How cold is the water underneath the ice?",
+      "gold_rewrite": "How cold is the water underneath the ice in Antarctica?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 9,
+      "original_query": "What is the biggest town?",
+      "gold_rewrite": "What is the biggest town in Antarctica?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 11,
+      "turn_id": 1,
+      "original_query": "What are futuristic designs?",
+      "gold_rewrite": "What are futuristic designs?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 1,
+      "original_query": "What is a good age to get LASIK?",
+      "gold_rewrite": "What is a good age to get LASIK?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 2,
+      "original_query": "Give me a short description of the procedure.",
+      "gold_rewrite": "Give me a short description of the LASIK procedure.",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 3,
+      "original_query": "What are its benefits?",
+      "gold_rewrite": "What are the benefits of LASIK?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 4,
+      "original_query": "What are the risks?",
+      "gold_rewrite": "What are the risks of LASIK?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 5,
+      "original_query": "Describe experiences of some people who had it done.",
+      "gold_rewrite": "Describe experiences of some people who have done LASIK.",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 6,
+      "original_query": "Are there any good alternatives to it?",
+      "gold_rewrite": "Are there any good alternatives to LASIK?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 7,
+      "original_query": "What is its success rate?",
+      "gold_rewrite": "What is the success rate of LASIK?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 8,
+      "original_query": "Once it's done, what kind of precautions do I need to take?",
+      "gold_rewrite": "Once LASIK is done, what kind of precautions do I need to take?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 9,
+      "original_query": "Does the effect wear off with age?",
+      "gold_rewrite": "Does the effect of LASIK wear off with age?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 1,
+      "original_query": "What is tofu exactly?",
+      "gold_rewrite": "What is tofu exactly?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 2,
+      "original_query": "How is it made?",
+      "gold_rewrite": "How is tofu made?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 3,
+      "original_query": "What are its origins?",
+      "gold_rewrite": "What are tofus origins?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 4,
+      "original_query": "What is the best tofu?",
+      "gold_rewrite": "What is the best tofu?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 5,
+      "original_query": "Is it a kind of cheese?",
+      "gold_rewrite": "Is tofu a kind of cheese?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 6,
+      "original_query": "Can I eat it raw?",
+      "gold_rewrite": "Can I eat tofu raw?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 7,
+      "original_query": "What are common ways to cook it?",
+      "gold_rewrite": "What are common ways to cook tofu?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 8,
+      "original_query": "In what cuisines is it popular?",
+      "gold_rewrite": "In what cuisines is tofu popular?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 9,
+      "original_query": "Is tofu good for you?",
+      "gold_rewrite": "Is tofu good for you?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 10,
+      "original_query": "Can it make you sick?",
+      "gold_rewrite": "Can tofu make you sick?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 11,
+      "original_query": "Is too much tofu bad for you?",
+      "gold_rewrite": "Is too much tofu bad for you?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 14,
+      "turn_id": 1,
+      "original_query": "What are scalable data center network architectures?",
+      "gold_rewrite": "What are scalable data center network architectures?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 14,
+      "turn_id": 2,
+      "original_query": "What are some examples?",
+      "gold_rewrite": "What are some examples of scalable data center network architectures?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 14,
+      "turn_id": 3,
+      "original_query": "Describe the characteristics of FAT tree topology.",
+      "gold_rewrite": "Describe the characteristics of FAT tree topology.",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 14,
+      "turn_id": 4,
+      "original_query": "What routes can be taken by an upstream packet?",
+      "gold_rewrite": "What routes can be taken by an upstream packet?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 14,
+      "turn_id": 5,
+      "original_query": "Describe core, aggregator and edge switches.",
+      "gold_rewrite": "Describe core, aggregator and edge switches.",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 14,
+      "turn_id": 8,
+      "original_query": "Describe the jellyfish architecture.",
+      "gold_rewrite": "Describe the jellyfish architecture.",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 15,
+      "turn_id": 1,
+      "original_query": "Tell me about the International Linguistics Olympiad.",
+      "gold_rewrite": "Tell me about the International Linguistics Olympiad.",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 15,
+      "turn_id": 2,
+      "original_query": "How do I prepare for it?",
+      "gold_rewrite": "How do I prepare for the International Linguistic Olympiad?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 15,
+      "turn_id": 3,
+      "original_query": "How tough is the exam?",
+      "gold_rewrite": "How tough is the exam for the International Linguistic Olympiad?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 15,
+      "turn_id": 4,
+      "original_query": "What kind of problems can I expect?",
+      "gold_rewrite": "What kind of problems can I expect during the exam for the International Linguistic Olympiad?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 15,
+      "turn_id": 5,
+      "original_query": "Tell me about the history of linguistics as a field.",
+      "gold_rewrite": "Tell me about the history of linguistics as a field.",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 15,
+      "turn_id": 6,
+      "original_query": "Who was Panini and what were his contributions?",
+      "gold_rewrite": "Who was Panini and what were his contributions?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 15,
+      "turn_id": 7,
+      "original_query": "What is the link between linguistics and computer science?",
+      "gold_rewrite": "What is the link between linguistics and computer science?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 16,
+      "turn_id": 1,
+      "original_query": "What is a normal blood sugar level?",
+      "gold_rewrite": "What is a normal blood sugar level?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 16,
+      "turn_id": 2,
+      "original_query": "What does it mean if it's higher than this?",
+      "gold_rewrite": "What does it mean if blood sugar level is higher than normal?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 16,
+      "turn_id": 3,
+      "original_query": "What is a dangerous level?",
+      "gold_rewrite": "What is a dangerous level for blood sugar?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 16,
+      "turn_id": 4,
+      "original_query": "How do you bring it down quickly?",
+      "gold_rewrite": "How do you bring blood sugar levels down quickly?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 16,
+      "turn_id": 5,
+      "original_query": "How fast can it rise?",
+      "gold_rewrite": "How fast can blood sugar levels rise?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 16,
+      "turn_id": 6,
+      "original_query": "And what if it's lower than normal?",
+      "gold_rewrite": "What if a blood sugar level is lower than normal?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 16,
+      "turn_id": 7,
+      "original_query": "How does this make you feel?",
+      "gold_rewrite": "How does this make you feel if a blood sugar level is lower than normal?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 16,
+      "turn_id": 8,
+      "original_query": "Do different activities lead to an imbalance?",
+      "gold_rewrite": "Do different activities lead to an imbalance in blood sugar levels?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 16,
+      "turn_id": 9,
+      "original_query": "Is there a relation between age and sugar levels?",
+      "gold_rewrite": "Is there a relation between age and sugar levels?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 1,
+      "original_query": "What are the different forms of energy?",
+      "gold_rewrite": "What are the different forms of energy?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 2,
+      "original_query": "How can it be stored?",
+      "gold_rewrite": "How can energy be stored?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 3,
+      "original_query": "What type of energy is used in motion?",
+      "gold_rewrite": "What type of energy is used in motion?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 4,
+      "original_query": "Tell me about mechanical energy.",
+      "gold_rewrite": "Tell me about mechanical energy.",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 5,
+      "original_query": "Give me some examples.",
+      "gold_rewrite": "Give me some examples of mechanical energy.",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 6,
+      "original_query": "Why is sound a form of mechanical energy?",
+      "gold_rewrite": "Why is sound a form of mechanical energy?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 7,
+      "original_query": "How does it differ from potential energy?",
+      "gold_rewrite": "How does mechanical energy differ from potential energy?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 8,
+      "original_query": "Are potential and kinetic the same?",
+      "gold_rewrite": "Are potential energy and kinetic energy the same?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 9,
+      "original_query": "What type does chemical energy belong to?",
+      "gold_rewrite": "What type does chemical energy belong to?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 10,
+      "original_query": "What form of energy is used in eating?",
+      "gold_rewrite": "What form of energy is used in eating?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 1,
+      "original_query": "Describe Uranus.",
+      "gold_rewrite": "Describe Uranus.",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 2,
+      "original_query": "What makes it so unusual?",
+      "gold_rewrite": "What makes Uranus so unusual?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 3,
+      "original_query": "Tell me about its orbit.",
+      "gold_rewrite": "Tell me about Uranus's orbit.",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 4,
+      "original_query": "Why is it tilted?",
+      "gold_rewrite": "Why is Uranus tilted?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 5,
+      "original_query": "How is its rotation different from other planets?",
+      "gold_rewrite": "How is its rotation of Uranus different from other planets?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 6,
+      "original_query": "What is peculiar about its seasons?",
+      "gold_rewrite": "What is peculiar about Uranus's seasons?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 7,
+      "original_query": "Are there any other planets similar to it?",
+      "gold_rewrite": "Are there any other planets similar to Uranus?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 8,
+      "original_query": "Describe the characteristics of Neptune.",
+      "gold_rewrite": "Describe the characteristics of Neptune.",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 9,
+      "original_query": "Why is it important to our solar system?",
+      "gold_rewrite": "Why is Neptune important to our solar system?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 10,
+      "original_query": "How are these two planets similar to each other?",
+      "gold_rewrite": "How is Uranus and Neptune similar to each other?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 11,
+      "original_query": "Can life exist on either of them?",
+      "gold_rewrite": "Can life exist on either Uranus or Neptune?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 19,
+      "turn_id": 1,
+      "original_query": "What is chemical energy?",
+      "gold_rewrite": "What is chemical energy?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 19,
+      "turn_id": 2,
+      "original_query": "Describe a chemical reaction.",
+      "gold_rewrite": "Describe a chemical reaction.",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 19,
+      "turn_id": 3,
+      "original_query": "How is it represented mathematically?",
+      "gold_rewrite": "How is a chemical reaction represented mathematically?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 19,
+      "turn_id": 4,
+      "original_query": "Give me an example.",
+      "gold_rewrite": "Give me an example of a chemical reaction.",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 19,
+      "turn_id": 5,
+      "original_query": "What are the different kinds of reactions?",
+      "gold_rewrite": "What are the different kinds of chemical reactions?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 19,
+      "turn_id": 6,
+      "original_query": "What is a decomposition reaction?",
+      "gold_rewrite": "What is a decomposition reaction?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 19,
+      "turn_id": 7,
+      "original_query": "How is it a chemical change?",
+      "gold_rewrite": "How is a decomposition reaction a chemical change?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 19,
+      "turn_id": 8,
+      "original_query": "What is a synthesis reaction?",
+      "gold_rewrite": "What is a synthesis reaction?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 19,
+      "turn_id": 9,
+      "original_query": "Tell me the differences between synthesis and decomposition.",
+      "gold_rewrite": "Tell me the differences between synthesis reaction and decomposition reaction.",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 20,
+      "turn_id": 1,
+      "original_query": "Describe cell membranes.",
+      "gold_rewrite": "Describe cell membranes.",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 20,
+      "turn_id": 2,
+      "original_query": "What are its important functions?",
+      "gold_rewrite": "What are the important functions of a cell membrane?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 20,
+      "turn_id": 3,
+      "original_query": "Tell me about the phospholipid bilayer.",
+      "gold_rewrite": "Tell me about the phospholipid bilayer.",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 20,
+      "turn_id": 4,
+      "original_query": "What are its functions?",
+      "gold_rewrite": "What are the functions of a phospholipid bilayer?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 20,
+      "turn_id": 5,
+      "original_query": "What if the membrane gets damaged?",
+      "gold_rewrite": "What if the cell membrane gets damaged?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 20,
+      "turn_id": 6,
+      "original_query": "Do they repair themselves?",
+      "gold_rewrite": "Do cell membranes repair themselves?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 20,
+      "turn_id": 7,
+      "original_query": "Which nutrients may help in the repair process?",
+      "gold_rewrite": "Which nutrients may help in the repair process of a cell membrane?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 21,
+      "turn_id": 1,
+      "original_query": "What is weathering?",
+      "gold_rewrite": "What is weathering?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 21,
+      "turn_id": 2,
+      "original_query": "What are its major types?",
+      "gold_rewrite": "What are its major types of weathering ?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 21,
+      "turn_id": 3,
+      "original_query": "Tell me about chemical weathering.",
+      "gold_rewrite": "Tell me about chemical weathering.",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 21,
+      "turn_id": 4,
+      "original_query": "How is it different from biological weathering?",
+      "gold_rewrite": "How is chemical weathering different from biological weathering?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 21,
+      "turn_id": 5,
+      "original_query": "Does it change the composition of rocks?",
+      "gold_rewrite": "Does weathering change the composition of rocks?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 21,
+      "turn_id": 6,
+      "original_query": "What is the end product of chemical weathering?",
+      "gold_rewrite": "What is the end product of chemical weathering?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 21,
+      "turn_id": 7,
+      "original_query": "Give me an example.",
+      "gold_rewrite": "Give me an example of the end product of chemical weathering.",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 21,
+      "turn_id": 8,
+      "original_query": "What happens when quartz undergoes weathering?",
+      "gold_rewrite": "What happens when quartz undergoes weathering?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 22,
+      "turn_id": 1,
+      "original_query": "What are the most common spices used in cooking?",
+      "gold_rewrite": "What are the most common spices used in cooking?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 22,
+      "turn_id": 2,
+      "original_query": "How are they different from herbs?",
+      "gold_rewrite": "How are spices different from herbs?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 22,
+      "turn_id": 3,
+      "original_query": "Why do spices taste good?",
+      "gold_rewrite": "Why do spices taste good?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 22,
+      "turn_id": 4,
+      "original_query": "Where do most of them come from?",
+      "gold_rewrite": "Where do most spices come from?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    }
+  ]
+}

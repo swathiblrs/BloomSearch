@@ -1,0 +1,68 @@
+[
+  {
+    "original_query": "What is a physician's assistant?",
+    "rewritten_query": "What is a physician's assistant?",
+    "accepted": false,
+    "problems": [
+      "Query unchanged"
+    ]
+  },
+  {
+    "original_query": "What are the educational requirements required to become one?",
+    "rewritten_query": "What are the educational requirements required to become a physician's assistant?",
+    "accepted": true,
+    "problems": []
+  },
+  {
+    "original_query": "What does it cost?",
+    "rewritten_query": "What is the cost of a physician assistant program?",
+    "accepted": true,
+    "problems": []
+  },
+  {
+    "original_query": "What's the average starting salary in the UK?",
+    "rewritten_query": "What is the average starting salary in the UK?",
+    "accepted": true,
+    "problems": []
+  },
+  {
+    "original_query": "What about in the US?",
+    "rewritten_query": "What is the average cost of non-resident tuition for a physician's assistant program in the UK?",
+    "accepted": true,
+    "problems": []
+  },
+  {
+    "original_query": "What school subjects are needed to become a registered nurse?",
+    "rewritten_query": "What school subjects are needed to become a registered nurse?",
+    "accepted": false,
+    "problems": [
+      "Query unchanged"
+    ]
+  },
+  {
+    "original_query": "What is the PA average salary vs an RN?",
+    "rewritten_query": "An early career Physician Assistant (PA) with 1-4 years of experience earns an average total compensation (includes tips, bonus, and overtime pay) of $91,587 based on 4,392 salaries.",
+    "accepted": true,
+    "problems": []
+  },
+  {
+    "original_query": "What the difference between a PA and a nurse practitioner?",
+    "rewritten_query": "What is the average salary for PA's in 2013?",
+    "accepted": true,
+    "problems": []
+  },
+  {
+    "original_query": "Do NPs or PAs make more?",
+    "rewritten_query": "PAs are usually out on top.",
+    "accepted": true,
+    "problems": []
+  },
+  {
+    "original_query": "Is a PA above a NP?",
+    "rewritten_query": "Is a PA above a NP?",
+    "accepted": false,
+    "problems": [
+      "Query unchanged"
+    ]
+  }
+]
