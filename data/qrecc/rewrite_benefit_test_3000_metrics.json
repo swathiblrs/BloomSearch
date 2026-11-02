@@ -1,0 +1,32 @@
+{
+  "examples": 2803,
+  "test_accuracy": 0.6182661434177666,
+  "classification_report": {
+    "False": {
+      "precision": 0.709366391184573,
+      "recall": 0.6138259833134684,
+      "f1-score": 0.65814696485623,
+      "support": 1678.0
+    },
+    "True": {
+      "precision": 0.5203552923760177,
+      "recall": 0.6248888888888889,
+      "f1-score": 0.5678513731825525,
+      "support": 1125.0
+    },
+    "accuracy": 0.6182661434177666,
+    "macro avg": {
+      "precision": 0.6148608417802954,
+      "recall": 0.6193574361011787,
+      "f1-score": 0.6129991690193912,
+      "support": 2803.0
+    },
+    "weighted avg": {
+      "precision": 0.6335057111418957,
+      "recall": 0.6182661434177666,
+      "f1-score": 0.621906315326124,
+      "support": 2803.0
+    }
+  },
+  "rewrite_recommended": 1351
+}

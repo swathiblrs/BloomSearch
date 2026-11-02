@@ -1,0 +1,8 @@
+{
+  "test_examples": 2803,
+  "keep_all_hit_at_10": 0.34249018908312523,
+  "rewrite_all_hit_at_10": 0.7356403853014627,
+  "selective_hit_at_10": 0.5900820549411345,
+  "rewrites_recommended": 1333,
+  "rewrite_rate": 0.4755618979664645
+}

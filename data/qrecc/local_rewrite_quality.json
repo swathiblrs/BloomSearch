@@ -1,0 +1,1053 @@
+[
+  {
+    "original": "What is a physician's assistant?",
+    "gold": "What is a physician's assistant?",
+    "predicted": "What is a physician's assistant?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What are the educational requirements required to become one?",
+    "gold": "What are the educational requirements required to become a physician's assistant?",
+    "predicted": "What are the educational requirements required to become a physician's assistant?",
+    "accepted": true,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": []
+  },
+  {
+    "original": "What does it cost?",
+    "gold": "What does it cost to become a physician's assistant?",
+    "predicted": "What is the cost of a physician assistant program?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.5263157894736842,
+    "problems": []
+  },
+  {
+    "original": "What's the average starting salary in the UK?",
+    "gold": "What's the average starting salary for a physician's assistant in the UK?",
+    "predicted": "What's the average starting salary in the UK?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.782608695652174,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What about in the US?",
+    "gold": "What's the average starting salary for a physician's assistant in the US?",
+    "predicted": "What about in the US?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.4210526315789473,
+    "problems": [
+      "Missing named entities: us"
+    ]
+  },
+  {
+    "original": "What school subjects are needed to become a registered nurse?",
+    "gold": "What school subjects are needed to become a registered nurse?",
+    "predicted": "What school subjects are needed to become a registered nurse?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What is the PA average salary vs an RN?",
+    "gold": "What is the physician's assistant average salary vs a registered nurse?",
+    "predicted": "What is the PA average salary vs an RN?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.5714285714285715,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What the difference between a PA and a nurse practitioner?",
+    "gold": "What the difference between a physician assistant and a nurse practitioner?",
+    "predicted": "What the difference between a PA and a nurse practitioner?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.8571428571428572,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "Do NPs or PAs make more?",
+    "gold": "Do nurse practitioners or physician assistants make more?",
+    "predicted": "Do NPs or PAs make more?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.5714285714285715,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "Is a PA above a NP?",
+    "gold": "Is a physician assistants above a nurse practitioner?",
+    "predicted": "Is a PA above a NP?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.5714285714285715,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What is the fastest way to become a NP?",
+    "gold": "What is the fastest way to become a nurse practitioner?",
+    "predicted": "What is the fastest way to become a NP?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.8421052631578948,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "How much longer does it take to become a doctor after being an NP?",
+    "gold": "How much longer does it take to become a doctor after being a nurse practitioner?",
+    "predicted": "How long does it take to become a doctor after being an NP?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.7142857142857142,
+    "problems": []
+  },
+  {
+    "original": "What are the main breeds of goat?",
+    "gold": "What are the main breeds of goat?",
+    "predicted": "What are the main breeds of goat?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "Tell me about boer goats.",
+    "gold": "Tell me about boer goats",
+    "predicted": "Tell me about boer goats.",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What breed is good for meat?",
+    "gold": "What breed of goats is good for meat",
+    "predicted": "What breed is good for meat?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.8571428571428571,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "Are angora goats good for it?",
+    "gold": "Are angora goats good for meat?",
+    "predicted": "Are angora goats good for it?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.8333333333333334,
+    "problems": [
+      "Question form changed: yes_no -> wh"
+    ]
+  },
+  {
+    "original": "What about boer goats?",
+    "gold": "Are boer goats good for meat?",
+    "predicted": "What about boer goats?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.4,
+    "problems": [
+      "Unsupported restrictions added: country"
+    ]
+  },
+  {
+    "original": "What are pygmies used for?",
+    "gold": "What are pygmy goats used for?",
+    "predicted": "What are pygmies used for?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.7272727272727272,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What is the best for fiber production?",
+    "gold": "What is the best goat for fiber production?",
+    "predicted": "What is the best for fiber production?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.9333333333333333,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "How long do Angora goats live?",
+    "gold": "How long do Angora goats live?",
+    "predicted": "How long do Angora goats live?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "Can you milk them?",
+    "gold": "Can you milk Angora goats?",
+    "predicted": "Can you milk Angora goats?",
+    "accepted": true,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": []
+  },
+  {
+    "original": "How many can you have per acre?",
+    "gold": "How many goats can you have per acre?",
+    "predicted": "How many can you have per acre?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.9333333333333333,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "Are they profitable?",
+    "gold": "Are goats profitable?",
+    "predicted": "Are Angora mothers profitable?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.5714285714285715,
+    "problems": []
+  },
+  {
+    "original": "Tell me about the types of irregular heart beat.",
+    "gold": "Tell me about the types of irregular heart beat.",
+    "predicted": "Tell me about the types of irregular heart beat.",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "How serious is an irregular heart beat?",
+    "gold": "How serious is an irregular heart beat?",
+    "predicted": "How serious is an irregular heart beat?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What are the different types of tachycardia?",
+    "gold": "What are the different types of tachycardia?",
+    "predicted": "What are the different types of tachycardia?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What is atrial flutter?",
+    "gold": "What is atrial flutter?",
+    "predicted": "What is atrial flutter?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What causes it?",
+    "gold": "What causes irregular heartbeat?",
+    "predicted": "What causes Atrial fibrillation?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.5,
+    "problems": []
+  },
+  {
+    "original": "What's the difference between flutter and fibrillation?",
+    "gold": "What's the difference between flutter and fibrillation?",
+    "predicted": "What's the difference between flutter and fibrillation?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "How does afib affect an ECG?",
+    "gold": "How does atrial fibrillation affect electrocardiography?",
+    "predicted": "How does afib affect an ECG?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.5,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "Does it shorten your life?",
+    "gold": "Does atrial flutter shorten your life?",
+    "predicted": "Does atrial fibrillation shorten your life?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.8333333333333334,
+    "problems": []
+  },
+  {
+    "original": "What triggers it?",
+    "gold": "What triggers atrial flutter?",
+    "predicted": "What causes AFib?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.28571428571428575,
+    "problems": []
+  },
+  {
+    "original": "How do you stop an attack?",
+    "gold": "How do you stop an atrial flutter attack?",
+    "predicted": "How do you stop an attack?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.8571428571428571,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What is the best exercise for it?",
+    "gold": "What is the best exercise for atrial flutter?",
+    "predicted": "What is the best exercise for yoga?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.7999999999999999,
+    "problems": []
+  },
+  {
+    "original": "What was the neolithic revolution?",
+    "gold": "What was the neolithic revolution?",
+    "predicted": "What was the neolithic revolution?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "When did it start and end?",
+    "gold": "When did the Neolithic revolution start and end?",
+    "predicted": "When did it start and end?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.7142857142857143,
+    "problems": [
+      "Question type changed: when -> what"
+    ]
+  },
+  {
+    "original": "Why did it start?",
+    "gold": "Why did the Neolithic revolution start?",
+    "predicted": "Why did the Neolithic Revolution start and end?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.8571428571428571,
+    "problems": []
+  },
+  {
+    "original": "What did the neolithic invent?",
+    "gold": "What did the neolithic invent?",
+    "predicted": "What did the neolithic invent?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What tools were used?",
+    "gold": "What tools were used in the neolithic event?",
+    "predicted": "What tools were used?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.6666666666666666,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "When was it brought to the british isles?",
+    "gold": "When was the neolithic event brought to the British isles?",
+    "predicted": "When was it brought to the british isles?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.7777777777777777,
+    "problems": [
+      "Query unchanged"
+    ]
+  },
+  {
+    "original": "Describe the period that follows it.",
+    "gold": "Describe the period that follows the neolithic event?",
+    "predicted": "What is the name of the place where the Neolithic Age began?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.3,
+    "problems": []
+  },
+  {
+    "original": "What was its significance?",
+    "gold": "What was the significance of the neolithic event?",
+    "predicted": "What was the significance of copper metallurgy?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.6666666666666666,
+    "problems": []
+  },
+  {
+    "original": "What were the houses like?",
+    "gold": "What were the houses like in the neolithic event?",
+    "predicted": "What were the houses like?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.7142857142857143,
+    "problems": [
+      "Query unchanged"
+    ]
+  },
+  {
+    "original": "What are the best ways to cook a turkey?",
+    "gold": "What are the best ways to cook a turkey?",
+    "predicted": "What are the best ways to cook a turkey?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "Should I brine a turkey before smoking it?",
+    "gold": "Should I brine a turkey before smoking it?",
+    "predicted": "Should I brine a turkey before smoking it?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Question form changed: yes_no -> wh"
+    ]
+  },
+  {
+    "original": "How much salt do I use to brine it?",
+    "gold": "How much salt do I use to brine a turkey?",
+    "predicted": "How much salt do I use to brine it?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.8421052631578948,
+    "problems": [
+      "Question type changed: how -> what"
+    ]
+  },
+  {
+    "original": "What kind of wood should I use?",
+    "gold": "What kind of wood should I use to brine a turkey?",
+    "predicted": "What kind of wood should I use?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.7777777777777778,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "How long should it be smoked for?",
+    "gold": "How long should a turkey be smoked for?",
+    "predicted": "How long should it be smoked for?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.7999999999999999,
+    "problems": [
+      "Query unchanged"
+    ]
+  },
+  {
+    "original": "Is smoked turkey healthy?",
+    "gold": "Is smoked turkey healthy?",
+    "predicted": "Is smoked turkey healthy?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Query unchanged"
+    ]
+  },
+  {
+    "original": "What can you do with leftovers?",
+    "gold": "What can you do with leftovers or a turkey?",
+    "predicted": "What can you do with leftovers?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.8,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "How long are leftovers good for in the fridge?",
+    "gold": "How long are leftovers a turkey good for in the fridge?",
+    "predicted": "How long are leftovers good for in the fridge?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.9,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What's a recipe for smoked turkey soup?",
+    "gold": "What's a recipe for smoked turkey soup?",
+    "predicted": "What's a recipe for smoked turkey soup?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "How about one for chili?",
+    "gold": "How about a recipe for chili?",
+    "predicted": "How many days is the longest time turkey-lovers have been eating frozen food?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.1,
+    "problems": []
+  },
+  {
+    "original": "What are the most important US supreme court cases?",
+    "gold": "What are the most important US supreme court cases?",
+    "predicted": "What are the most important US supreme court cases?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What did Plessy v. Ferguson establish?",
+    "gold": "What did Plessy v. Ferguson establish?",
+    "predicted": "What did Plessy v. Ferguson establish?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "How about Marbury vs Madison?",
+    "gold": "What did the Marbury vs Madison case establish?",
+    "predicted": "How about Marbury vs Madison?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.4615384615384615,
+    "problems": [
+      "Question type changed: how -> what"
+    ]
+  },
+  {
+    "original": "Was it unanimous?",
+    "gold": "Was the Marbury vs Madison case unanimous?",
+    "predicted": "The unanimous opinion was written by Chief Justice John Marshall.",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.3529411764705882,
+    "problems": []
+  },
+  {
+    "original": "What was the implication of Roe vs Wade?",
+    "gold": "What was the implication of Roe vs Wade?",
+    "predicted": "What was the implication of Roe vs Wade?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What were the main arguments?",
+    "gold": "What were the main arguments of the Roe vs. Wade?",
+    "predicted": "What were the main arguments?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.6666666666666666,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What was the point of Brown v Board of Ed?",
+    "gold": "What was the point of Brown v Board of Ed?",
+    "predicted": "What was the point of Brown v Board of Ed?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What were the main arguments?",
+    "gold": "What were the main arguments of Brown v Board of Ed?",
+    "predicted": "What were the main arguments?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.625,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "Why is it important today?",
+    "gold": "Why is the Brown v Board of Ed important today?",
+    "predicted": "Why is it important today?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.5333333333333333,
+    "problems": [
+      "Question type changed: why -> what",
+      "Unsupported restrictions added: state"
+    ]
+  },
+  {
+    "original": "What are the different types of macromolecules?",
+    "gold": "What are the different types of macromolecules?",
+    "predicted": "What are the different types of macromolecules?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "Tell me about the characteristics of carbohydrates.",
+    "gold": "Tell me about the characteristics of carbohydrates.",
+    "predicted": "Tell me about the characteristics of carbohydrates.",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What are they composed of?",
+    "gold": "What are carbohydrates composed of?",
+    "predicted": "Proteins.Carbohydrates.Lipids.Nucleic Acids are composed of the elements carbon, hydrogen and oxygen.",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.4210526315789473,
+    "problems": []
+  },
+  {
+    "original": "What is their basic structure?",
+    "gold": "What are carbohydrates basic structure?",
+    "predicted": "What is the basic structure of carbohydrates?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.6666666666666666,
+    "problems": []
+  },
+  {
+    "original": "What are the main types with examples of each?",
+    "gold": "What are the main types of carbohydrates with examples of each?",
+    "predicted": "What are the main types with examples of each?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.9,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "Tell me about lipids.",
+    "gold": "Tell me about lipids.",
+    "predicted": "What is the lipid content of a lipid?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.0,
+    "problems": []
+  },
+  {
+    "original": "What is their function?",
+    "gold": "What are the functions of lipids.",
+    "predicted": "Lipids are molecules that contain hydrocarbons and make up the building blocks of the structure and function of living cells.",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.30769230769230765,
+    "problems": []
+  },
+  {
+    "original": "What are the types of lipids?",
+    "gold": "What are the types of lipids?",
+    "predicted": "What are the types of lipids?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What is the most common?",
+    "gold": "What is the most common lipid?",
+    "predicted": "What is the most common?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.9090909090909091,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What is the difference between them and carbohydrates?",
+    "gold": "What is the difference between lipids and carbohydrates?",
+    "predicted": "What is the difference between fats and oils?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.75,
+    "problems": []
+  },
+  {
+    "original": "Why are carbs better?",
+    "gold": "Why are carbs better than lipids?",
+    "predicted": "Why are carbs better?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.8,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What was the Securities Act of 1933?",
+    "gold": "What was the Securities Act of 1933?",
+    "predicted": "What was the Securities Act of 1933?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What is exempt from it?",
+    "gold": "What is exempt for the Securities Act of 1933?",
+    "predicted": "What is the purpose of the Securities Act of 1933?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.7368421052631577,
+    "problems": []
+  },
+  {
+    "original": "Why was it needed?",
+    "gold": "Why was the Securities Act of 1933 needed?",
+    "predicted": "Why was it needed?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.5,
+    "problems": [
+      "Question type changed: why -> what"
+    ]
+  },
+  {
+    "original": "What was the reason for creating the 1934 act?",
+    "gold": "What was the reason for creating the 1934 act?",
+    "predicted": "What was the reason for creating the 1934 act?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What is the largest securities exchange in the world?",
+    "gold": "What is the largest securities exchange in the world?",
+    "predicted": "What is the largest securities exchange in the world?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "How and when when was it created?",
+    "gold": "How and when was the largest securities exchange in the world created?",
+    "predicted": "The SEA of 1934 was enacted by Franklin D. Roosevelt's administration as a response to the widely held belief that irresponsible financial practices were one of the chief causes of the 1929 stock market crash. What is the largest securities exchange in the world?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.2807017543859649,
+    "problems": []
+  },
+  {
+    "original": "What was the first stock market?",
+    "gold": "What was the first stock market?",
+    "predicted": "What was the first stock market?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "Why is statistics important?",
+    "gold": "Why is statistics important?",
+    "predicted": "Why is statistics important?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "Why should one study it?",
+    "gold": "Why should one study statistics?",
+    "predicted": "The field of statistics is the science of learning from data. Statistical knowledge helps you use the proper methods to collect the data, employ the correct analyses, and effectively present the results.",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.05405405405405406,
+    "problems": []
+  },
+  {
+    "original": "Tell me about its career options.",
+    "gold": "Tell me about the career options for statistics?",
+    "predicted": "What is the career options of the company that is a stand alone candidate?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.2727272727272727,
+    "problems": []
+  },
+  {
+    "original": "Are Data Scientists in high demand?",
+    "gold": "Are Data Scientists in high demand?",
+    "predicted": "Are Data Scientists in high demand?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "How much do they make on average in a year?",
+    "gold": "How much do Data Scientists make on average in a year?",
+    "predicted": "How much do they make on average in a year?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.8571428571428572,
+    "problems": [
+      "Question type changed: how -> what"
+    ]
+  },
+  {
+    "original": "What is range in statistics?",
+    "gold": "What is range in statistics?",
+    "predicted": "What is range in statistics?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "Describe some different metrics to interpret it.",
+    "gold": "Describe some different metrics to interpret range in statistics.",
+    "predicted": "What is the median starting salary for a data scientist?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.0,
+    "problems": []
+  },
+  {
+    "original": "What are quartiles?",
+    "gold": "What are quartiles?",
+    "predicted": "What are quartiles?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "How do you find the lower and upper quartile?",
+    "gold": "How do you find the lower and upper quartile?",
+    "predicted": "How do you find the lower and upper quartile?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "How does water freeze?",
+    "gold": "How does water freeze?",
+    "predicted": "How does water freeze?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What happens to its molecules?",
+    "gold": "How happens to waters molecules when it freezes?",
+    "predicted": "What happens to the molecules of a liquid when they slow down enough to hook onto each other?",
+    "accepted": true,
+    "exact_match": false,
+    "token_f1": 0.30769230769230765,
+    "problems": []
+  },
+  {
+    "original": "Why isn't the bottom of the ocean frozen?",
+    "gold": "Why isn't the bottom of the ocean frozen?",
+    "predicted": "Why isn't the bottom of the ocean frozen?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "Can the bottom of the ocean freeze?",
+    "gold": "Can the bottom of the ocean freeze?",
+    "predicted": "Can the bottom of the ocean freeze?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "Where is the coldest place on Earth?",
+    "gold": "Where is the coldest place on Earth?",
+    "predicted": "Where is the coldest place on Earth?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "Does Dome Fuji have inhabitants?",
+    "gold": "Does Dome Fuji have inhabitants?",
+    "predicted": "Does Dome Fuji have inhabitants?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "Why is Antarctica so cold?",
+    "gold": "Why is Antarctica so cold?",
+    "predicted": "Why is Antarctica so cold?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "How cold is the water underneath the ice?",
+    "gold": "How cold is the water underneath the ice in Antarctica?",
+    "predicted": "How cold is the water underneath the ice?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.888888888888889,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What is the biggest town?",
+    "gold": "What is the biggest town in Antarctica?",
+    "predicted": "What is the biggest town?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.8333333333333333,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "What are futuristic designs?",
+    "gold": "What are futuristic designs?",
+    "predicted": "What are futuristic designs?",
+    "accepted": false,
+    "exact_match": true,
+    "token_f1": 1.0,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  },
+  {
+    "original": "How did this become a new trend?",
+    "gold": "How did futuristic designs become a new trend?",
+    "predicted": "How did this become a new trend?",
+    "accepted": false,
+    "exact_match": false,
+    "token_f1": 0.7999999999999999,
+    "problems": [
+      "Rewrite not recommended by predictor"
+    ]
+  }
+]

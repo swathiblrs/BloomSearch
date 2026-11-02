@@ -1,0 +1,28 @@
+{
+  "training_examples": 8762,
+  "validation_examples": 2255,
+  "rewrite_budget": 0.7,
+  "threshold_results": [
+    {
+      "threshold": 0.3,
+      "hit_at_10": 0.5764966740576497,
+      "rewrite_rate": 0.8780487804878049
+    },
+    {
+      "threshold": 0.4,
+      "hit_at_10": 0.5365853658536586,
+      "rewrite_rate": 0.7379157427937916
+    },
+    {
+      "threshold": 0.5,
+      "hit_at_10": 0.4496674057649667,
+      "rewrite_rate": 0.5175166297117516
+    },
+    {
+      "threshold": 0.6,
+      "hit_at_10": 0.34279379157427936,
+      "rewrite_rate": 0.2798226164079823
+    }
+  ],
+  "selected_threshold": 0.5
+}

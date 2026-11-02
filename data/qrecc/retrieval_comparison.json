@@ -1,0 +1,1002 @@
+[
+  {
+    "original_query": "What is a physician's assistant?",
+    "rewritten_query": "What is a physician's assistant?",
+    "accepted": false,
+    "original_results": [
+      {
+        "document_id": "qrecc-44697",
+        "score": 10.646180239185437
+      },
+      {
+        "document_id": "qrecc-49866",
+        "score": 10.154042388025465
+      },
+      {
+        "document_id": "qrecc-55320",
+        "score": 10.154042388025465
+      },
+      {
+        "document_id": "qrecc-26986",
+        "score": 10.07505208034497
+      },
+      {
+        "document_id": "qrecc-51585",
+        "score": 9.997342813303337
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-44697",
+        "score": 10.646180239185437
+      },
+      {
+        "document_id": "qrecc-49866",
+        "score": 10.154042388025465
+      },
+      {
+        "document_id": "qrecc-55320",
+        "score": 10.154042388025465
+      },
+      {
+        "document_id": "qrecc-26986",
+        "score": 10.07505208034497
+      },
+      {
+        "document_id": "qrecc-51585",
+        "score": 9.997342813303337
+      }
+    ],
+    "overlap_at_5": 5
+  },
+  {
+    "original_query": "What are the educational requirements required to become one?",
+    "rewritten_query": "What are the educational requirements required to become a physician's assistant?",
+    "accepted": true,
+    "original_results": [
+      {
+        "document_id": "qrecc-44850",
+        "score": 18.52479254260227
+      },
+      {
+        "document_id": "qrecc-46540",
+        "score": 16.791374875602802
+      },
+      {
+        "document_id": "qrecc-44545",
+        "score": 12.922283593807183
+      },
+      {
+        "document_id": "qrecc-43742",
+        "score": 12.75531682273729
+      },
+      {
+        "document_id": "qrecc-5457",
+        "score": 12.54810005225818
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-44850",
+        "score": 18.52479254260227
+      },
+      {
+        "document_id": "qrecc-46540",
+        "score": 14.936880672203358
+      },
+      {
+        "document_id": "qrecc-55870",
+        "score": 13.213176132684143
+      },
+      {
+        "document_id": "qrecc-21781",
+        "score": 13.1723951199561
+      },
+      {
+        "document_id": "qrecc-44545",
+        "score": 12.922283593807183
+      }
+    ],
+    "overlap_at_5": 3
+  },
+  {
+    "original_query": "What does it cost?",
+    "rewritten_query": "What is the cost of a physician assistant program?",
+    "accepted": true,
+    "original_results": [
+      {
+        "document_id": "qrecc-50363",
+        "score": 14.208338381953727
+      },
+      {
+        "document_id": "qrecc-47120",
+        "score": 13.347928661719038
+      },
+      {
+        "document_id": "qrecc-48213",
+        "score": 12.35642027517858
+      },
+      {
+        "document_id": "qrecc-54232",
+        "score": 11.623934831733118
+      },
+      {
+        "document_id": "qrecc-47513",
+        "score": 11.24303941402058
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-11761",
+        "score": 16.569307948023926
+      },
+      {
+        "document_id": "qrecc-48511",
+        "score": 13.629609214841146
+      },
+      {
+        "document_id": "qrecc-26430",
+        "score": 13.183257270456604
+      },
+      {
+        "document_id": "qrecc-45941",
+        "score": 12.869323455416101
+      },
+      {
+        "document_id": "qrecc-44697",
+        "score": 12.526541287567001
+      }
+    ],
+    "overlap_at_5": 0
+  },
+  {
+    "original_query": "What's the average starting salary in the UK?",
+    "rewritten_query": "What's the average starting salary in the UK?",
+    "accepted": false,
+    "original_results": [
+      {
+        "document_id": "qrecc-54403",
+        "score": 16.801762502463415
+      },
+      {
+        "document_id": "qrecc-45783",
+        "score": 14.038541567828915
+      },
+      {
+        "document_id": "qrecc-45785",
+        "score": 14.038541567828915
+      },
+      {
+        "document_id": "qrecc-54296",
+        "score": 11.850635599448916
+      },
+      {
+        "document_id": "qrecc-46874",
+        "score": 9.48188368326434
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-54403",
+        "score": 16.801762502463415
+      },
+      {
+        "document_id": "qrecc-45783",
+        "score": 14.038541567828915
+      },
+      {
+        "document_id": "qrecc-45785",
+        "score": 14.038541567828915
+      },
+      {
+        "document_id": "qrecc-54296",
+        "score": 11.850635599448916
+      },
+      {
+        "document_id": "qrecc-46874",
+        "score": 9.48188368326434
+      }
+    ],
+    "overlap_at_5": 5
+  },
+  {
+    "original_query": "What about in the US?",
+    "rewritten_query": "What about in the US?",
+    "accepted": false,
+    "original_results": [
+      {
+        "document_id": "qrecc-45080",
+        "score": 12.503918746422308
+      },
+      {
+        "document_id": "qrecc-5124",
+        "score": 11.356783415911146
+      },
+      {
+        "document_id": "qrecc-51585",
+        "score": 11.071665392321488
+      },
+      {
+        "document_id": "qrecc-54937",
+        "score": 10.800288728278723
+      },
+      {
+        "document_id": "qrecc-40393",
+        "score": 10.353943852509909
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-45080",
+        "score": 12.503918746422308
+      },
+      {
+        "document_id": "qrecc-5124",
+        "score": 11.356783415911146
+      },
+      {
+        "document_id": "qrecc-51585",
+        "score": 11.071665392321488
+      },
+      {
+        "document_id": "qrecc-54937",
+        "score": 10.800288728278723
+      },
+      {
+        "document_id": "qrecc-40393",
+        "score": 10.353943852509909
+      }
+    ],
+    "overlap_at_5": 5
+  },
+  {
+    "original_query": "What school subjects are needed to become a registered nurse?",
+    "rewritten_query": "What school subjects are needed to become a registered nurse?",
+    "accepted": false,
+    "original_results": [
+      {
+        "document_id": "qrecc-55345",
+        "score": 14.108516784470932
+      },
+      {
+        "document_id": "qrecc-23720",
+        "score": 13.720608275267313
+      },
+      {
+        "document_id": "qrecc-55907",
+        "score": 13.670342518809772
+      },
+      {
+        "document_id": "qrecc-34428",
+        "score": 13.597725187246583
+      },
+      {
+        "document_id": "qrecc-34420",
+        "score": 13.549255856528426
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-55345",
+        "score": 14.108516784470932
+      },
+      {
+        "document_id": "qrecc-23720",
+        "score": 13.720608275267313
+      },
+      {
+        "document_id": "qrecc-55907",
+        "score": 13.670342518809772
+      },
+      {
+        "document_id": "qrecc-34428",
+        "score": 13.597725187246583
+      },
+      {
+        "document_id": "qrecc-34420",
+        "score": 13.549255856528426
+      }
+    ],
+    "overlap_at_5": 5
+  },
+  {
+    "original_query": "What is the PA average salary vs an RN?",
+    "rewritten_query": "What is the PA average salary vs an RN?",
+    "accepted": false,
+    "original_results": [
+      {
+        "document_id": "qrecc-54403",
+        "score": 19.439106540968243
+      },
+      {
+        "document_id": "qrecc-54296",
+        "score": 15.746044155860215
+      },
+      {
+        "document_id": "qrecc-48964",
+        "score": 15.607634605708164
+      },
+      {
+        "document_id": "qrecc-50359",
+        "score": 15.543129780354358
+      },
+      {
+        "document_id": "qrecc-45591",
+        "score": 14.05353939272544
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-54403",
+        "score": 19.439106540968243
+      },
+      {
+        "document_id": "qrecc-54296",
+        "score": 15.746044155860215
+      },
+      {
+        "document_id": "qrecc-48964",
+        "score": 15.607634605708164
+      },
+      {
+        "document_id": "qrecc-50359",
+        "score": 15.543129780354358
+      },
+      {
+        "document_id": "qrecc-45591",
+        "score": 14.05353939272544
+      }
+    ],
+    "overlap_at_5": 5
+  },
+  {
+    "original_query": "What the difference between a PA and a nurse practitioner?",
+    "rewritten_query": "What the difference between a PA and a nurse practitioner?",
+    "accepted": false,
+    "original_results": [
+      {
+        "document_id": "qrecc-47252",
+        "score": 20.443709464871315
+      },
+      {
+        "document_id": "qrecc-47254",
+        "score": 18.619000455917817
+      },
+      {
+        "document_id": "qrecc-47253",
+        "score": 18.453373407561806
+      },
+      {
+        "document_id": "qrecc-47251",
+        "score": 17.699417843614672
+      },
+      {
+        "document_id": "qrecc-51433",
+        "score": 16.330933266608895
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-47252",
+        "score": 20.443709464871315
+      },
+      {
+        "document_id": "qrecc-47254",
+        "score": 18.619000455917817
+      },
+      {
+        "document_id": "qrecc-47253",
+        "score": 18.453373407561806
+      },
+      {
+        "document_id": "qrecc-47251",
+        "score": 17.699417843614672
+      },
+      {
+        "document_id": "qrecc-51433",
+        "score": 16.330933266608895
+      }
+    ],
+    "overlap_at_5": 5
+  },
+  {
+    "original_query": "Do NPs or PAs make more?",
+    "rewritten_query": "Do NPs or PAs make more?",
+    "accepted": false,
+    "original_results": [
+      {
+        "document_id": "qrecc-41430",
+        "score": 13.529362628368402
+      },
+      {
+        "document_id": "qrecc-49818",
+        "score": 12.240452539954184
+      },
+      {
+        "document_id": "qrecc-40262",
+        "score": 11.197229765102563
+      },
+      {
+        "document_id": "qrecc-54850",
+        "score": 10.910751385998505
+      },
+      {
+        "document_id": "qrecc-51359",
+        "score": 10.839094896505749
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-41430",
+        "score": 13.529362628368402
+      },
+      {
+        "document_id": "qrecc-49818",
+        "score": 12.240452539954184
+      },
+      {
+        "document_id": "qrecc-40262",
+        "score": 11.197229765102563
+      },
+      {
+        "document_id": "qrecc-54850",
+        "score": 10.910751385998505
+      },
+      {
+        "document_id": "qrecc-51359",
+        "score": 10.839094896505749
+      }
+    ],
+    "overlap_at_5": 5
+  },
+  {
+    "original_query": "Is a PA above a NP?",
+    "rewritten_query": "Is a PA above a NP?",
+    "accepted": false,
+    "original_results": [
+      {
+        "document_id": "qrecc-45591",
+        "score": 13.689263934889333
+      },
+      {
+        "document_id": "qrecc-49491",
+        "score": 12.824687350427476
+      },
+      {
+        "document_id": "qrecc-53321",
+        "score": 12.578834645014105
+      },
+      {
+        "document_id": "qrecc-45592",
+        "score": 11.710345670037745
+      },
+      {
+        "document_id": "qrecc-45593",
+        "score": 11.710345670037745
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-45591",
+        "score": 13.689263934889333
+      },
+      {
+        "document_id": "qrecc-49491",
+        "score": 12.824687350427476
+      },
+      {
+        "document_id": "qrecc-53321",
+        "score": 12.578834645014105
+      },
+      {
+        "document_id": "qrecc-45592",
+        "score": 11.710345670037745
+      },
+      {
+        "document_id": "qrecc-45593",
+        "score": 11.710345670037745
+      }
+    ],
+    "overlap_at_5": 5
+  },
+  {
+    "original_query": "What is the fastest way to become a NP?",
+    "rewritten_query": "What is the fastest way to become a NP?",
+    "accepted": false,
+    "original_results": [
+      {
+        "document_id": "qrecc-21781",
+        "score": 15.393520983714485
+      },
+      {
+        "document_id": "qrecc-26404",
+        "score": 14.218478003981314
+      },
+      {
+        "document_id": "qrecc-12069",
+        "score": 13.5284006974135
+      },
+      {
+        "document_id": "qrecc-26399",
+        "score": 13.455662566013281
+      },
+      {
+        "document_id": "qrecc-53321",
+        "score": 13.10168977551959
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-21781",
+        "score": 15.393520983714485
+      },
+      {
+        "document_id": "qrecc-26404",
+        "score": 14.218478003981314
+      },
+      {
+        "document_id": "qrecc-12069",
+        "score": 13.5284006974135
+      },
+      {
+        "document_id": "qrecc-26399",
+        "score": 13.455662566013281
+      },
+      {
+        "document_id": "qrecc-53321",
+        "score": 13.10168977551959
+      }
+    ],
+    "overlap_at_5": 5
+  },
+  {
+    "original_query": "How much longer does it take to become a doctor after being an NP?",
+    "rewritten_query": "How long does it take to become a doctor after being an NP?",
+    "accepted": true,
+    "original_results": [
+      {
+        "document_id": "qrecc-54768",
+        "score": 20.12184955620992
+      },
+      {
+        "document_id": "qrecc-54766",
+        "score": 19.19325826059563
+      },
+      {
+        "document_id": "qrecc-43886",
+        "score": 19.083677629914025
+      },
+      {
+        "document_id": "qrecc-50495",
+        "score": 18.102166973256338
+      },
+      {
+        "document_id": "qrecc-54767",
+        "score": 17.5106177479368
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-54768",
+        "score": 20.12184955620992
+      },
+      {
+        "document_id": "qrecc-51066",
+        "score": 19.81089836816811
+      },
+      {
+        "document_id": "qrecc-54766",
+        "score": 19.19325826059563
+      },
+      {
+        "document_id": "qrecc-43886",
+        "score": 19.083677629914025
+      },
+      {
+        "document_id": "qrecc-54767",
+        "score": 17.5106177479368
+      }
+    ],
+    "overlap_at_5": 4
+  },
+  {
+    "original_query": "What are the main breeds of goat?",
+    "rewritten_query": "What are the main breeds of goat?",
+    "accepted": false,
+    "original_results": [
+      {
+        "document_id": "qrecc-53005",
+        "score": 14.801401191504937
+      },
+      {
+        "document_id": "qrecc-45558",
+        "score": 12.212103148693595
+      },
+      {
+        "document_id": "qrecc-50063",
+        "score": 11.872818235550728
+      },
+      {
+        "document_id": "qrecc-53467",
+        "score": 11.713472488208456
+      },
+      {
+        "document_id": "qrecc-53002",
+        "score": 11.461110310460874
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-53005",
+        "score": 14.801401191504937
+      },
+      {
+        "document_id": "qrecc-45558",
+        "score": 12.212103148693595
+      },
+      {
+        "document_id": "qrecc-50063",
+        "score": 11.872818235550728
+      },
+      {
+        "document_id": "qrecc-53467",
+        "score": 11.713472488208456
+      },
+      {
+        "document_id": "qrecc-53002",
+        "score": 11.461110310460874
+      }
+    ],
+    "overlap_at_5": 5
+  },
+  {
+    "original_query": "Tell me about boer goats.",
+    "rewritten_query": "Tell me about boer goats.",
+    "accepted": false,
+    "original_results": [
+      {
+        "document_id": "qrecc-54657",
+        "score": 17.638162149241467
+      },
+      {
+        "document_id": "qrecc-54658",
+        "score": 17.638162149241467
+      },
+      {
+        "document_id": "qrecc-54656",
+        "score": 17.21379838930752
+      },
+      {
+        "document_id": "qrecc-54655",
+        "score": 17.009182943373304
+      },
+      {
+        "document_id": "qrecc-19102",
+        "score": 15.617981037289756
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-54657",
+        "score": 17.638162149241467
+      },
+      {
+        "document_id": "qrecc-54658",
+        "score": 17.638162149241467
+      },
+      {
+        "document_id": "qrecc-54656",
+        "score": 17.21379838930752
+      },
+      {
+        "document_id": "qrecc-54655",
+        "score": 17.009182943373304
+      },
+      {
+        "document_id": "qrecc-19102",
+        "score": 15.617981037289756
+      }
+    ],
+    "overlap_at_5": 5
+  },
+  {
+    "original_query": "What breed is good for meat?",
+    "rewritten_query": "What breed is good for meat?",
+    "accepted": false,
+    "original_results": [
+      {
+        "document_id": "qrecc-22809",
+        "score": 13.988996177294798
+      },
+      {
+        "document_id": "qrecc-46318",
+        "score": 13.781215400257096
+      },
+      {
+        "document_id": "qrecc-46320",
+        "score": 12.937049961925172
+      },
+      {
+        "document_id": "qrecc-23132",
+        "score": 12.548186269754368
+      },
+      {
+        "document_id": "qrecc-51982",
+        "score": 12.463646837644589
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-22809",
+        "score": 13.988996177294798
+      },
+      {
+        "document_id": "qrecc-46318",
+        "score": 13.781215400257096
+      },
+      {
+        "document_id": "qrecc-46320",
+        "score": 12.937049961925172
+      },
+      {
+        "document_id": "qrecc-23132",
+        "score": 12.548186269754368
+      },
+      {
+        "document_id": "qrecc-51982",
+        "score": 12.463646837644589
+      }
+    ],
+    "overlap_at_5": 5
+  },
+  {
+    "original_query": "Are angora goats good for it?",
+    "rewritten_query": "Are angora goats good for it?",
+    "accepted": false,
+    "original_results": [
+      {
+        "document_id": "qrecc-51983",
+        "score": 14.362207899422426
+      },
+      {
+        "document_id": "qrecc-22806",
+        "score": 13.002211114168388
+      },
+      {
+        "document_id": "qrecc-30780",
+        "score": 13.002211114168388
+      },
+      {
+        "document_id": "qrecc-20250",
+        "score": 12.244493701630676
+      },
+      {
+        "document_id": "qrecc-4117",
+        "score": 12.192798033719136
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-51983",
+        "score": 14.362207899422426
+      },
+      {
+        "document_id": "qrecc-22806",
+        "score": 13.002211114168388
+      },
+      {
+        "document_id": "qrecc-30780",
+        "score": 13.002211114168388
+      },
+      {
+        "document_id": "qrecc-20250",
+        "score": 12.244493701630676
+      },
+      {
+        "document_id": "qrecc-4117",
+        "score": 12.192798033719136
+      }
+    ],
+    "overlap_at_5": 5
+  },
+  {
+    "original_query": "What about boer goats?",
+    "rewritten_query": "What about boer goats?",
+    "accepted": false,
+    "original_results": [
+      {
+        "document_id": "qrecc-35289",
+        "score": 13.094612387497474
+      },
+      {
+        "document_id": "qrecc-20250",
+        "score": 12.244493701630676
+      },
+      {
+        "document_id": "qrecc-18789",
+        "score": 11.999686912356871
+      },
+      {
+        "document_id": "qrecc-18791",
+        "score": 11.547908760048777
+      },
+      {
+        "document_id": "qrecc-18790",
+        "score": 11.187515487244443
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-35289",
+        "score": 13.094612387497474
+      },
+      {
+        "document_id": "qrecc-20250",
+        "score": 12.244493701630676
+      },
+      {
+        "document_id": "qrecc-18789",
+        "score": 11.999686912356871
+      },
+      {
+        "document_id": "qrecc-18791",
+        "score": 11.547908760048777
+      },
+      {
+        "document_id": "qrecc-18790",
+        "score": 11.187515487244443
+      }
+    ],
+    "overlap_at_5": 5
+  },
+  {
+    "original_query": "What are pygmies used for?",
+    "rewritten_query": "What are pygmies used for?",
+    "accepted": false,
+    "original_results": [
+      {
+        "document_id": "qrecc-43742",
+        "score": 14.9069571851769
+      },
+      {
+        "document_id": "qrecc-16821",
+        "score": 11.612669225947613
+      },
+      {
+        "document_id": "qrecc-50021",
+        "score": 11.286236081025784
+      },
+      {
+        "document_id": "qrecc-51057",
+        "score": 11.286236081025784
+      },
+      {
+        "document_id": "qrecc-46922",
+        "score": 11.26992898984949
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-43742",
+        "score": 14.9069571851769
+      },
+      {
+        "document_id": "qrecc-16821",
+        "score": 11.612669225947613
+      },
+      {
+        "document_id": "qrecc-50021",
+        "score": 11.286236081025784
+      },
+      {
+        "document_id": "qrecc-51057",
+        "score": 11.286236081025784
+      },
+      {
+        "document_id": "qrecc-46922",
+        "score": 11.26992898984949
+      }
+    ],
+    "overlap_at_5": 5
+  },
+  {
+    "original_query": "What is the best for fiber production?",
+    "rewritten_query": "What is the best for fiber production?",
+    "accepted": false,
+    "original_results": [
+      {
+        "document_id": "qrecc-50674",
+        "score": 15.024932813638909
+      },
+      {
+        "document_id": "qrecc-47463",
+        "score": 13.291671383246937
+      },
+      {
+        "document_id": "qrecc-55066",
+        "score": 13.266475853023081
+      },
+      {
+        "document_id": "qrecc-17302",
+        "score": 12.925406607803021
+      },
+      {
+        "document_id": "qrecc-55982",
+        "score": 12.92446431853855
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-50674",
+        "score": 15.024932813638909
+      },
+      {
+        "document_id": "qrecc-47463",
+        "score": 13.291671383246937
+      },
+      {
+        "document_id": "qrecc-55066",
+        "score": 13.266475853023081
+      },
+      {
+        "document_id": "qrecc-17302",
+        "score": 12.925406607803021
+      },
+      {
+        "document_id": "qrecc-55982",
+        "score": 12.92446431853855
+      }
+    ],
+    "overlap_at_5": 5
+  },
+  {
+    "original_query": "How long do Angora goats live?",
+    "rewritten_query": "How long do Angora goats live?",
+    "accepted": false,
+    "original_results": [
+      {
+        "document_id": "qrecc-2128",
+        "score": 13.150046767981369
+      },
+      {
+        "document_id": "qrecc-2131",
+        "score": 13.150046767981369
+      },
+      {
+        "document_id": "qrecc-51982",
+        "score": 12.997060682105097
+      },
+      {
+        "document_id": "qrecc-55184",
+        "score": 12.612890558891133
+      },
+      {
+        "document_id": "qrecc-20250",
+        "score": 12.244493701630676
+      }
+    ],
+    "rewritten_results": [
+      {
+        "document_id": "qrecc-2128",
+        "score": 13.150046767981369
+      },
+      {
+        "document_id": "qrecc-2131",
+        "score": 13.150046767981369
+      },
+      {
+        "document_id": "qrecc-51982",
+        "score": 12.997060682105097
+      },
+      {
+        "document_id": "qrecc-55184",
+        "score": 12.612890558891133
+      },
+      {
+        "document_id": "qrecc-20250",
+        "score": 12.244493701630676
+      }
+    ],
+    "overlap_at_5": 5
+  }
+]

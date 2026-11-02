@@ -1,0 +1,1809 @@
+{
+  "examples": 200,
+  "top_k": 10,
+  "original_hit_at_10": 0.45,
+  "gold_rewrite_hit_at_10": 0.685,
+  "rewrite_only_wins": 52,
+  "results": [
+    {
+      "conversation_id": 1,
+      "turn_id": 1,
+      "original_query": "What can you tell me about Gary Cherone?",
+      "gold_rewrite": "What can you tell me about Gary Cherone?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 1,
+      "turn_id": 2,
+      "original_query": "Did Gary sing well?",
+      "gold_rewrite": "Did Gary Cherone sing well?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 1,
+      "turn_id": 3,
+      "original_query": "What significant fact can you tell me about Gary that you liked?",
+      "gold_rewrite": "What significant fact can you tell me about Gary Cherone that you liked?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 1,
+      "turn_id": 4,
+      "original_query": "What did Cherone do after Van Halen?",
+      "gold_rewrite": "What did Gary Cherone do after Van Halen?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 1,
+      "turn_id": 5,
+      "original_query": "Did they release any albums during that time frame?",
+      "gold_rewrite": "Did they release any albums after Gary Cherone left?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 1,
+      "turn_id": 6,
+      "original_query": "What are some other interesting aspects of the article?",
+      "gold_rewrite": "What are some other interesting aspects of the article?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 2,
+      "turn_id": 1,
+      "original_query": "How did Van Halen reunite with Roth?",
+      "gold_rewrite": "How did Van Halen reunite with David Lee Roth?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 2,
+      "turn_id": 2,
+      "original_query": "Did Roth re-join the band?",
+      "gold_rewrite": "Did David Lee Roth re-join the band?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 2,
+      "turn_id": 3,
+      "original_query": "Why was it only temporary?",
+      "gold_rewrite": "Why was David Lee Roth's renion only temporary?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 2,
+      "turn_id": 4,
+      "original_query": "Did they release any songs during the time they were reunited?",
+      "gold_rewrite": "Did Van Halen release any songs during the time they were reunited?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 2,
+      "turn_id": 5,
+      "original_query": "Are there any other interesting aspects about this article?",
+      "gold_rewrite": "Are there any other interesting aspects about this article?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 2,
+      "turn_id": 6,
+      "original_query": "What did Roth do that was embarrassing?",
+      "gold_rewrite": "What did David Lee Roth do that was embarrassing?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 1,
+      "original_query": "What is MMM?",
+      "gold_rewrite": "What is MMM?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 2,
+      "original_query": "Is it an album or a song?",
+      "gold_rewrite": "Is MMM an album or a song?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 3,
+      "original_query": "Was it a hit?",
+      "gold_rewrite": "Was MMM a hit?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 4,
+      "original_query": "What is No Way Out 2?",
+      "gold_rewrite": "What is No Way Out 2?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 5,
+      "original_query": "Was this album a success?",
+      "gold_rewrite": "Was No Way Out 2 a success?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 6,
+      "original_query": "Is Love an album?",
+      "gold_rewrite": "Is Love an album?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 7,
+      "original_query": "Why did he change his name?",
+      "gold_rewrite": "Why did Sean Combs change his name?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 8,
+      "original_query": "Did he continue to be called Love?",
+      "gold_rewrite": "Did Sean Combs continue to be called Love?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 3,
+      "turn_id": 9,
+      "original_query": "Did he win any awards during this time?",
+      "gold_rewrite": "Did Sean Combs win any awards during this time?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 4,
+      "turn_id": 1,
+      "original_query": "Who is Sean John",
+      "gold_rewrite": "Who is Sean John Combs?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 4,
+      "turn_id": 2,
+      "original_query": "Are there any other interesting aspects about this article?",
+      "gold_rewrite": "Are there any other interesting aspects about this article?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 4,
+      "turn_id": 3,
+      "original_query": "Who did he start the company with?",
+      "gold_rewrite": "Who did Sean Combs start the company, Sean John, with?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 4,
+      "turn_id": 4,
+      "original_query": "Was the company successful?",
+      "gold_rewrite": "Was the Sean John successful?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 4,
+      "turn_id": 5,
+      "original_query": "Why was it violating the labor laws?",
+      "gold_rewrite": "Why was the Sean John factory violating the Honduran labor laws?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 4,
+      "turn_id": 6,
+      "original_query": "Did the clothing line end due to that?",
+      "gold_rewrite": "Did the Sean John clothing line end due to the Honduran labor laws scandal?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 4,
+      "turn_id": 7,
+      "original_query": "What happened after that?",
+      "gold_rewrite": "What happened after the Honduran labor laws incident?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 4,
+      "turn_id": 8,
+      "original_query": "What happened when they discovered that?",
+      "gold_rewrite": "What happened when they discovered raccoon dog fur being used on their clothing?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 1,
+      "original_query": "Where was he born?",
+      "gold_rewrite": "Where was David M. Shoup born?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 2,
+      "original_query": "When was he born?",
+      "gold_rewrite": "When was David M. Shoup born?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 3,
+      "original_query": "Did he grow up in Battleground?",
+      "gold_rewrite": "Did David M. Shoup grow up in Battleground?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 4,
+      "original_query": "Why did they move to Covington?",
+      "gold_rewrite": "Why did David M. Shoup's family move to Covington?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 5,
+      "original_query": "When did they move to Covington?",
+      "gold_rewrite": "When did David M. Shoup's family move to Covington?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 6,
+      "original_query": "Where did he go to school?",
+      "gold_rewrite": "Where did David M. Shoup go to school?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 7,
+      "original_query": "How did he do in school?",
+      "gold_rewrite": "How did David M. Shoup do in school?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 8,
+      "original_query": "Can you tell me more about his school life?",
+      "gold_rewrite": "Can you tell me more about David M. Shoup's school life?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 5,
+      "turn_id": 9,
+      "original_query": "Was he in any other activities?",
+      "gold_rewrite": "Was David M. Shoup in any other activities?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 6,
+      "turn_id": 1,
+      "original_query": "What is Tarawa?",
+      "gold_rewrite": "What is Tarawa?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 6,
+      "turn_id": 2,
+      "original_query": "What was significant about that battle?",
+      "gold_rewrite": "What was significant about the Battle of Tarawa?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 6,
+      "turn_id": 3,
+      "original_query": "Did he receive any awards or medals?",
+      "gold_rewrite": "Did David M. Shoup receive any awards or medals?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 6,
+      "turn_id": 4,
+      "original_query": "Did he receive any other awards?",
+      "gold_rewrite": "Did David M. Shoup receive any other awards?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 6,
+      "turn_id": 5,
+      "original_query": "Were there any significant losses or injuries from that battle?",
+      "gold_rewrite": "Were there any significant losses or injuries from the Battle of Tarawa?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 6,
+      "turn_id": 6,
+      "original_query": "Was there anything significant that happened in that battle?",
+      "gold_rewrite": "Was there anything significant that happened in the Battle of Tarawa?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 6,
+      "turn_id": 7,
+      "original_query": "Where was the invasion?",
+      "gold_rewrite": "Where was the invasion at the Battle of Tarawa?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 6,
+      "turn_id": 8,
+      "original_query": "Are there any other interesting aspects about this article?",
+      "gold_rewrite": "Are there any other interesting aspects about this article?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 6,
+      "turn_id": 9,
+      "original_query": "Was there anything else important?",
+      "gold_rewrite": "Was there anything else important about this article?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 1,
+      "original_query": "Where was he born?",
+      "gold_rewrite": "Where was Ralph Waldo Emerson born?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 2,
+      "original_query": "Who were his parents?",
+      "gold_rewrite": "Who were Ralph Waldo Emerson's parents?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 3,
+      "original_query": "Who was his mother?",
+      "gold_rewrite": "Who was Ralph Waldo Emerson's mother?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 4,
+      "original_query": "Where did he grow up?",
+      "gold_rewrite": "Where did Ralph Waldo Emerson grow up?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 5,
+      "original_query": "Did he have any siblings?",
+      "gold_rewrite": "Did Ralph Waldo Emerson have any siblings?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 6,
+      "original_query": "Where did he go to school?",
+      "gold_rewrite": "Where did Ralph Waldo Emerson go to school?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 7,
+      "original_query": "Where did he go to college?",
+      "gold_rewrite": "Where did Ralph Waldo Emerson go to college?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 9,
+      "original_query": "What was his childhood like?",
+      "gold_rewrite": "What was Ralph Waldo Emerson's childhood like?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 10,
+      "original_query": "Where did he move to?",
+      "gold_rewrite": "Where did Ralph Waldo Emerson move to?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 7,
+      "turn_id": 11,
+      "original_query": "Where did he finally settle?",
+      "gold_rewrite": "Where did Ralph Waldo Emerson finally settle?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 8,
+      "turn_id": 1,
+      "original_query": "What was important during the civil war years?",
+      "gold_rewrite": "What was important for Ralph Waldo Emerson during the Civil War years?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 8,
+      "turn_id": 2,
+      "original_query": "Did he ever lecture regardless of how he felt?",
+      "gold_rewrite": "Did Ralph Waldo Emerson ever lecture regardless of how he felt?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 8,
+      "turn_id": 3,
+      "original_query": "Did he participate in many lectures?",
+      "gold_rewrite": "Did Ralph Waldo Emerson participate in many lectures?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 8,
+      "turn_id": 4,
+      "original_query": "What else happened during the Civil War years?",
+      "gold_rewrite": "What else happened during the Civil War years?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 8,
+      "turn_id": 5,
+      "original_query": "Was he successful giving this lecture?",
+      "gold_rewrite": "Was Ralph Waldo Emerson successful giving this lecture?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 8,
+      "turn_id": 6,
+      "original_query": "Did anything take place at this lecture?",
+      "gold_rewrite": "Did anything take place at his lecture at the Smithsonian on January 31, 1862?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 8,
+      "turn_id": 7,
+      "original_query": "Did him and Lincoln get a chance to talk?",
+      "gold_rewrite": "Did Ralph Waldo Emerson and President Lincoln get a chance to talk?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 8,
+      "turn_id": 9,
+      "original_query": "What else happened after his time with Lincoln?",
+      "gold_rewrite": "What else happened after Ralph Waldo Emerson's time with President Lincoln?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 8,
+      "turn_id": 10,
+      "original_query": "Did he continue to meet high ranking government officials?",
+      "gold_rewrite": "Did Ralph Waldo Emerson continue to meet high ranking government officials?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 8,
+      "turn_id": 11,
+      "original_query": "What else took place after Thoreau's death and the delivery of Emerson's eulogy?",
+      "gold_rewrite": "What else took place after Henry David Thoreau's death and the delivery of Ralph Waldo Emerson's eulogy?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 1,
+      "original_query": "When was Born to Fly released?",
+      "gold_rewrite": "When was Born to Fly released?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 2,
+      "original_query": "Was this album well received by critics?",
+      "gold_rewrite": "Was Born to Fly well received by critics?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 3,
+      "original_query": "Did it win any awards?",
+      "gold_rewrite": "Did Born to Fly win any awards?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 4,
+      "original_query": "How many copies did Born to Fly sell?",
+      "gold_rewrite": "How many copies did Born to Fly sell?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 5,
+      "original_query": "Did she go on tour after the release of this album?",
+      "gold_rewrite": "Did Sara Evans go on tour after the release of Born to Fly?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 6,
+      "original_query": "When did she record the Restless album?",
+      "gold_rewrite": "When did Sara Evans record the Restless album?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 7,
+      "original_query": "How did it do in the charts?",
+      "gold_rewrite": "How did Restless do in the charts?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 8,
+      "original_query": "Did the song win any awards?",
+      "gold_rewrite": "Did Suds in the Bucket win any awards?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 9,
+      "original_query": "What did she do following the success of this album?",
+      "gold_rewrite": "What did Sara Evans do following the success of this album?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 10,
+      "original_query": "Are there any other interesting aspects about this article?",
+      "gold_rewrite": "Are there any other interesting aspects about this article?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 9,
+      "turn_id": 11,
+      "original_query": "In which category did she win her first CMA award ?",
+      "gold_rewrite": "In which category did Sara Evans win her first CMA award ?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 1,
+      "original_query": "Where was she born?",
+      "gold_rewrite": "Where was Sara Evans born?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 2,
+      "original_query": "Was she raised there?",
+      "gold_rewrite": "Was Sara Evans raised there?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 3,
+      "original_query": "Did she get an education in music?",
+      "gold_rewrite": "Did Sara Evans get an education in music?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 4,
+      "original_query": "When did she become an artist?",
+      "gold_rewrite": "When did Sara Evans become an artist?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 5,
+      "original_query": "When did she rise to fame?",
+      "gold_rewrite": "When did Sara Evans rise to fame?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 6,
+      "original_query": "What were some of her early songs?",
+      "gold_rewrite": "What were some of Sara Evans's early songs?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 7,
+      "original_query": "Did any of her songs reach any charts or billboards?",
+      "gold_rewrite": "Did any of Sara Evans's songs reach any charts or billboards?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 8,
+      "original_query": "Was she married early in her career?",
+      "gold_rewrite": "Was Sara Evans married early in her career?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 9,
+      "original_query": "Are there any other interesting aspects about this article?",
+      "gold_rewrite": "Are there any other interesting aspects about this article?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 10,
+      "original_query": "Was she badly hurt in this accident?",
+      "gold_rewrite": "Was Sara Evans badly hurt in this accident?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 11,
+      "original_query": "Did she still sing during this time?",
+      "gold_rewrite": "Did Sara Evans still sing during this time?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 10,
+      "turn_id": 12,
+      "original_query": "Is there anything else you can share about her rise to fame?",
+      "gold_rewrite": "Is there anything else you can share about Sara Evans' rise to fame?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 11,
+      "turn_id": 1,
+      "original_query": "Who was the members of the Second incarnation?",
+      "gold_rewrite": "Who was the members of the second incarnation of The Animals?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 11,
+      "turn_id": 2,
+      "original_query": "What year was the Second incarnation?",
+      "gold_rewrite": "What year was the second incarnation of The Annimals?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 11,
+      "turn_id": 3,
+      "original_query": "Did they release any albums?",
+      "gold_rewrite": "Did The Animals release any albums?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 11,
+      "turn_id": 4,
+      "original_query": "Did they celebrate any successes?",
+      "gold_rewrite": "Did The Animals celebrate any successes?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 11,
+      "turn_id": 5,
+      "original_query": "Is there anything else interesting about the second incarnation?",
+      "gold_rewrite": "Is there anything else interesting about the second incarnation of The Animals?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 11,
+      "turn_id": 6,
+      "original_query": "Why did they kidnap the band's manager?",
+      "gold_rewrite": "Why did the yakuza kidnap the band's manager?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 11,
+      "turn_id": 7,
+      "original_query": "What happened to The Animals afterwards?",
+      "gold_rewrite": "What happened to The Animals after the kidnapping?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 1,
+      "original_query": "What is Sean John?",
+      "gold_rewrite": "What is Sean John?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 2,
+      "original_query": "What style of clothing?",
+      "gold_rewrite": "What style of clothing is Sean John?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 3,
+      "original_query": "Did he receive any other awards?",
+      "gold_rewrite": "Did Sean Combs receive any awards?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 4,
+      "original_query": "Was his clothing line successful?",
+      "gold_rewrite": "Was Sean Combs clothing line successful?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 5,
+      "original_query": "What else is notable about this part of his career?",
+      "gold_rewrite": "What else is notable about this part of Sean Combs' career?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 6,
+      "original_query": "What happened after this?",
+      "gold_rewrite": "What happened after Sean Combs opened up a couple restaurants?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 7,
+      "original_query": "What labor laws were violated?",
+      "gold_rewrite": "What labor laws were violated by one of Sean Combs' factory?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 8,
+      "original_query": "Were there any other violations?",
+      "gold_rewrite": "Were there any other violations Sean Combs' Honduran factory had?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 9,
+      "original_query": "What did Combs do after this discovery?",
+      "gold_rewrite": "What did Sean Combs do after this discovery?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 12,
+      "turn_id": 10,
+      "original_query": "What happened to his clothing line?",
+      "gold_rewrite": "What happened to Sean Combs' clothing line?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 1,
+      "original_query": "What was Money Making Mitch?",
+      "gold_rewrite": "What was Money Making Mitch?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 2,
+      "original_query": "When was it released?",
+      "gold_rewrite": "When was MMM released?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 3,
+      "original_query": "Did it do well?",
+      "gold_rewrite": "Did MMM do well?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 4,
+      "original_query": "What was No Way Out 2?",
+      "gold_rewrite": "What was No Way Out 2?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 5,
+      "original_query": "Was No Way Out a movie or an album?",
+      "gold_rewrite": "Was No Way Out a movie or an album?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 6,
+      "original_query": "Did it do as well as his debut?",
+      "gold_rewrite": "Did it do as well as Sean Combs' debut album?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 7,
+      "original_query": "What was Love?",
+      "gold_rewrite": "What was Love?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 8,
+      "original_query": "Why did he want to change his name?",
+      "gold_rewrite": "Why did Sean Combs want to change his name?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 9,
+      "original_query": "When did he change his name to Love?",
+      "gold_rewrite": "When did Sean Combs change his name to Love?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 10,
+      "original_query": "Does he still go by that name?",
+      "gold_rewrite": "Does Sean Combs still go by Love or Brother Love?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 13,
+      "turn_id": 11,
+      "original_query": "What else interesting happened after 2014?",
+      "gold_rewrite": "What else interesting happened after 2014 concerning Sean Combs?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 14,
+      "turn_id": 1,
+      "original_query": "What was the relation between Pierrot and Shakespeare at the Funabules?",
+      "gold_rewrite": "What was the relation between Pierrot and Shakespeare at the Funabules?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 14,
+      "turn_id": 2,
+      "original_query": "Does he have any other work mentioned?",
+      "gold_rewrite": "Does Pierrot have any other work mentioned?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 14,
+      "turn_id": 3,
+      "original_query": "Are there any other interesting aspects about this article?",
+      "gold_rewrite": "Are there any other interesting aspects about this article?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 14,
+      "turn_id": 4,
+      "original_query": "What other things does he perform at the event?",
+      "gold_rewrite": "What other things does Pierrot perform at the event?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 14,
+      "turn_id": 5,
+      "original_query": "Which person does he work with?",
+      "gold_rewrite": "Which person does Pierrot work with?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 14,
+      "turn_id": 6,
+      "original_query": "Which other people were mentioned in the story and what was their role?",
+      "gold_rewrite": "Which other people were mentioned in the story and what was their role?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 14,
+      "turn_id": 7,
+      "original_query": "Was he taken responsible for the murder?",
+      "gold_rewrite": "Was Pierrot taken responsible for the murder?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 15,
+      "turn_id": 1,
+      "original_query": "What controversies was she apart of?",
+      "gold_rewrite": "What controversies was Nancy Grace apart of?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 15,
+      "turn_id": 2,
+      "original_query": "Are there any other interesting aspects about this article?",
+      "gold_rewrite": "Are there any other interesting aspects about this article?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 15,
+      "turn_id": 3,
+      "original_query": "What tragedy?",
+      "gold_rewrite": "What tragedy was Nancy Grace accused of capitalizing on?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 15,
+      "turn_id": 4,
+      "original_query": "When did those occur?",
+      "gold_rewrite": "When did the tragedies Nancy Grace is accused of capitalizing on occur?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 16,
+      "turn_id": 1,
+      "original_query": "What Italian is Pierrot compared to?",
+      "gold_rewrite": "What Italian is Pierrot compared to?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 16,
+      "turn_id": 2,
+      "original_query": "What do they have in common?",
+      "gold_rewrite": "What does Canio's Pagliaccio and Pierrot have in common?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 16,
+      "turn_id": 3,
+      "original_query": "Where is Pierrot's origin traced to?",
+      "gold_rewrite": "Where is Pierrot's origin traced to?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 16,
+      "turn_id": 4,
+      "original_query": "What type of character was Pierrot?",
+      "gold_rewrite": "What type of character was Pierrot?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 16,
+      "turn_id": 5,
+      "original_query": "Who gave life to Pierrot?",
+      "gold_rewrite": "Who gave life to Pierrot?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 16,
+      "turn_id": 6,
+      "original_query": "Who was Jean Palaprat?",
+      "gold_rewrite": "Who was Jean Palaprat?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 16,
+      "turn_id": 7,
+      "original_query": "Who banished the troupe?",
+      "gold_rewrite": "Who banished the troupe?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 1,
+      "original_query": "What was wrong",
+      "gold_rewrite": "What was it that Robeson considered wrong?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 2,
+      "original_query": "What was he?",
+      "gold_rewrite": "What was Josh White?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 3,
+      "original_query": "What year did he do this?",
+      "gold_rewrite": "What year did Josh White do this?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 4,
+      "original_query": "What did he do?",
+      "gold_rewrite": "What did Josh White do?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 5,
+      "original_query": "What year was this?",
+      "gold_rewrite": "What year did he transcended the typical racial and social barriers of the time?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 6,
+      "original_query": "What else did he say?",
+      "gold_rewrite": "What else did Josh White say?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 7,
+      "original_query": "What song did this do?",
+      "gold_rewrite": "What song did Josh White do?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 8,
+      "original_query": "What year was this?",
+      "gold_rewrite": "What year did Josh white record this song?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 17,
+      "turn_id": 9,
+      "original_query": "What happened then?",
+      "gold_rewrite": "What happened after Josh White recorded his song, Meatball?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 1,
+      "original_query": "What day",
+      "gold_rewrite": "What day was Josh white born?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 2,
+      "original_query": "When was he born?",
+      "gold_rewrite": "When was Josh White born?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 3,
+      "original_query": "What state?",
+      "gold_rewrite": "What state was Josh White born in?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 4,
+      "original_query": "What city?",
+      "gold_rewrite": "What city was Josh White born in?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 5,
+      "original_query": "What was his parents name?",
+      "gold_rewrite": "What was Josh White's parents name?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 6,
+      "original_query": "What happened to his dad?",
+      "gold_rewrite": "What happened to Josh White's dad?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 7,
+      "original_query": "What did he do for this?",
+      "gold_rewrite": "What did Josh White's do for this?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 18,
+      "turn_id": 9,
+      "original_query": "What else did he do?",
+      "gold_rewrite": "What else did Josh White do?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 19,
+      "turn_id": 1,
+      "original_query": "Did the Manchu people create the Octagonal drum?",
+      "gold_rewrite": "Did the Manchu people create the Octagonal drum?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 19,
+      "turn_id": 2,
+      "original_query": "What was the Octagonal drum used for?",
+      "gold_rewrite": "What was the Octagonal drum used for?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 19,
+      "turn_id": 3,
+      "original_query": "What material was the drum made from?",
+      "gold_rewrite": "What material was the octagonal drum made from?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 19,
+      "turn_id": 4,
+      "original_query": "Why was the Octagon shape chosen for the drum?",
+      "gold_rewrite": "Why was the Octagon shape chosen for the drum?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 19,
+      "turn_id": 5,
+      "original_query": "Was there an object that was used to play the Octagonal drum?",
+      "gold_rewrite": "Was there an object that was used to play the Octagonal drum?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 19,
+      "turn_id": 7,
+      "original_query": "Were there other instruments that the Manchu people played along with the drum?",
+      "gold_rewrite": "Were there other instruments that the Manchu people played along with the drum?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 20,
+      "turn_id": 1,
+      "original_query": "How does season 7 start for Willow?",
+      "gold_rewrite": "How does season 7 of Buffy the Vampire Slayer start for Willow Rosenberg?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 20,
+      "turn_id": 2,
+      "original_query": "Why is she unnerved by her power?",
+      "gold_rewrite": "Why is Willow Rosenberg unnerved by her power?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 20,
+      "turn_id": 3,
+      "original_query": "Does she ever return to her home?",
+      "gold_rewrite": "Does Willow Rosenberg ever return to her home?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 20,
+      "turn_id": 4,
+      "original_query": "Does she use her power during this season?",
+      "gold_rewrite": "Does Willow Rosenberg use her power during this season?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 20,
+      "turn_id": 5,
+      "original_query": "What happens when she casts the spell?",
+      "gold_rewrite": "What happens when Willow Rosenberg casts the spell?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 20,
+      "turn_id": 6,
+      "original_query": "Does casting the spell harm Willow?",
+      "gold_rewrite": "Does casting the spell harm Willow Rosenberg?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 20,
+      "turn_id": 7,
+      "original_query": "Anything else interest happen during this time?",
+      "gold_rewrite": "Anything else interest happen during for Willow Rosenburg at the end of seaosn 7 of Buffy the Vampire Slayer?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 20,
+      "turn_id": 8,
+      "original_query": "Where did they go when they escaped?",
+      "gold_rewrite": "Where did they go when Willow Rosenburg and the rest of her group escape to at the end of season 7?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 20,
+      "turn_id": 9,
+      "original_query": "What did Willow cast the spell to destroy?",
+      "gold_rewrite": "What did Willow Rosenberg cast the spell to destroy?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 21,
+      "turn_id": 1,
+      "original_query": "When was season 1 released?",
+      "gold_rewrite": "When was season 1 of Buffy the Vampire Slayer released?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 21,
+      "turn_id": 2,
+      "original_query": "How does it start?",
+      "gold_rewrite": "How does season 1 of Buffy the Vampire Slayer start?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 21,
+      "turn_id": 3,
+      "original_query": "When does that change?",
+      "gold_rewrite": "When does Willow Rosenburg start to develope as a character?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 21,
+      "turn_id": 4,
+      "original_query": "Who is Buffy Summers?",
+      "gold_rewrite": "Who is Buffy Summers?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 21,
+      "turn_id": 5,
+      "original_query": "Are there any other interesting aspects about this article?",
+      "gold_rewrite": "Are there any other interesting aspects about this article?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 21,
+      "turn_id": 6,
+      "original_query": "What happens next?",
+      "gold_rewrite": "What happens next because of Willow Rosenburg's ability to learn magic?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 21,
+      "turn_id": 7,
+      "original_query": "How does the 3rd season start?",
+      "gold_rewrite": "How does the 3rd season of Buffy the Vampire Slayer start?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 21,
+      "turn_id": 8,
+      "original_query": "What is her backstory?",
+      "gold_rewrite": "What is Willow Rosenburg's backstory?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 22,
+      "turn_id": 1,
+      "original_query": "What was there to debate about?",
+      "gold_rewrite": "What was there to debate about Judd Aapatow's work?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 22,
+      "turn_id": 2,
+      "original_query": "Are there any other interesting aspects about this article?",
+      "gold_rewrite": "Are there any other interesting aspects about this article?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 22,
+      "turn_id": 3,
+      "original_query": "What was his approach to women?",
+      "gold_rewrite": "What was Judd Apatow's approach to women?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 22,
+      "turn_id": 4,
+      "original_query": "How was it taken by the public?",
+      "gold_rewrite": "How was the criticism of Judd Apatow's work taken by the public?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 22,
+      "turn_id": 5,
+      "original_query": "Was there any controversy?",
+      "gold_rewrite": "Was there any controversy concerning Judd Apatow?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 22,
+      "turn_id": 6,
+      "original_query": "Can you tell me more about the debate?",
+      "gold_rewrite": "Can you tell me more about the debate about Judd Apatow's work?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 22,
+      "turn_id": 7,
+      "original_query": "Did he take it seriously?",
+      "gold_rewrite": "Did Judd Apatow take the criticism about his work seriously?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 23,
+      "turn_id": 1,
+      "original_query": "Who is the lead singer of the Outfield?",
+      "gold_rewrite": "Who is the lead singer of the Outfield?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 23,
+      "turn_id": 2,
+      "original_query": "Where did the band have success?",
+      "gold_rewrite": "Where did The Outfield have success?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 23,
+      "turn_id": 3,
+      "original_query": "When was Bangin released?",
+      "gold_rewrite": "When was Bangin released?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 23,
+      "turn_id": 4,
+      "original_query": "Did the band have any tours in this timeframe?",
+      "gold_rewrite": "Did The Outfield have any tours in this timeframe?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 23,
+      "turn_id": 5,
+      "original_query": "Did the band have any top 40 hits?",
+      "gold_rewrite": "Did The Outfield have any top 40 hits?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 23,
+      "turn_id": 6,
+      "original_query": "Did any band members leave the band?",
+      "gold_rewrite": "Did any band members leave The Outfield?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 23,
+      "turn_id": 7,
+      "original_query": "What was the name of their third album?",
+      "gold_rewrite": "What was the name of The Outfield's third album?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 23,
+      "turn_id": 9,
+      "original_query": "Did the band break up in 1991?",
+      "gold_rewrite": "Did The Outfield break up in 1991?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 24,
+      "turn_id": 1,
+      "original_query": "Can you give me some information on the Player compensation?",
+      "gold_rewrite": "Can you give me some information on the Player Compensation?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 24,
+      "turn_id": 2,
+      "original_query": "What are some other key points to the career Grand Slam?",
+      "gold_rewrite": "What are some other key points to the career Grand Slam?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 24,
+      "turn_id": 3,
+      "original_query": "Did she win anything else?",
+      "gold_rewrite": "Did Billie Jean King win anything else?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 24,
+      "turn_id": 4,
+      "original_query": "How popular was she?",
+      "gold_rewrite": "How popular was Billie Jean King?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 24,
+      "turn_id": 5,
+      "original_query": "How many tournaments did she participate in?",
+      "gold_rewrite": "How many tournaments did Billie Jean King participate in?",
+      "original_hit_at_10": true,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 24,
+      "turn_id": 6,
+      "original_query": "Are there any other interesting aspects about this article?",
+      "gold_rewrite": "Are there any other interesting aspects about this article?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    },
+    {
+      "conversation_id": 24,
+      "turn_id": 7,
+      "original_query": "What else did she do?",
+      "gold_rewrite": "What else did Billie Jean King do?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 24,
+      "turn_id": 8,
+      "original_query": "Is there anything else important to know?",
+      "gold_rewrite": "Is there anything else important to know about Billie Jean King?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": true,
+      "rewrite_helped": true
+    },
+    {
+      "conversation_id": 25,
+      "turn_id": 1,
+      "original_query": "what aappenne after his deah",
+      "gold_rewrite": "What happened after Osceola's death?",
+      "original_hit_at_10": false,
+      "rewrite_hit_at_10": false,
+      "rewrite_helped": false
+    }
+  ]
+}
