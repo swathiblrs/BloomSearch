@@ -8,3 +8,5 @@ Accuracy:                 0.6379
 Precision:                0.6306
 Recall:                   0.9206
 F1-score:                 0.7485
+## Clarification question
+Currently, the clarification question for ambiguous queries is static: "Could you clarify exactly what you're asking?"

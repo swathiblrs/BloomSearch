@@ -12,8 +12,7 @@ threshold = detector["threshold"]
 test_questions = [
     "When did the Simpsons first air on television?",
     "Who played Batman?",
-    "What is the capital of France?",
-    "When was the first computer invented?"
+    "What has been on longer wheel of fortune or jeopardy?"
 ]
 
 for question in test_questions:
