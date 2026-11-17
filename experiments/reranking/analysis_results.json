@@ -1,0 +1,123 @@
+{
+  "k": 10,
+  "rerank_file": "reranking_progress_v2.json",
+  "bm25_all": {
+    "queries": 300,
+    "ndcg_first_reported": 0.6725345275626968,
+    "ndcg": 0.663454305453947,
+    "recall": 0.7805,
+    "mrr": 0.6328875661375661
+  },
+  "reranking": {
+    "queries": 300,
+    "errors": 0,
+    "bm25_ndcg": 0.663454305453947,
+    "reranked_ndcg": 0.7015109698689124,
+    "difference": 0.03805666441496534,
+    "ci95": [
+      0.014238120220439769,
+      0.06189715771192958
+    ],
+    "helped": 63,
+    "hurt": 30,
+    "same": 207,
+    "avg_tokens": 1463.8233333333333,
+    "avg_latency_s": 2.929533333333333
+  },
+  "headroom": {
+    "no_relevant_in_top_k": 60,
+    "already_ideal": 158,
+    "fixable": 82,
+    "helped_of_fixable": 63,
+    "hurt_of_ideal": 22
+  },
+  "depth": {
+    "10": {
+      "queries_with_relevant": 240,
+      "recall": 0.7805
+    },
+    "20": {
+      "queries_with_relevant": 252,
+      "recall": 0.8225555555555555
+    },
+    "50": {
+      "queries_with_relevant": 264,
+      "recall": 0.8703888888888889
+    },
+    "100": {
+      "queries_with_relevant": 268,
+      "recall": 0.8858888888888888
+    }
+  },
+  "predictor": {
+    "queries": 300,
+    "positives": 63,
+    "BM25 scores only": {
+      "auc": 0.7046982787489118,
+      "auc_std": 0.00839756346622515,
+      "avg_precision": 0.3724152417282573
+    },
+    "Query features only": {
+      "auc": 0.6226809992632776,
+      "auc_std": 0.0172588081118925,
+      "avg_precision": 0.285560306866402
+    },
+    "Scores + query features": {
+      "auc": 0.6811265153037305,
+      "auc_std": 0.015149636752196168,
+      "avg_precision": 0.33795386583351733
+    }
+  },
+  "comparison": {
+    "BM25 only": {
+      "calls": 0,
+      "ndcg": 0.663454305453947
+    },
+    "Rerank every query": {
+      "calls": 300,
+      "ndcg": 0.7015109698689124
+    },
+    "Oracle (rerank only if it helps)": {
+      "calls": 63,
+      "ndcg": 0.7347124952646424
+    }
+  },
+  "budget_curve": {
+    "budgets": [
+      0.2,
+      0.4,
+      0.6,
+      0.8
+    ],
+    "Random selection": [
+      0.6710656383369401,
+      0.6786769712199332,
+      0.6862883041029262,
+      0.6938996369859193
+    ],
+    "Smallest-margin rule": [
+      0.6859899155296557,
+      0.7042466957087911,
+      0.7067251333389296,
+      0.70851951996405
+    ],
+    "Predictor: BM25 scores only": [
+      0.6844299429801147,
+      0.693337562062045,
+      0.7052072137440298,
+      0.7033477170269813
+    ],
+    "Predictor: Query features only": [
+      0.67378100268531,
+      0.6911119167737265,
+      0.6983315740645162,
+      0.7016380294797876
+    ],
+    "Predictor: Scores + query features": [
+      0.6759206734916645,
+      0.6987926813544008,
+      0.7035730154536375,
+      0.7064756959881652
+    ]
+  }
+}
