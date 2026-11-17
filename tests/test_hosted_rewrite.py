@@ -12,6 +12,16 @@ class FakeHostedClient:
 
 class TestHostedRewrite(unittest.TestCase):
 
+    def test_without_hosted_client_returns_original_query(self):
+        result = rewrite_query(
+            original_query="When was he born?",
+            context=["We are discussing Alan Turing."],
+        )
+
+        self.assertFalse(result.accepted)
+        self.assertEqual(result.rewritten_query, "When was he born?")
+        self.assertIn("Hosted API", result.problems[0])
+
     # Test 1: Verify hosted API rewriting works
     def test_hosted_rewrite(self):
         result = rewrite_query(

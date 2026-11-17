@@ -12,7 +12,7 @@ class FakeHostedModel:
     def chat_json(self, *, system, user, temperature=0):
         self.calls += 1
         if self.calls == 1:
-            return {"rewritten_query": "bloom filter web crawler duplicate urls"}
+            return {"rewritten_query": "How can Bloom filters prevent duplicate crawler URLs?"}
         return {
             "results": [
                 {"id": "crawler", "relevance_score": 0.98, "explanation": "Direct answer."},
@@ -53,7 +53,10 @@ class SearchIndexTests(unittest.TestCase):
         client = FakeHostedModel()
         engine = BloomSearchEngine(SearchIndex.build(self.documents), client)
         output = engine.search("how avoid same website")
-        self.assertEqual(output["rewritten_query"], "bloom filter web crawler duplicate urls")
+        self.assertEqual(
+            output["rewritten_query"],
+            "How can Bloom filters prevent duplicate crawler URLs?",
+        )
         self.assertEqual(output["results"][0].document.id, "crawler")
         self.assertEqual(client.calls, 2)
 

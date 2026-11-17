@@ -13,6 +13,7 @@ from .nlp_policy import (
     SoftmaxActionClassifier,
 )
 from .research import CertaintyAwareCascade, QueryCase
+from .rewrite import RewriteResult, rewrite_query
 
 __all__ = [
     "ActionDecision",
@@ -25,6 +26,7 @@ __all__ = [
     "PolicyFeatures",
     "QueryCase",
     "RerankDecision",
+    "RewriteResult",
     "SearchIndex",
     "SearchResult",
     "SoftmaxActionClassifier",
@@ -32,4 +34,5 @@ __all__ = [
     "WeatherResult",
     "WeatherService",
     "weather_location",
+    "rewrite_query",
 ]

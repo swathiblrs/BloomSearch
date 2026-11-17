@@ -16,6 +16,16 @@ web = [
   "fastapi>=0.115,<1",
   "uvicorn>=0.30,<1",
 ]
+research = [
+  "joblib>=1.4,<2",
+  "numpy>=1.26,<3",
+  "pandas>=2.2,<3",
+  "scipy>=1.12,<2",
+  "scikit-learn>=1.5,<2",
+]
+test = [
+  "pytest>=8,<9",
+]
 
 [project.scripts]
 bloom-filter = "bloom_filter.cli:main"

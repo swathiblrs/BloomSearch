@@ -20,6 +20,7 @@ from .crawler import WebCrawler
 from .engine import BloomSearchEngine
 from .index import Document, SearchIndex, has_meaningful_match
 from .nlp_policy import JointActionPolicy
+from .rewrite import rewrite_query
 from .weather import WeatherService, is_weather_query, weather_location
 
 
@@ -218,9 +219,18 @@ def search(request: SearchRequest) -> JSONResponse:
             engine = BloomSearchEngine(index, client)
             hosted_calls = 0
             effective_query = request.query
+            rewrite_metadata = None
             if layer_one.action == "rewrite":
-                effective_query = engine.rewrite_query(request.query)
+                rewrite_result = rewrite_query(
+                    request.query,
+                    context=request.context,
+                    hosted_client=client,
+                    force_rewrite=True,
+                    prompt_version="improved",
+                )
                 hosted_calls += 1
+                effective_query = rewrite_result.rewritten_query
+                rewrite_metadata = rewrite_result.to_dict()
             candidates, skipped = index.search_bm25(effective_query, max(20, request.limit))
             layer_two = policy.decide_layer_two(candidates)
             if layer_two.should_rerank:
@@ -256,6 +266,7 @@ def search(request: SearchRequest) -> JSONResponse:
                         "layer_one": layer_one.to_dict(),
                         "layer_two": layer_two.to_dict(),
                         "hosted_calls": hosted_calls,
+                        "rewrite": rewrite_metadata,
                     },
                 }
             )

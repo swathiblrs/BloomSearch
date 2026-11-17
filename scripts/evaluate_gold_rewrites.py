@@ -1,3 +1,4 @@
+import argparse
 import json
 from pathlib import Path
 
@@ -5,8 +6,8 @@ from bloom_search.index import Document, SearchIndex
 
 
 ROOT = Path(__file__).resolve().parents[1]
-INPUT_FILE = ROOT / "data" / "qrecc" / "test_3000.json"
-OUTPUT_FILE = ROOT / "data" / "qrecc" / "test_3000_results.json"
+DEFAULT_INPUT = ROOT / "data" / "qrecc" / "test_3000.json"
+DEFAULT_OUTPUT = ROOT / "data" / "qrecc" / "test_3000_results.json"
 TOP_K = 10
 
 
@@ -17,7 +18,11 @@ def hit_at_k(index: SearchIndex, query: str, target_id: str) -> bool:
 
 
 def main() -> None:
-    rows = json.loads(INPUT_FILE.read_text(encoding="utf-8"))
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
+    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    args = parser.parse_args()
+    rows = json.loads(args.input.read_text(encoding="utf-8"))
 
     documents = []
     usable_rows = []
@@ -78,7 +83,8 @@ def main() -> None:
         "results": results,
     }
 
-    OUTPUT_FILE.write_text(
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(
         json.dumps(report, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
@@ -87,7 +93,7 @@ def main() -> None:
     print(f"Original Hit@10: {report['original_hit_at_10']:.1%}")
     print(f"Gold rewrite Hit@10: {report['gold_rewrite_hit_at_10']:.1%}")
     print(f"Rewrite-only wins: {rewrite_wins}")
-    print(f"Saved report: {OUTPUT_FILE}")
+    print(f"Saved report: {args.output}")
 
 
 if __name__ == "__main__":
