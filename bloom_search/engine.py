@@ -26,7 +26,7 @@ class BloomSearchEngine:
         self.index = index
         self.model_client = model_client
 
-    def _rewrite_query(self, query: str) -> str:
+    def rewrite_query(self, query: str) -> str:
         response = self.model_client.chat_json(
             system=(
                 "You improve search queries. Preserve the user's intent and names. "
@@ -38,16 +38,16 @@ class BloomSearchEngine:
             raise ValueError("hosted model returned an invalid query rewrite")
         return response["rewritten_query"].strip() or query
 
-    def search(self, query: str, *, limit: int = 5, candidate_limit: int = 20) -> dict[str, object]:
-        rewritten = self._rewrite_query(query)
-        candidates, skipped_segments = self.index.search_bm25(rewritten, candidate_limit)
+    def rerank(
+        self,
+        query: str,
+        candidates: list[tuple[Document, float]],
+        *,
+        limit: int = 5,
+    ) -> list[SearchResult]:
+        """Rerank an existing BM25 candidate list with the hosted model."""
         if not candidates:
-            return {
-                "query": query,
-                "rewritten_query": rewritten,
-                "segments_skipped": skipped_segments,
-                "results": [],
-            }
+            return []
         candidate_payload = [
             {
                 "id": document.id,
@@ -83,10 +83,23 @@ class BloomSearchEngine:
             )
             seen.add(document.id)
         ranked.sort(key=lambda result: (result.relevance_score, result.bm25_score), reverse=True)
+        return ranked[:limit]
+
+    def search(self, query: str, *, limit: int = 5, candidate_limit: int = 20) -> dict[str, object]:
+        rewritten = self.rewrite_query(query)
+        candidates, skipped_segments = self.index.search_bm25(rewritten, candidate_limit)
+        if not candidates:
+            return {
+                "query": query,
+                "rewritten_query": rewritten,
+                "segments_skipped": skipped_segments,
+                "results": [],
+            }
+        ranked = self.rerank(rewritten, candidates, limit=limit)
         return {
             "query": query,
             "rewritten_query": rewritten,
             "segments_skipped": skipped_segments,
-            "results": ranked[:limit],
+            "results": ranked,
         }
 
