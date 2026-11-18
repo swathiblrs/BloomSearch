@@ -1,6 +1,5 @@
 # Reranking decision experiment (Task 3)
 
-Owner: Prapti Bhatt. Last updated: November 14, 2026.
 
 This folder tests the Layer 2 decision in BloomSearch: after BM25 returns its top 10 results, should the system call the hosted LLM reranker or return the BM25 list as it is?
 
@@ -90,6 +89,4 @@ python validate_margin_rule.py
 
 The reranking step is the only one that needs an API key. The key is read from the environment and is never written to a file. The reranking script saves progress every 10 queries and resumes when run again.
 
-## Acknowledgment
 
-The scripts in this folder were written with the help of Claude, a language model developed by Anthropic, which was used for code drafting, debugging and analysis design.
