@@ -214,6 +214,10 @@ Historical offline results are consolidated in
 `research/QUERY_REWRITE_RESULTS.md`. They are not hosted-provider results. A
 live hosted-model benchmark remains future work.
 
+The integrated zero-new-API-cost replay is documented in
+`research/INTEGRATED_POLICY_EVALUATION.md`, with machine-readable results in
+`research/results/integrated_policy_replay.json`.
+
 Run the complete dependency-free core test suite with:
 
 ```bash
