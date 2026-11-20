@@ -9,6 +9,7 @@ WORKDIR /app
 COPY pyproject.toml README.md ./
 COPY bloom_filter ./bloom_filter
 COPY bloom_search ./bloom_search
+COPY ambiguity/ambiguity_detector.joblib ./ambiguity/ambiguity_detector.joblib
 COPY examples ./examples
 COPY web ./web
 

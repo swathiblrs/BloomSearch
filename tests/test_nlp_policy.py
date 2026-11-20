@@ -3,7 +3,30 @@ import unittest
 from pathlib import Path
 
 from bloom_search.index import Document, SearchIndex
-from bloom_search.nlp_policy import JointActionPolicy, SoftmaxActionClassifier
+from bloom_search.ambiguity import AmbiguityResult
+from bloom_search.nlp_policy import (
+    BM25MarginRerankPredictor,
+    JointActionPolicy,
+    SoftmaxActionClassifier,
+)
+
+
+class FakeAmbiguityDetector:
+    def __init__(self, score=0.95, needs_clarification=True):
+        self.score = score
+        self.needs_clarification = needs_clarification
+
+    def predict(self, query):
+        return AmbiguityResult(
+            self.score,
+            self.needs_clarification,
+            "test_ambiguity_detector",
+        )
+
+
+class FakeRewriteClient:
+    def chat_json(self, *, system, user, temperature=0):
+        return {"rewritten_query": "How do Bloom filter membership checks work?"}
 
 
 class JointActionPolicyTests(unittest.TestCase):
@@ -39,6 +62,40 @@ class JointActionPolicyTests(unittest.TestCase):
     def test_layer_two_reranks_close_candidates(self):
         decision = self.policy.decide_layer_two([(object(), 2.0), (object(), 1.95)])
         self.assertTrue(decision.should_rerank)
+
+    def test_trained_ambiguity_detector_feeds_joint_policy(self):
+        policy = JointActionPolicy(ambiguity_detector=FakeAmbiguityDetector())
+        decision = policy.decide_layer_one(self.index, "Who played it?")
+        self.assertEqual(decision.action, "clarify")
+        self.assertEqual(decision.source, "test_ambiguity_detector")
+        self.assertIsNotNone(decision.clarification_question)
+
+    def test_joint_policy_executes_selected_hosted_rewrite(self):
+        policy = JointActionPolicy(
+            ambiguity_detector=FakeAmbiguityDetector(0.1, False)
+        )
+        outcome = policy.apply_layer_one(
+            self.index,
+            "How does it work?",
+            context="We were discussing Bloom filter membership checks.",
+            hosted_client=FakeRewriteClient(),
+        )
+        self.assertEqual(outcome.decision.action, "rewrite")
+        self.assertTrue(outcome.rewrite.accepted)
+        self.assertEqual(
+            outcome.effective_query,
+            "How do Bloom filter membership checks work?",
+        )
+
+    def test_scifact_margin_rule_is_used_for_layer_two(self):
+        policy = JointActionPolicy(
+            rerank_predictor=BM25MarginRerankPredictor(margin_threshold=1.0)
+        )
+        close = policy.decide_layer_two([(object(), 4.0), (object(), 3.5)])
+        separated = policy.decide_layer_two([(object(), 4.0), (object(), 2.0)])
+        self.assertTrue(close.should_rerank)
+        self.assertFalse(separated.should_rerank)
+        self.assertEqual(close.source, "scifact_margin_rule")
 
 
 class SoftmaxActionClassifierTests(unittest.TestCase):

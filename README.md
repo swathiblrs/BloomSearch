@@ -167,11 +167,21 @@ Core stack:
 - Extracts normalized query-length, meaningful-term, context-dependence, ambiguity,
   BM25-confidence, score-margin, and Bloom-coverage features
 - Selects **keep**, **rewrite**, or **clarify** before retrieval
-- Uses a separate uncertainty gate to select **rerank** or **return BM25** afterward
+- Loads the team's TF-IDF/logistic-regression ambiguity detector when the optional
+  ML dependencies are available; the web installation includes them, while the
+  dependency-free core uses the safe heuristic fallback
+- Executes the hosted rewrite only after the shared policy selects **rewrite**, then
+  applies the intent-preservation guard before using it
+- Uses the SciFact-derived BM25 top-two margin rule to select **rerank** or
+  **return BM25** afterward
 - Returns structured decision metadata for component-level evaluation
 - Falls back safely to free lexical retrieval when a hosted API is not supplied
 - Includes a dependency-free trainable softmax classifier with JSON save/load support
-- Uses a conservative rule-based baseline until a classifier is trained on labeled public data
+- Exposes each component source and BM25 margin in the API response for evaluation
+
+The reranking margin defaults to `3.84`, which corresponds to approximately the
+lowest-margin 43% of the SciFact experiment. Because raw BM25 score scales vary
+by collection, it can be calibrated with `BLOOMSEARCH_RERANK_MARGIN_THRESHOLD`.
 
 ### 🧠 API-Hosted LLM Reranking
 
@@ -264,6 +274,7 @@ bloom_filter/
  └── __main__.py          # python -m bloom_filter entry point
 
 bloom_search/
+ ├── ambiguity.py         # Optional trained ambiguity-detector runtime adapter
  ├── collections.py       # Persistent named document collections
  ├── crawler.py           # Bounded, domain-limited, robots-aware crawler
  ├── api.py               # Provider-neutral hosted-model API client

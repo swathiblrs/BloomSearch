@@ -7,8 +7,10 @@ from .weather import WeatherResult, WeatherService, weather_location
 from .index import Document, SearchIndex
 from .nlp_policy import (
     ActionDecision,
+    BM25MarginRerankPredictor,
     JointActionPolicy,
     PolicyFeatures,
+    QueryActionResult,
     RerankDecision,
     SoftmaxActionClassifier,
 )
@@ -17,6 +19,7 @@ from .rewrite import RewriteResult, rewrite_query
 
 __all__ = [
     "ActionDecision",
+    "BM25MarginRerankPredictor",
     "BloomSearchEngine",
     "CollectionInfo",
     "CollectionStore",
@@ -25,6 +28,7 @@ __all__ = [
     "JointActionPolicy",
     "PolicyFeatures",
     "QueryCase",
+    "QueryActionResult",
     "RerankDecision",
     "RewriteResult",
     "SearchIndex",
