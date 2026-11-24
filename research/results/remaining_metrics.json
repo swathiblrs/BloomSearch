@@ -1,0 +1,19 @@
+{
+  "dataset": "QReCC stored rewrite evaluation",
+  "queries": 2803,
+  "accepted_rewrites": 766,
+  "retrieval_harm_proxy": {
+    "lost_hit_at_5_count": 17,
+    "lost_hit_at_5_rate_per_accepted_rewrite": 0.022193211488250653,
+    "reduced_reciprocal_rank_count": 34,
+    "reduced_reciprocal_rank_rate_per_accepted_rewrite": 0.044386422976501305,
+    "improved_reciprocal_rank_count": 291,
+    "improved_reciprocal_rank_rate_per_accepted_rewrite": 0.37989556135770236
+  },
+  "warning": "Retrieval degradation is not proof of changed user intent. The semantic harmful-rewrite rate must be measured with human intent-preservation labels.",
+  "remaining_human_metrics": [
+    "three-class keep/rewrite/clarify Macro-F1",
+    "semantic harmful-rewrite rate",
+    "clarification usefulness and task success"
+  ]
+}

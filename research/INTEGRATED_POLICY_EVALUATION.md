@@ -68,6 +68,17 @@ selection still needs calibration. A final hosted evaluation should replace
 gold rewrites with generated rewrites and should measure all actions on a
 shared dataset with clarification responses.
 
+## Additional harmful-rewrite proxy
+
+Among 766 accepted stored QReCC rewrites, 17 lost an existing Hit@5, giving a
+retrieval-harm proxy of **2.22%**. Reciprocal rank decreased for 34 accepted
+rewrites (**4.44%**) and improved for 291 (**37.99%**). Retrieval degradation
+does not prove that user intent changed; the human-study intent label remains
+the required semantic harmful-rewrite metric.
+
+The balanced study materials and analysis program are available under
+`research/human_study/`.
+
 The complete machine-readable results are stored in
 `research/results/integrated_policy_replay.json`. Reproduce the replay with:
 

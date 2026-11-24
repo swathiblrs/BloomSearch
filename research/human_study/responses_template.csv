@@ -1,0 +1,1 @@
+participant_id,item_id,original_query,context,system_action,proposed_rewrite,clarification_question,correct_action,rewrite_preserves_intent,clarification_usefulness_1_to_5,task_success_0_or_1,trust_1_to_5,notes

@@ -218,6 +218,11 @@ The integrated zero-new-API-cost replay is documented in
 `research/INTEGRATED_POLICY_EVALUATION.md`, with machine-readable results in
 `research/results/integrated_policy_replay.json`.
 
+The remaining three-class action, semantic intent-preservation, and
+clarification metrics use the pilot protocol and analysis tools in
+`research/human_study/`. Automatic retrieval-harm proxy results are stored in
+`research/results/remaining_metrics.json`.
+
 Run the complete dependency-free core test suite with:
 
 ```bash
