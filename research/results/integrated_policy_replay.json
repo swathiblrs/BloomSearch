@@ -7,7 +7,8 @@
     "limitations": [
       "Gold rewrites measure action-selection potential, not hosted rewrite quality.",
       "QReCC has no keep/rewrite/clarify three-class labels; Macro-F1 is not reported.",
-      "Clarification is treated as unresolved because the dataset has no user response."
+      "Clarification is treated as unresolved because the dataset has no user response.",
+      "Layer 1 and Layer 2 use different datasets, so no combined quality score is claimed."
     ],
     "baselines": {
       "bm25_original_hit_at_10": 0.34249018908312523,
@@ -37,7 +38,7 @@
         "precision": 0.5197452229299363,
         "recall": 0.7253333333333334,
         "f1": 0.6055658627087199,
-        "macro_f1": 0.6201996266480734,
+        "macro_f1": 0.6201996266480735,
         "true_positive": 816,
         "false_positive": 754,
         "false_negative": 309,
