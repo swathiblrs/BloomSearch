@@ -11,3 +11,4 @@ build/
 data/collections/
 data/qrecc/*.json
 data/qrecc/*.joblib
+research/human_study/participant_packets/*_responses.csv
