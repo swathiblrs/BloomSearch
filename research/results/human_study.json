@@ -1,0 +1,55 @@
+{
+  "participants": 2,
+  "responses": 60,
+  "items": 30,
+  "completion_rate_by_participant": {
+    "P01": 1.0,
+    "P02": 1.0
+  },
+  "action_policy": {
+    "macro_f1": 0.3818138971903553,
+    "per_action_f1": {
+      "keep": 0.30434782608695654,
+      "rewrite": 0.7804878048780488,
+      "clarify": 0.06060606060606061
+    },
+    "unanimous_action_agreement_rate": 0.5666666666666667
+  },
+  "intent_preservation": {
+    "evaluated_rewrites": 20,
+    "harmful_rewrite_rate": 0.45
+  },
+  "clarification": {
+    "evaluated_usefulness": 20,
+    "mean_usefulness_1_to_5": 3.55,
+    "useful_rating_at_least_4_rate": 0.5,
+    "primary_perceived_task_success": {
+      "evaluated": 20,
+      "success_rate": 0.95
+    }
+  },
+  "perceived_task_success": {
+    "overall": {
+      "evaluated": 60,
+      "success_rate": 0.5333333333333333
+    },
+    "by_system_action": {
+      "keep": {
+        "evaluated": 20,
+        "success_rate": 0.3
+      },
+      "rewrite": {
+        "evaluated": 20,
+        "success_rate": 0.35
+      },
+      "clarify": {
+        "evaluated": 20,
+        "success_rate": 0.95
+      }
+    }
+  },
+  "trust": {
+    "evaluated": 60,
+    "mean_1_to_5": 3
+  }
+}
