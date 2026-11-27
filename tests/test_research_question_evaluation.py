@@ -1,10 +1,12 @@
 import math
+from pathlib import Path
 
 from research.evaluate_research_questions import (
     _estimated_input_tokens,
     _ndcg,
     _rank,
     _recall,
+    automatic_intent_harm_comparison,
 )
 
 
@@ -32,3 +34,28 @@ def test_missing_relevant_document_has_zero_recall_and_ndcg():
 def test_input_token_estimate_includes_context_and_is_never_zero():
     assert _estimated_input_tokens("", "") == 1
     assert _estimated_input_tokens("abcd", "efgh") == 3
+
+
+def test_automatic_intent_comparison_uses_same_guard_for_both_conditions(
+    tmp_path: Path,
+):
+    study = tmp_path / "study.csv"
+    study.write_text(
+        "item_id,original_query,context,system_action,proposed_rewrite\n"
+        "Q01,What happened in 2020?,,rewrite,What happened?\n"
+        "Q02,Who won?,,keep,\n",
+        encoding="utf-8",
+    )
+    always = tmp_path / "always.csv"
+    always.write_text(
+        "item_id,original_query,context,always_rewrite_output\n"
+        "Q01,What happened in 2020?,,What happened?\n"
+        "Q02,Who won?,,Who won?\n",
+        encoding="utf-8",
+    )
+
+    result = automatic_intent_harm_comparison(study, always)
+
+    assert result["always_rewrite"]["harmful_rewrite_rate"] == 0.5
+    assert result["selective_rewrite"]["harmful_rewrite_rate"] == 1.0
+    assert result["selective_minus_always_rate"] == 0.5

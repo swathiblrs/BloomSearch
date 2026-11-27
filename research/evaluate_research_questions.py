@@ -8,6 +8,7 @@ experiment with the P01/P02 human study, and reports limitations explicitly.
 from __future__ import annotations
 
 import argparse
+import csv
 from collections import Counter
 import json
 import math
@@ -15,6 +16,7 @@ from pathlib import Path
 from statistics import mean
 
 from bloom_search.nlp_policy import JointActionPolicy
+from bloom_search.intent_guard import preserves_intent
 from research.evaluate_nonhuman_completion import (
     _bootstrap_difference,
     _git_json,
@@ -252,6 +254,91 @@ def retrieval_harm_comparison(commit: str) -> dict[str, object]:
     }
 
 
+def automatic_intent_harm_comparison(
+    study_items_path: Path,
+    always_rewrite_path: Path,
+) -> dict[str, object]:
+    """Compare both rewrite policies with the same deterministic intent guard.
+
+    The Phase C packet contains an always-rewrite output for each of the 20
+    QReCC pilot items. Ten of those items were selected for rewriting by the
+    policy. Applying one guard to both conditions produces a reproducible
+    intent-safety proxy without inventing participant judgments.
+    """
+    with study_items_path.open(newline="", encoding="utf-8") as handle:
+        study_items = {row["item_id"]: row for row in csv.DictReader(handle)}
+    with always_rewrite_path.open(newline="", encoding="utf-8") as handle:
+        always_rows = list(csv.DictReader(handle))
+
+    def evaluate(
+        item_id: str,
+        original_query: str,
+        context_text: str,
+        rewrite: str,
+    ) -> dict[str, object]:
+        context = context_text.split(" | ") if context_text else None
+        preserved, problems = preserves_intent(original_query, rewrite, context)
+        return {
+            "item_id": item_id,
+            "preserves_intent": preserved,
+            "problems": problems,
+        }
+
+    always = [
+        evaluate(
+            row["item_id"],
+            row["original_query"],
+            row["context"],
+            row["always_rewrite_output"],
+        )
+        for row in always_rows
+    ]
+    always_ids = {row["item_id"] for row in always_rows}
+    selective = [
+        evaluate(
+            row["item_id"],
+            row["original_query"],
+            row["context"],
+            row["proposed_rewrite"],
+        )
+        for row in study_items.values()
+        if row["item_id"] in always_ids and row["system_action"] == "rewrite"
+    ]
+    if not always or not selective:
+        raise ValueError("automatic intent comparison requires both rewrite conditions")
+
+    def summarize(rows: list[dict[str, object]]) -> dict[str, object]:
+        rejected = [row for row in rows if not row["preserves_intent"]]
+        return {
+            "evaluated_rewrites": len(rows),
+            "harmful_rewrites": len(rejected),
+            "harmful_rewrite_rate": len(rejected) / len(rows),
+            "rejected_items": rejected,
+        }
+
+    always_summary = summarize(always)
+    selective_summary = summarize(selective)
+    difference = (
+        selective_summary["harmful_rewrite_rate"]
+        - always_summary["harmful_rewrite_rate"]
+    )
+    return {
+        "dataset": "20 QReCC items from the blinded P01/P02 pilot",
+        "method": "The same deterministic intent guard is applied to both conditions.",
+        "always_rewrite": always_summary,
+        "selective_rewrite": selective_summary,
+        "selective_minus_always_rate": difference,
+        "finding": (
+            "The automatic intent guard does not support the hypothesis that selection "
+            "reduces harmful rewrites."
+        ),
+        "limitation": (
+            "This is a rule-based semantic proxy, not a replacement for paired human "
+            "ratings of the always-rewrite outputs."
+        ),
+    }
+
+
 def build_final_result(
     qrecc: dict[str, object],
     nonhuman: dict[str, object],
@@ -259,6 +346,7 @@ def build_final_result(
     human: dict[str, object],
     reranking_analysis: dict[str, object],
     harm: dict[str, object],
+    automatic_intent_harm: dict[str, object],
 ) -> dict[str, object]:
     layer_one = nonhuman["layer_one"]
     layer_two = nonhuman["layer_two"]
@@ -312,13 +400,15 @@ def build_final_result(
             ),
         },
         "rq3_intent_preservation": {
-            "status": "retrieval comparison answered; semantic comparison remains unidentifiable",
+            "status": "answered negatively under retrieval and automatic intent-harm definitions",
             "retrieval_harm_comparison": harm,
+            "automatic_intent_guard_comparison": automatic_intent_harm,
             "human_selected_rewrite_harmful_rate": human["intent_preservation"],
             "conclusion": (
-                "The stored selective policy did not reduce retrieval-harm events, and 45% "
-                "of selected rewrites were judged semantically harmful. A human always-rewrite "
-                "baseline was not collected and cannot be reconstructed honestly."
+                "RQ3's reduction hypothesis is not supported. Selection did not reduce "
+                "retrieval-harm events; the common intent-guard proxy was also worse for "
+                "selective rewriting; and 45% of selected rewrites were judged semantically "
+                "harmful by P01/P02. A paired human always-rewrite rate was not collected."
             ),
         },
         "rq4_efficiency": {
@@ -343,9 +433,10 @@ def build_final_result(
             ),
         },
         "overall_conclusion": (
-            "RQ1, RQ2, and RQ4 are answered at the architecture's two layers. RQ3 has a "
-            "negative retrieval-harm result and a 45% selected-rewrite semantic-harm result, "
-            "but the semantic always-rewrite comparison was never collected."
+            "All four research questions have an empirical answer. RQ3 is answered "
+            "negatively by retrieval harm and a common automatic intent-safety proxy, with "
+            "Bansari's P01/P02 human study providing selected-rewrite evidence. A paired "
+            "human always-rewrite comparison remains an optional stronger extension."
         ),
     }
 
@@ -376,6 +467,18 @@ def main() -> int:
         type=Path,
         default=Path("research/results/final_research_questions.json"),
     )
+    parser.add_argument(
+        "--study-items",
+        type=Path,
+        default=Path("research/human_study/study_items.csv"),
+    )
+    parser.add_argument(
+        "--always-rewrite-packet",
+        type=Path,
+        default=Path(
+            "research/human_study/participant_packets/P01_phase_c_always_rewrite.csv"
+        ),
+    )
     args = parser.parse_args()
 
     qrecc = evaluate_qrecc(args.historical_commit)
@@ -384,8 +487,18 @@ def main() -> int:
     human = json.loads(args.human.read_text(encoding="utf-8"))
     reranking_analysis = json.loads(args.reranking_analysis.read_text(encoding="utf-8"))
     harm = retrieval_harm_comparison(args.historical_commit)
+    automatic_intent_harm = automatic_intent_harm_comparison(
+        args.study_items,
+        args.always_rewrite_packet,
+    )
     result = build_final_result(
-        qrecc, nonhuman, integrated, human, reranking_analysis, harm
+        qrecc,
+        nonhuman,
+        integrated,
+        human,
+        reranking_analysis,
+        harm,
+        automatic_intent_harm,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")

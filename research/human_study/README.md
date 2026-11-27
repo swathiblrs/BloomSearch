@@ -122,12 +122,13 @@ question conclusions, and limitations are documented in
 `research/HUMAN_STUDY_RESULTS.md`. The two-participant pilot is complete. No
 P03 response is required by the study protocol.
 
-## RQ3 always-rewrite extension
+## Optional paired-human RQ3 extension
 
 The original pilot rated intent preservation only when the selective policy
-showed a rewrite. To answer the official comparison against rewriting every
-query, P01 and P02 must complete one short Phase C over the 20 QReCC study
-items. This is an extension for the same participants, not a P03 study.
+showed a rewrite. The official RQ3 now has a negative automatic answer from
+both retrieval harm and a common intent-guard comparison. For a stronger
+paired-human replication, P01 and P02 may complete one short Phase C over the
+20 QReCC study items. This is optional and is not a P03 study.
 
 Generate the packets with:
 

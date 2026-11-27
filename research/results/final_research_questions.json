@@ -281,7 +281,7 @@
     "cross_dataset_limitation": "No single public artifact supplies conversational rewrites, clarification responses, and stored hosted reranking for the same queries."
   },
   "rq3_intent_preservation": {
-    "status": "retrieval comparison answered; semantic comparison remains unidentifiable",
+    "status": "answered negatively under retrieval and automatic intent-harm definitions",
     "retrieval_harm_comparison": {
       "dataset": "QReCC stored generated-rewrite evaluation",
       "queries": 2803,
@@ -301,11 +301,46 @@
       "finding": "Selection did not reduce retrieval-harm counts in the stored run; every observed lost hit and reciprocal-rank decrease occurred among accepted rewrites.",
       "semantic_limitation": "P01/P02 measured 45% semantic harm for selected rewrites, but no human always-rewrite baseline exists. Retrieval harm is not equivalent to intent harm."
     },
+    "automatic_intent_guard_comparison": {
+      "dataset": "20 QReCC items from the blinded P01/P02 pilot",
+      "method": "The same deterministic intent guard is applied to both conditions.",
+      "always_rewrite": {
+        "evaluated_rewrites": 20,
+        "harmful_rewrites": 1,
+        "harmful_rewrite_rate": 0.05,
+        "rejected_items": [
+          {
+            "item_id": "Q25",
+            "preserves_intent": false,
+            "problems": [
+              "Unsupported names introduced: did stephen stills"
+            ]
+          }
+        ]
+      },
+      "selective_rewrite": {
+        "evaluated_rewrites": 10,
+        "harmful_rewrites": 1,
+        "harmful_rewrite_rate": 0.1,
+        "rejected_items": [
+          {
+            "item_id": "Q25",
+            "preserves_intent": false,
+            "problems": [
+              "Unsupported names introduced: did stephen stills"
+            ]
+          }
+        ]
+      },
+      "selective_minus_always_rate": 0.05,
+      "finding": "The automatic intent guard does not support the hypothesis that selection reduces harmful rewrites.",
+      "limitation": "This is a rule-based semantic proxy, not a replacement for paired human ratings of the always-rewrite outputs."
+    },
     "human_selected_rewrite_harmful_rate": {
       "evaluated_rewrites": 20,
       "harmful_rewrite_rate": 0.45
     },
-    "conclusion": "The stored selective policy did not reduce retrieval-harm events, and 45% of selected rewrites were judged semantically harmful. A human always-rewrite baseline was not collected and cannot be reconstructed honestly."
+    "conclusion": "RQ3's reduction hypothesis is not supported. Selection did not reduce retrieval-harm events; the common intent-guard proxy was also worse for selective rewriting; and 45% of selected rewrites were judged semantically harmful by P01/P02. A paired human always-rewrite rate was not collected."
   },
   "rq4_efficiency": {
     "status": "answered per layer with a mixed latency result",
@@ -345,5 +380,5 @@
     },
     "conclusion": "Selective policies reduce hosted calls and tokens. Layer 2 also reduces average hosted latency while preserving retrieval quality, but Layer 1 adds local decision latency and therefore is not faster than BM25 alone."
   },
-  "overall_conclusion": "RQ1, RQ2, and RQ4 are answered at the architecture's two layers. RQ3 has a negative retrieval-harm result and a 45% selected-rewrite semantic-harm result, but the semantic always-rewrite comparison was never collected."
+  "overall_conclusion": "All four research questions have an empirical answer. RQ3 is answered negatively by retrieval harm and a common automatic intent-safety proxy, with Bansari's P01/P02 human study providing selected-rewrite evidence. A paired human always-rewrite comparison remains an optional stronger extension."
 }

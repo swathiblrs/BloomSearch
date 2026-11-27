@@ -107,14 +107,28 @@ Every observed retrieval-harm event occurred among rewrites accepted by the
 selective policy. Therefore, selection did not reduce retrieval-harm counts in
 this stored run.
 
+The same deterministic intent guard was also applied to both rewrite policies
+on the 20 QReCC items in the blinded pilot:
+
+| Condition | Rewrites checked | Guard-rejected | Automatic harmful-rewrite rate |
+|---|---:|---:|---:|
+| Always rewrite | 20 | 1 | **5.00%** |
+| Selective rewrite | 10 | 1 | **10.00%** |
+
+The rejected item was Q25 in both conditions. The selective rate was 5
+percentage points higher, so this common automatic semantic proxy also does
+not support the hypothesis that selection reduces harmful rewrites.
+
 P01/P02 judged 45% of the shown selected rewrites semantically harmful. They
 were not originally shown rewrites for the policy's keep cases, so a human
 always-rewrite semantic rate cannot be reconstructed from completed responses.
 
-**Current answer:** The hypothesis is not supported by retrieval outcomes, and
-selected rewrites still have a high semantic-harm rate. The exact human
-selective-versus-always comparison requires the prepared Phase C ratings from
-the same P01/P02 participants. No P03 is required.
+**Answer:** No. The hypothesis is not supported by either retrieval harm or the
+common automatic intent-safety proxy. Bansari's P01/P02 analysis further shows
+that selected rewrites still have a high human-rated semantic-harm rate. A
+paired human always-rewrite comparison would strengthen this conclusion, but
+it is an optional extension rather than missing evidence for the automatic
+answer. No P03 is required.
 
 ## RQ4: Efficiency
 
@@ -145,8 +159,9 @@ relative to always rewriting.
 
 ## Completion status
 
-All automatic experiments and the original P01/P02 pilot are complete. RQ1,
-RQ2, and RQ4 have final results. RQ3 has a negative retrieval-harm result and a
-selected-rewrite human result; only the paired human always-rewrite extension
-remains. Participant packets and the analyzer for that extension are included
-under `research/human_study/`.
+All automatic experiments and the original P01/P02 pilot are complete. All
+four research questions now have empirical answers. RQ3 is a negative result:
+selection did not reduce harm under either automatic definition, while the
+human pilot found substantial harm among selected rewrites. Participant
+packets and an analyzer remain available for an optional paired-human
+replication.

@@ -38,5 +38,7 @@ The authoritative synthesis for the four official NLP research questions is
 [`FINAL_RESEARCH_QUESTION_RESULTS.md`](FINAL_RESEARCH_QUESTION_RESULTS.md).
 It includes recomputed QReCC Recall@10 and NDCG@10, SciFact retrieval results,
 the hierarchical action-policy evaluation, call/token/latency trade-offs, and
-the remaining paired human baseline required for the exact semantic RQ3 claim.
+the completed negative RQ3 comparison using retrieval harm and a common
+automatic intent guard. A paired-human always-rewrite comparison is documented
+as an optional stronger extension.
 

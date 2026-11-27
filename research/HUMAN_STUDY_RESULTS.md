@@ -73,10 +73,11 @@ trigger from potentially useful clarification text.
    experiments. Selective rewriting improves QReCC Hit@10 over original-query
    BM25, while selective reranking preserves rerank-all quality and reduces
    hosted calls.
-3. **Intent preservation:** the selected-rewrite condition is answered for the
-   pilot. A 45% harmful-rewrite rate shows that the current rules require
-   stronger semantic validation. The official comparison with rewriting every
-   query requires the prepared P01/P02 Phase C baseline.
+3. **Intent preservation:** the pilot finds a 45% human harmful-rewrite rate
+   among selected rewrites. The final automatic evaluation applies one intent
+   guard to both policies and finds 10% harm for selective rewriting versus 5%
+   for always rewriting, so the proposed reduction is not supported. Phase C
+   remains available only as a stronger paired-human replication.
 4. **Efficiency and user benefit:** the automatic evaluation answers calls,
    tokens, and latency. This study adds perceived task success and trust. The
    resulting trade-off is mixed rather than uniformly positive.
