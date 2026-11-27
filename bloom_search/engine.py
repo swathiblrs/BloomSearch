@@ -7,6 +7,7 @@ import json
 from typing import Protocol
 
 from .index import Document, SearchIndex
+from .rewrite import rewrite_query as hosted_rewrite_query
 
 
 class JSONModelClient(Protocol):
@@ -26,17 +27,15 @@ class BloomSearchEngine:
         self.index = index
         self.model_client = model_client
 
-    def rewrite_query(self, query: str) -> str:
-        response = self.model_client.chat_json(
-            system=(
-                "You improve search queries. Preserve the user's intent and names. "
-                "Return JSON only with one string field named rewritten_query."
-            ),
-            user=query,
-        )
-        if not isinstance(response, dict) or not isinstance(response.get("rewritten_query"), str):
-            raise ValueError("hosted model returned an invalid query rewrite")
-        return response["rewritten_query"].strip() or query
+    def rewrite_query(self, query: str, *, context: str = "") -> str:
+        """Rewrite through the hosted client and retain the query if the guard rejects it."""
+        return hosted_rewrite_query(
+            query,
+            context=context,
+            hosted_client=self.model_client,
+            force_rewrite=True,
+            prompt_version="improved",
+        ).rewritten_query
 
     def rerank(
         self,

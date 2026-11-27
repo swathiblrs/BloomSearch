@@ -25,3 +25,11 @@ The included benchmark is deterministic and synthetic: 600 documents across 12 t
 
 No hosted-model API is called. Reranker tokens are estimated as payload characters divided by four. Logical filter memory assumes packed bits for the standard filter and 16-bit counters for the counting filter; it excludes Python object overhead. Latency measures local Python execution and should be rerun on the target hardware.
 
+## NLP completion evaluation
+
+The automatic single-signal versus combined-signal ablation, paired confidence
+intervals, significance tests, and local timing are documented in
+[`NONHUMAN_COMPLETION_EVALUATION.md`](NONHUMAN_COMPLETION_EVALUATION.md). The
+human study remains separate because intent preservation, clarification
+usefulness, and user task success cannot be inferred from retrieval metrics.
+

@@ -1,0 +1,363 @@
+{
+  "evaluation": "BloomSearch non-human research-question completion",
+  "new_hosted_api_calls": 0,
+  "cross_dataset_policy": "Layers are evaluated separately; no invalid combined QReCC/SciFact score is reported.",
+  "layer_one": {
+    "dataset": "QReCC held-out retrieval set",
+    "queries": 2803,
+    "ambiguity_threshold": 0.3,
+    "decision_sources": {
+      "safe_baseline": 2802,
+      "trained_ambiguity_detector": 1
+    },
+    "methods": {
+      "bm25_original": {
+        "hit_at_10": 0.34249018908312523,
+        "rewrite_call_rate": 0.0
+      },
+      "always_gold_rewrite": {
+        "hit_at_10": 0.7356403853014627,
+        "rewrite_call_rate": 1.0
+      },
+      "linguistic_only": {
+        "hit_at_10": 0.0720656439529076,
+        "actions": {
+          "clarify": 2498,
+          "keep": 115,
+          "rewrite": 190
+        },
+        "action_rates": {
+          "clarify": 0.8911880128433821,
+          "keep": 0.041027470567249376,
+          "rewrite": 0.06778451658936853
+        },
+        "rewrite_benefit": {
+          "accuracy": 0.618622904031395,
+          "precision": 0.6473684210526316,
+          "recall": 0.10933333333333334,
+          "f1": 0.1870722433460076,
+          "macro_f1": 0.4689730827543368,
+          "true_positive": 123,
+          "false_positive": 67,
+          "false_negative": 1002,
+          "true_negative": 1611
+        }
+      },
+      "bm25_only": {
+        "hit_at_10": 0.34249018908312523,
+        "actions": {
+          "keep": 2803
+        },
+        "action_rates": {
+          "keep": 1.0
+        },
+        "rewrite_benefit": {
+          "accuracy": 0.5986443096682126,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "macro_f1": 0.37446998437848694,
+          "true_positive": 0,
+          "false_positive": 0,
+          "false_negative": 1125,
+          "true_negative": 1678
+        }
+      },
+      "bloom_only": {
+        "hit_at_10": 0.34249018908312523,
+        "actions": {
+          "keep": 2802,
+          "rewrite": 1
+        },
+        "action_rates": {
+          "keep": 0.9996432393863718,
+          "rewrite": 0.00035676061362825543
+        },
+        "rewrite_benefit": {
+          "accuracy": 0.5982875490545844,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "macro_f1": 0.3743303571428571,
+          "true_positive": 0,
+          "false_positive": 1,
+          "false_negative": 1125,
+          "true_negative": 1677
+        }
+      },
+      "joint_policy": {
+        "hit_at_10": 0.6286122012129861,
+        "actions": {
+          "keep": 1232,
+          "rewrite": 1570,
+          "clarify": 1
+        },
+        "action_rates": {
+          "keep": 0.4395290759900107,
+          "rewrite": 0.560114163396361,
+          "clarify": 0.00035676061362825543
+        },
+        "rewrite_benefit": {
+          "accuracy": 0.6207634677131645,
+          "precision": 0.5197452229299363,
+          "recall": 0.7253333333333334,
+          "f1": 0.6055658627087199,
+          "macro_f1": 0.6201996266480735,
+          "true_positive": 816,
+          "false_positive": 754,
+          "false_negative": 309,
+          "true_negative": 924
+        }
+      }
+    },
+    "cross_validated_signal_ablation": {
+      "protocol": "5-fold stratified cross-validation repeated 10 times",
+      "target": "whether the QReCC gold rewrite improves Hit@10",
+      "feature_order": [
+        "token_count",
+        "meaningful_ratio",
+        "context_dependence",
+        "ambiguity",
+        "bm25_confidence",
+        "bm25_margin",
+        "bloom_coverage"
+      ],
+      "results": {
+        "linguistic_only": {
+          "features": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "roc_auc_mean": 0.6744634956171522,
+          "roc_auc_std": 0.02093039348739669,
+          "average_precision_mean": 0.5527700088890638,
+          "positive_f1_mean": 0.5894446110320931,
+          "macro_f1_mean": 0.6252286259917182,
+          "fold_evaluations": 50
+        },
+        "bm25_only": {
+          "features": [
+            4,
+            5
+          ],
+          "roc_auc_mean": 0.52387413843481,
+          "roc_auc_std": 0.02262645405063998,
+          "average_precision_mean": 0.4262479617431133,
+          "positive_f1_mean": 0.40667067489376246,
+          "macro_f1_mean": 0.5146345057274945,
+          "fold_evaluations": 50
+        },
+        "bloom_only": {
+          "features": [
+            6
+          ],
+          "roc_auc_mean": 0.5014897832267236,
+          "roc_auc_std": 0.0012983133444374052,
+          "average_precision_mean": 0.402074142432074,
+          "positive_f1_mean": 0.5735415523915748,
+          "macro_f1_mean": 0.28973482096246583,
+          "fold_evaluations": 50
+        },
+        "linguistic_plus_bm25": {
+          "features": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "roc_auc_mean": 0.674057937297639,
+          "roc_auc_std": 0.020253591577521896,
+          "average_precision_mean": 0.5516776681012285,
+          "positive_f1_mean": 0.5882688862969008,
+          "macro_f1_mean": 0.6251845586129576,
+          "fold_evaluations": 50
+        },
+        "all_signals": {
+          "features": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "roc_auc_mean": 0.6748355737187081,
+          "roc_auc_std": 0.020232624557852266,
+          "average_precision_mean": 0.5521126338149156,
+          "positive_f1_mean": 0.589117428420267,
+          "macro_f1_mean": 0.6258229819711504,
+          "fold_evaluations": 50
+        }
+      }
+    },
+    "paired_comparisons": {
+      "linguistic_only_minus_bm25_original": {
+        "mean_difference": -0.27042454513021763,
+        "confidence_interval_95": [
+          -0.2904031394933999,
+          -0.2504459507670353
+        ],
+        "bootstrap_iterations": 10000,
+        "mcnemar": {
+          "first_only_successes": 123,
+          "second_only_successes": 881,
+          "discordant_pairs": 1004,
+          "p_value_two_sided": 7.492328675632489e-142
+        }
+      },
+      "bm25_only_minus_bm25_original": {
+        "mean_difference": 0.0,
+        "confidence_interval_95": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_iterations": 10000,
+        "mcnemar": {
+          "first_only_successes": 0,
+          "second_only_successes": 0,
+          "discordant_pairs": 0,
+          "p_value_two_sided": 1.0
+        }
+      },
+      "bloom_only_minus_bm25_original": {
+        "mean_difference": 0.0,
+        "confidence_interval_95": [
+          0.0,
+          0.0
+        ],
+        "bootstrap_iterations": 10000,
+        "mcnemar": {
+          "first_only_successes": 0,
+          "second_only_successes": 0,
+          "discordant_pairs": 0,
+          "p_value_two_sided": 1.0
+        }
+      },
+      "joint_policy_minus_bm25_original": {
+        "mean_difference": 0.2861220121298609,
+        "confidence_interval_95": [
+          0.2693542632893329,
+          0.3032465215840171
+        ],
+        "bootstrap_iterations": 10000,
+        "mcnemar": {
+          "first_only_successes": 816,
+          "second_only_successes": 14,
+          "discordant_pairs": 830,
+          "p_value_two_sided": 2.1500066373723003e-220
+        }
+      }
+    },
+    "best_single_signal_by_hit_at_10": "bm25_only",
+    "joint_minus_best_single": {
+      "mean_difference": 0.2861220121298609,
+      "confidence_interval_95": [
+        0.26864074206207633,
+        0.3032465215840171
+      ],
+      "bootstrap_iterations": 10000,
+      "mcnemar": {
+        "first_only_successes": 816,
+        "second_only_successes": 14,
+        "discordant_pairs": 830,
+        "p_value_two_sided": 2.1500066373723003e-220
+      }
+    },
+    "timing": {
+      "scope": "local Python decision and BM25 time; hosted generation is excluded",
+      "sample_size": 300,
+      "sampling": "deterministic random sample with seed 42",
+      "bm25_original": {
+        "mean_ms": 78.87687821445675,
+        "median_ms": 76.20837551075965,
+        "p95_ms": 131.18785172700885
+      },
+      "joint_policy_gold_rewrite_replay": {
+        "mean_ms": 178.8034703648494,
+        "median_ms": 176.561291445978,
+        "p95_ms": 269.7788500285242
+      }
+    },
+    "limitations": [
+      "Gold rewrites test action selection, not newly generated rewrite quality.",
+      "Clarification is unresolved because QReCC has no simulated user response.",
+      "The binary rewrite-benefit label is not a human three-class action label."
+    ]
+  },
+  "layer_two": {
+    "dataset": "BEIR SciFact test split",
+    "queries": 300,
+    "retrieved_pool_ndcg_at_10": {
+      "bm25_only": 0.6725345275626968,
+      "rerank_all": 0.7126974101605379,
+      "selective_margin_rule": 0.7189384162869439
+    },
+    "paired_comparisons": {
+      "selective_minus_bm25": {
+        "mean_difference": 0.04640388872424704,
+        "confidence_interval_95": [
+          0.02854607112154588,
+          0.06500334225351184
+        ],
+        "bootstrap_iterations": 10000,
+        "sign_flip_p_value_two_sided": 9.999000099990002e-05
+      },
+      "selective_minus_rerank_all": {
+        "mean_difference": 0.006241006126406109,
+        "confidence_interval_95": [
+          -0.008341999972180039,
+          0.021458671125095908
+        ],
+        "bootstrap_iterations": 10000,
+        "sign_flip_p_value_two_sided": 0.412958704129587
+      }
+    },
+    "hosted_usage_replay": {
+      "reranking_calls": 130,
+      "reranking_call_rate": 0.43333333333333335,
+      "reranking_call_reduction_vs_always": 0.5666666666666667,
+      "selected_tokens": 188619,
+      "always_rerank_tokens": 439147,
+      "token_reduction_vs_always": 0.5704877865498341,
+      "average_hosted_latency_across_all_queries_seconds": 1.144133333333334,
+      "average_latency_per_selected_call_seconds": 2.640307692307694
+    },
+    "standard_ndcg_context_from_published_analysis": {
+      "bm25_only": 0.663454305453947,
+      "rerank_all": 0.7015109698689124,
+      "rerank_all_gain_ci95": [
+        0.014238120220439769,
+        0.06189715771192958
+      ],
+      "held_out_selective_margin_rule": 0.7023,
+      "held_out_selective_call_rate": 0.43
+    },
+    "rerank_benefit_feature_ablation": {
+      "BM25 scores only": {
+        "auc": 0.7046982787489118,
+        "auc_std": 0.00839756346622515,
+        "avg_precision": 0.3724152417282573
+      },
+      "Query features only": {
+        "auc": 0.6226809992632776,
+        "auc_std": 0.0172588081118925,
+        "avg_precision": 0.285560306866402
+      },
+      "Scores + query features": {
+        "auc": 0.6811265153037305,
+        "auc_std": 0.015149636752196168,
+        "avg_precision": 0.33795386583351733
+      }
+    },
+    "limitations": [
+      "Stored reranker outputs are replayed; no new hosted call is made.",
+      "Retrieved-pool NDCG is used for paired selective-policy tests because per-query full qrels were removed during repository cleanup.",
+      "The published standard NDCG values remain the correct cross-system results."
+    ]
+  }
+}

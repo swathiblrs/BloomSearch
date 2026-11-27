@@ -184,13 +184,32 @@ def search(request: SearchRequest) -> JSONResponse:
             else request.collection
         )
         index = STORE.load_index(selected_collection)
-        policy = JointActionPolicy()
-        layer_one = policy.decide_layer_one(index, request.query, context=request.context)
+        margin_threshold = float(os.getenv("BLOOMSEARCH_RERANK_MARGIN_THRESHOLD", "3.84"))
+        policy = JointActionPolicy.runtime(rerank_margin_threshold=margin_threshold)
         api_fields = (request.api_base, request.api_key, request.model)
         if any(api_fields) and not all(api_fields):
             raise ValueError("api_base, api_key, and model must be supplied together")
+        client = None
+        if all(api_fields):
+            # The credential exists only for this request and is never persisted.
+            validate_public_provider_url(str(request.api_base))
+            client = HostedModelClient(
+                base_url=str(request.api_base),
+                api_key=request.api_key.get_secret_value(),  # type: ignore[union-attr]
+                model=request.model,
+            )
+
+        query_action = policy.apply_layer_one(
+            index,
+            request.query,
+            context=request.context,
+            hosted_client=client,
+        )
+        layer_one = query_action.decision
         if layer_one.action == "clarify":
-            question = policy.clarification_question(request.query)
+            question = layer_one.clarification_question or policy.clarification_question(
+                request.query
+            )
             return JSONResponse(
                 {
                     "mode": "clarification",
@@ -207,91 +226,63 @@ def search(request: SearchRequest) -> JSONResponse:
                     },
                 }
             )
-        if all(api_fields):
-            # The credential exists only for this request and is never persisted.
-            validate_public_provider_url(str(request.api_base))
-            client = HostedModelClient(
-                base_url=str(request.api_base),
-                api_key=request.api_key.get_secret_value(),  # type: ignore[union-attr]
-                model=request.model,
-            )
+        effective_query = query_action.effective_query
+        candidates, skipped = index.search_bm25(effective_query, max(20, request.limit))
+        layer_two = policy.decide_layer_two(candidates)
+        hosted_calls = int(client is not None and query_action.rewrite is not None)
+        if client is not None and layer_two.should_rerank:
             engine = BloomSearchEngine(index, client)
-            hosted_calls = 0
-            effective_query = request.query
-            if layer_one.action == "rewrite":
-                effective_query = engine.rewrite_query(request.query)
-                hosted_calls += 1
-            candidates, skipped = index.search_bm25(effective_query, max(20, request.limit))
-            layer_two = policy.decide_layer_two(candidates)
-            if layer_two.should_rerank:
-                ranked = engine.rerank(effective_query, candidates, limit=request.limit)
-                hosted_calls += 1
-                results = [asdict(result) for result in ranked]
-                mode = "hosted-selective"
-            else:
-                filtered = [
-                    (document, score)
-                    for document, score in candidates[: request.limit]
-                    if has_meaningful_match(effective_query, document)
-                ]
-                results = [
-                    {
-                        "document": asdict(document),
-                        "bm25_score": score,
-                        "relevance_score": None,
-                        "explanation": index.snippet(document, effective_query),
-                    }
-                    for document, score in filtered
-                ]
-                mode = "hosted-not-needed" if hosted_calls == 0 else "hosted-rewrite-only"
-            return JSONResponse(
+            ranked = engine.rerank(effective_query, candidates, limit=request.limit)
+            hosted_calls += 1
+            results = [asdict(result) for result in ranked]
+            mode = "hosted-selective"
+        else:
+            filtered = [
+                (document, score)
+                for document, score in candidates[: request.limit]
+                if has_meaningful_match(effective_query, document)
+            ]
+            results = [
                 {
-                    "mode": mode,
-                    "collection": selected_collection,
-                    "query": request.query,
-                    "rewritten_query": effective_query,
-                    "segments_skipped": skipped,
-                    "results": results,
-                    "nlp_policy": {
-                        "layer_one": layer_one.to_dict(),
-                        "layer_two": layer_two.to_dict(),
-                        "hosted_calls": hosted_calls,
-                    },
+                    "document": asdict(document),
+                    "bm25_score": score,
+                    "relevance_score": None,
+                    "explanation": index.snippet(document, effective_query),
                 }
-            )
+                for document, score in filtered
+            ]
+            if client is None:
+                mode = "lexical"
+            elif hosted_calls:
+                mode = "hosted-rewrite-only"
+            else:
+                mode = "hosted-not-needed"
 
-        results, skipped = index.search_bm25(request.query, request.limit)
-        results = [
-            (document, score)
-            for document, score in results
-            if has_meaningful_match(request.query, document)
-        ]
-        layer_two = policy.decide_layer_two(results)
         return JSONResponse(
             {
-                "mode": "lexical",
+                "mode": mode,
                 "collection": selected_collection,
                 "query": request.query,
-                "rewritten_query": request.query,
+                "rewritten_query": effective_query,
                 "segments_skipped": skipped,
-                "results": [
-                    {
-                        "document": asdict(document),
-                        "bm25_score": score,
-                        "relevance_score": None,
-                        "explanation": index.snippet(document, request.query),
-                    }
-                    for document, score in results
-                ],
+                "results": results,
                 "nlp_policy": {
                     "layer_one": layer_one.to_dict(),
                     "layer_two": layer_two.to_dict(),
-                    "hosted_calls": 0,
+                    "hosted_calls": hosted_calls,
+                    "rewrite": (
+                        query_action.rewrite.to_dict() if query_action.rewrite is not None else None
+                    ),
                     "execution_note": (
                         "A hosted API was not supplied, so rewrite and rerank recommendations "
                         "fall back to lexical BM25."
-                        if layer_one.action == "rewrite" or layer_two.should_rerank
-                        else "The policy selected the free BM25 path."
+                        if client is None
+                        and (layer_one.action == "rewrite" or layer_two.should_rerank)
+                        else (
+                            "The policy selectively executed hosted NLP."
+                            if hosted_calls
+                            else "The policy selected the BM25 path."
+                        )
                     ),
                 },
             }

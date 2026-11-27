@@ -12,9 +12,11 @@ from dataclasses import asdict, dataclass
 import json
 import math
 from pathlib import Path
-from typing import Sequence
+from typing import Protocol, Sequence
 
+from .ambiguity import AmbiguityDetector, AmbiguityResult, load_ambiguity_detector
 from .index import SearchIndex, STOP_WORDS, tokenize
+from .rewrite import HostedRewriteClient, RewriteResult, rewrite_query
 
 
 LAYER_ONE_ACTIONS = ("keep", "rewrite", "clarify")
@@ -48,6 +50,7 @@ class ActionDecision:
     reason: str
     source: str
     features: PolicyFeatures
+    clarification_question: str | None = None
 
     def to_dict(self) -> dict[str, object]:
         return {
@@ -56,6 +59,7 @@ class ActionDecision:
             "reason": self.reason,
             "source": self.source,
             "features": {key: round(value, 4) for key, value in asdict(self.features).items()},
+            "clarification_question": self.clarification_question,
         }
 
 
@@ -64,13 +68,73 @@ class RerankDecision:
     should_rerank: bool
     confidence: float
     reason: str
+    source: str = "safe_baseline"
+    bm25_margin: float | None = None
 
     def to_dict(self) -> dict[str, object]:
         return {
             "action": "rerank" if self.should_rerank else "return_bm25",
             "confidence": round(self.confidence, 4),
             "reason": self.reason,
+            "source": self.source,
+            "bm25_margin": None if self.bm25_margin is None else round(self.bm25_margin, 4),
         }
+
+
+@dataclass(frozen=True, slots=True)
+class QueryActionResult:
+    """Result of selecting and, when possible, executing the layer-one action."""
+
+    decision: ActionDecision
+    effective_query: str
+    rewrite: RewriteResult | None
+
+
+class RerankPredictor(Protocol):
+    def predict(self, candidates: Sequence[tuple[object, float]]) -> RerankDecision: ...
+
+
+class BM25MarginRerankPredictor:
+    """SciFact-derived rule: rerank when BM25's two leaders are close.
+
+    The default raw-score cutoff corresponds to roughly the lowest-margin 43%
+    of the team's SciFact run. It is configurable because BM25 score scale can
+    change across collections.
+    """
+
+    def __init__(self, margin_threshold: float = 3.84) -> None:
+        if margin_threshold < 0:
+            raise ValueError("margin_threshold cannot be negative")
+        self.margin_threshold = float(margin_threshold)
+
+    def predict(self, candidates: Sequence[tuple[object, float]]) -> RerankDecision:
+        if len(candidates) < 2:
+            return RerankDecision(
+                False,
+                0.9,
+                "fewer than two candidates can be reordered",
+                "scifact_margin_rule",
+                None,
+            )
+        margin = max(0.0, float(candidates[0][1]) - float(candidates[1][1]))
+        should_rerank = margin <= self.margin_threshold
+        if self.margin_threshold == 0:
+            confidence = 1.0 if margin > 0 else 0.5
+        else:
+            distance = abs(margin - self.margin_threshold) / self.margin_threshold
+            confidence = min(0.99, 0.5 + 0.5 * distance)
+        reason = (
+            "the BM25 top-two score margin is within the SciFact reranking threshold"
+            if should_rerank
+            else "the BM25 leader is separated by more than the SciFact reranking threshold"
+        )
+        return RerankDecision(
+            should_rerank,
+            confidence,
+            reason,
+            "scifact_margin_rule",
+            margin,
+        )
 
 
 class SoftmaxActionClassifier:
@@ -171,11 +235,55 @@ class SoftmaxActionClassifier:
 class JointActionPolicy:
     """Choose layer-one query handling and layer-two reranking actions."""
 
-    def __init__(self, classifier: SoftmaxActionClassifier | None = None) -> None:
+    def __init__(
+        self,
+        classifier: SoftmaxActionClassifier | None = None,
+        *,
+        ambiguity_detector: AmbiguityDetector | None = None,
+        rerank_predictor: RerankPredictor | None = None,
+    ) -> None:
         self.classifier = classifier
+        self.ambiguity_detector = ambiguity_detector
+        self.rerank_predictor = rerank_predictor
 
-    @staticmethod
-    def extract_features(index: SearchIndex, query: str, context: str = "") -> PolicyFeatures:
+    @classmethod
+    def runtime(
+        cls,
+        *,
+        ambiguity_model_path: str | Path | None = None,
+        rerank_margin_threshold: float = 3.84,
+    ) -> "JointActionPolicy":
+        """Build the application policy with available trained research components."""
+        if ambiguity_model_path is None:
+            ambiguity_model_path = (
+                Path(__file__).resolve().parents[1]
+                / "ambiguity"
+                / "ambiguity_detector.joblib"
+            )
+        return cls(
+            ambiguity_detector=load_ambiguity_detector(ambiguity_model_path),
+            rerank_predictor=BM25MarginRerankPredictor(rerank_margin_threshold),
+        )
+
+    def ambiguity_result(self, query: str, heuristic_score: float) -> AmbiguityResult:
+        if self.ambiguity_detector is None:
+            return AmbiguityResult(
+                heuristic_score,
+                heuristic_score >= 0.6,
+                "safe_ambiguity_baseline",
+            )
+        try:
+            return self.ambiguity_detector.predict(query)
+        except (IndexError, TypeError, ValueError):
+            return AmbiguityResult(
+                heuristic_score,
+                heuristic_score >= 0.6,
+                "safe_ambiguity_fallback",
+            )
+
+    def _extract_features_and_ambiguity(
+        self, index: SearchIndex, query: str, context: str = ""
+    ) -> tuple[PolicyFeatures, AmbiguityResult]:
         terms = tokenize(query)
         unique_terms = tuple(dict.fromkeys(terms))
         meaningful = [term for term in terms if term not in STOP_WORDS]
@@ -184,7 +292,10 @@ class JointActionPolicy:
         context_dependence = min(1.0, context_hits / max(1, len(terms) / 3))
         underspecified = 1.0 if len(meaningful) <= 1 else 0.0
         missing_context = 0.0 if context.strip() else context_dependence
-        ambiguity = min(1.0, 0.55 * underspecified + 0.35 * missing_context + 0.1 * marker_hits)
+        heuristic_ambiguity = min(
+            1.0, 0.55 * underspecified + 0.35 * missing_context + 0.1 * marker_hits
+        )
+        ambiguity_result = self.ambiguity_result(query, heuristic_ambiguity)
 
         initial, _ = index.search_bm25(query, limit=2)
         top_score = initial[0][1] if initial else 0.0
@@ -202,20 +313,27 @@ class JointActionPolicy:
         else:
             bloom_coverage = 0.0
 
-        return PolicyFeatures(
-            token_count=min(1.0, len(terms) / 12.0),
-            meaningful_ratio=len(meaningful) / max(1, len(terms)),
-            context_dependence=context_dependence,
-            ambiguity=ambiguity,
-            bm25_confidence=bm25_confidence,
-            bm25_margin=max(0.0, min(1.0, bm25_margin)),
-            bloom_coverage=bloom_coverage,
+        return (
+            PolicyFeatures(
+                token_count=min(1.0, len(terms) / 12.0),
+                meaningful_ratio=len(meaningful) / max(1, len(terms)),
+                context_dependence=context_dependence,
+                ambiguity=ambiguity_result.score,
+                bm25_confidence=bm25_confidence,
+                bm25_margin=max(0.0, min(1.0, bm25_margin)),
+                bloom_coverage=bloom_coverage,
+            ),
+            ambiguity_result,
         )
+
+    def extract_features(self, index: SearchIndex, query: str, context: str = "") -> PolicyFeatures:
+        features, _ = self._extract_features_and_ambiguity(index, query, context)
+        return features
 
     def decide_layer_one(
         self, index: SearchIndex, query: str, *, context: str = ""
     ) -> ActionDecision:
-        features = self.extract_features(index, query, context)
+        features, ambiguity = self._extract_features_and_ambiguity(index, query, context)
         if self.classifier is not None and self.classifier.fitted:
             action, confidence = self.classifier.predict(features.values())
             return ActionDecision(
@@ -224,15 +342,19 @@ class JointActionPolicy:
                 "trained action classifier selected the highest-probability action",
                 "trained_classifier",
                 features,
+                self.clarification_question(query) if action == "clarify" else None,
             )
 
-        if features.ambiguity >= 0.6 and features.bm25_confidence < 0.45:
+        if ambiguity.needs_clarification and (
+            features.bm25_confidence < 0.45 or features.bloom_coverage < 0.5
+        ):
             return ActionDecision(
                 "clarify",
                 max(features.ambiguity, 1.0 - features.bm25_confidence),
-                "the query is underspecified and retrieval confidence is low",
-                "safe_baseline",
+                "the ambiguity detector and retrieval evidence indicate clarification is needed",
+                ambiguity.source,
                 features,
+                self.clarification_question(query),
             )
         if (
             features.context_dependence >= 0.35
@@ -254,8 +376,33 @@ class JointActionPolicy:
             features,
         )
 
-    @staticmethod
-    def decide_layer_two(candidates: Sequence[tuple[object, float]]) -> RerankDecision:
+    def apply_layer_one(
+        self,
+        index: SearchIndex,
+        query: str,
+        *,
+        context: str = "",
+        hosted_client: HostedRewriteClient | None = None,
+    ) -> QueryActionResult:
+        """Choose keep/rewrite/clarify and execute an allowed hosted rewrite."""
+        decision = self.decide_layer_one(index, query, context=context)
+        if decision.action != "rewrite":
+            return QueryActionResult(decision, query, None)
+        result = rewrite_query(
+            query,
+            context=context,
+            hosted_client=hosted_client,
+            force_rewrite=True,
+            prompt_version="improved",
+        )
+        return QueryActionResult(decision, result.rewritten_query, result)
+
+    def decide_layer_two(self, candidates: Sequence[tuple[object, float]]) -> RerankDecision:
+        if self.rerank_predictor is not None:
+            try:
+                return self.rerank_predictor.predict(candidates)
+            except (IndexError, TypeError, ValueError):
+                pass
         if len(candidates) < 2:
             return RerankDecision(False, 0.9, "fewer than two candidates can be reordered")
         top_score = max(0.0, candidates[0][1])
@@ -269,7 +416,13 @@ class JointActionPolicy:
             if should_rerank
             else "BM25 has a sufficiently clear leading result"
         )
-        return RerankDecision(should_rerank, uncertainty if should_rerank else 1.0 - uncertainty, reason)
+        return RerankDecision(
+            should_rerank,
+            uncertainty if should_rerank else 1.0 - uncertainty,
+            reason,
+            "safe_rerank_baseline",
+            top_score - second_score,
+        )
 
     @staticmethod
     def clarification_question(query: str) -> str:

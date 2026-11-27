@@ -1,0 +1,89 @@
+{
+  "evaluation": "Integrated JointActionPolicy offline replay",
+  "new_hosted_api_calls": 0,
+  "layer_one": {
+    "dataset": "QReCC held-out retrieval set",
+    "evaluation_type": "offline action replay with human gold rewrites",
+    "limitations": [
+      "Gold rewrites measure action-selection potential, not hosted rewrite quality.",
+      "QReCC has no keep/rewrite/clarify three-class labels; Macro-F1 is not reported.",
+      "Clarification is treated as unresolved because the dataset has no user response.",
+      "Layer 1 and Layer 2 use different datasets, so no combined quality score is claimed."
+    ],
+    "baselines": {
+      "bm25_original_hit_at_10": 0.34249018908312523,
+      "always_gold_rewrite_hit_at_10": 0.7356403853014627,
+      "previous_selective_hit_at_10": 0.5865144488048519,
+      "previous_selective_rewrite_rate": 0.47591865858009275
+    },
+    "integrated_policy": {
+      "queries": 2803,
+      "hit_at_10_gold_rewrite_replay": 0.6286122012129861,
+      "actions": {
+        "keep": 1232,
+        "rewrite": 1570,
+        "clarify": 1
+      },
+      "action_rates": {
+        "keep": 0.4395290759900107,
+        "rewrite": 0.560114163396361,
+        "clarify": 0.00035676061362825543
+      },
+      "decision_sources": {
+        "safe_baseline": 2802,
+        "trained_ambiguity_detector": 1
+      },
+      "rewrite_benefit": {
+        "accuracy": 0.6207634677131645,
+        "precision": 0.5197452229299363,
+        "recall": 0.7253333333333334,
+        "f1": 0.6055658627087199,
+        "macro_f1": 0.6201996266480735,
+        "true_positive": 816,
+        "false_positive": 754,
+        "false_negative": 309,
+        "true_negative": 924
+      },
+      "hosted_rewrite_call_rate_if_api_supplied": 0.560114163396361,
+      "clarification_unresolved_rate": 0.00035676061362825543
+    }
+  },
+  "layer_two": {
+    "dataset": "BEIR SciFact test split",
+    "evaluation_type": "offline replay of stored hosted-reranker outputs",
+    "queries": 300,
+    "margin_threshold": 3.84,
+    "metric_note": "Per-query stored NDCG is normalized by the ideal ordering of retrieved documents; use the published standard-NDCG results for cross-system reporting.",
+    "retrieved_pool_ndcg_at_10": {
+      "bm25_only": 0.6725345275626968,
+      "rerank_all": 0.7126974101605379,
+      "integrated_selective": 0.7189384162869439
+    },
+    "rerank_benefit": {
+      "accuracy": 0.65,
+      "precision": 0.3384615384615385,
+      "recall": 0.6984126984126984,
+      "f1": 0.455958549222798,
+      "macro_f1": 0.59898664561877,
+      "true_positive": 44,
+      "false_positive": 86,
+      "false_negative": 19,
+      "true_negative": 151
+    },
+    "reranking_calls": 130,
+    "reranking_call_rate": 0.43333333333333335,
+    "reranking_call_reduction": 0.5666666666666667,
+    "token_reduction": 0.5704877865498341,
+    "selected_total_tokens": 188619,
+    "all_queries_total_tokens": 439147,
+    "average_latency_per_selected_query_seconds": 2.640307692307694,
+    "average_latency_across_all_queries_seconds": 1.144133333333334,
+    "average_ndcg_gain_per_selected_call": 0.10708589705595471,
+    "published_standard_ndcg_context": {
+      "bm25_only": 0.663454305453947,
+      "rerank_all": 0.7015109698689124,
+      "held_out_selective_rule": 0.7023,
+      "held_out_selective_call_rate": 0.43
+    }
+  }
+}

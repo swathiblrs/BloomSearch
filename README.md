@@ -167,11 +167,21 @@ Core stack:
 - Extracts normalized query-length, meaningful-term, context-dependence, ambiguity,
   BM25-confidence, score-margin, and Bloom-coverage features
 - Selects **keep**, **rewrite**, or **clarify** before retrieval
-- Uses a separate uncertainty gate to select **rerank** or **return BM25** afterward
+- Loads the team's TF-IDF/logistic-regression ambiguity detector when the optional
+  ML dependencies are available; the web installation includes them, while the
+  dependency-free core uses the safe heuristic fallback
+- Executes the hosted rewrite only after the shared policy selects **rewrite**, then
+  applies the intent-preservation guard before using it
+- Uses the SciFact-derived BM25 top-two margin rule to select **rerank** or
+  **return BM25** afterward
 - Returns structured decision metadata for component-level evaluation
 - Falls back safely to free lexical retrieval when a hosted API is not supplied
 - Includes a dependency-free trainable softmax classifier with JSON save/load support
-- Uses a conservative rule-based baseline until a classifier is trained on labeled public data
+- Exposes each component source and BM25 margin in the API response for evaluation
+
+The reranking margin defaults to `3.84`, which corresponds to approximately the
+lowest-margin 43% of the SciFact experiment. Because raw BM25 score scales vary
+by collection, it can be calibrated with `BLOOMSEARCH_RERANK_MARGIN_THRESHOLD`.
 
 ### 🧠 API-Hosted LLM Reranking
 
@@ -185,146 +195,39 @@ Core stack:
 
 ## Conversational Query Rewriting and Intent Preservation
 
-### Overview
+When the joint action policy selects **rewrite**, BloomSearch calls the
+user-supplied hosted model API, validates the proposed rewrite with the intent
+guard, and falls back to the original query if validation fails. No rewriting
+model is downloaded or executed by the application.
 
-This component improves information retrieval by converting context-dependent conversational questions into standalone search queries while preserving the user's original intent.
+The intent guard checks question form, named entities, dates, numbers,
+comparisons, constraints, excessive expansion, multiple-sentence output, and
+prompt artifacts. These rules reduce obvious intent drift but cannot guarantee
+semantic equivalence.
 
-The system uses the QReCC dataset, a trained rewrite-benefit predictor, language-model-based query rewriting, and rule-based intent validation. It compares BM25 retrieval performance before and after rewriting.
+QReCC is used only for offline research on rewrite benefit. Raw data, generated
+indexes, trained artifacts, and per-query result dumps are not tracked. Install
+the optional research stack with `python -m pip install -e ".[research]"` and
+follow `data/qrecc/README.md` to reproduce the experiments.
 
-### 1. Dataset Preparation
+Historical offline results are consolidated in
+`research/QUERY_REWRITE_RESULTS.md`. They are not hosted-provider results. A
+live hosted-model benchmark remains future work.
 
-We use the **QReCC (Question Rewriting in Conversational Context)** dataset to evaluate conversational query rewriting.
+The integrated zero-new-API-cost replay is documented in
+`research/INTEGRATED_POLICY_EVALUATION.md`, with machine-readable results in
+`research/results/integrated_policy_replay.json`.
 
-- Prepared 3,000 conversational queries.
-- Constructed a test-specific retrieval index.
-- Evaluated 2,803 queries with usable document mappings.
-- Used conversation history to help resolve pronouns and references.
+The remaining three-class action, semantic intent-preservation, and
+clarification metrics use the pilot protocol and analysis tools in
+`research/human_study/`. Automatic retrieval-harm proxy results are stored in
+`research/results/remaining_metrics.json`.
 
-### 2. Rewrite-Benefit Prediction
-
-A trained machine-learning classifier predicts whether rewriting a query is likely to improve retrieval.
-
-The predictor uses text features and numerical features derived from the query and conversation context.
-
-Queries with low predicted benefit can skip rewriting, reducing unnecessary model calls. Context-dependent questions containing pronouns or references may still be rewritten.
-
-The current rewrite-benefit threshold is **0.50**.
-
-### 3. Query Rewriting
-
-The system supports two rewriting backends:
-
-**Local model**
-
-- Uses `google/flan-t5-small` through Hugging Face Transformers.
-- Supports reproducible, offline experiments.
-- Uses prompts designed to preserve question meaning and resolve conversational references.
-
-**Hosted API**
-
-- Uses the existing `HostedModelClient` interface.
-- Supports OpenAI-compatible chat completion endpoints.
-- Accepts user-supplied API configuration.
-- Requests a JSON response containing `rewritten_query`.
-
-Both rewriting paths can use the trained benefit predictor and intent-preservation checks through `rewrite_query()`.
-
-The hosted rewriting path has been validated with a simulated API client. Live provider testing remains separate.
-
-### 4. Intent Preservation
-
-The `intent_guard.py` module checks whether a rewritten query changes important information from the original question or conversation context.
-
-The validation includes:
-
-- **Named entities:** Detects missing names and certain unsupported names introduced from conversation context.
-- **Dates and numbers:** Detects missing original dates and numerical values.
-- **Locations:** Detects certain location substitutions through named-entity checks.
-- **Constraints:** Checks for selected added restrictions and removed comparisons.
-- **Question meaning:** Detects changes in question type or question form.
-- **Rewrite quality:** Rejects excessively long responses, multiple-sentence outputs, prompt artifacts, and certain narrowed questions.
-
-Unsafe rewrites are rejected, and the original query is retained for retrieval.
-
-These checks are heuristic and do not guarantee detection of every possible semantic change.
-
-### 5. Retrieval Evaluation
-
-Retrieval performance was measured using BM25 with a cutoff of five documents.
-
-**Final local-model evaluation**
-
-| Metric | Original Queries | System Rewrites |
-|---|---:|---:|
-| Hit@5 | 33.39% | 42.35% |
-| MRR@5 | 0.2425 | 0.2863 |
-
-Additional results:
-
-- Total evaluated queries: **2,803**
-- Accepted rewrites: **766**
-- Accepted rewrite rate: **27.3%**
-- Hit@5 improvement: **8.96 percentage points**
-- MRR@5 improvement: **0.0438**
-
-The results demonstrate that selective conversational query rewriting improved retrieval performance on the evaluated QReCC test collection.
-
-These measurements were obtained using the local rewriting model and should not be interpreted as hosted API evaluation results.
-
-### 6. Testing
-
-Automated unit tests validate hosted rewriting integration and intent preservation.
-
-Test cases include:
-
-- Accepting a valid context-dependent rewrite.
-- Rejecting rewrites that change dates.
-- Rejecting unsupported person substitutions.
-- Rejecting tested location and constraint changes.
-
-Run the hosted rewriting tests:
-
-```bash
-python -m unittest tests.test_hosted_rewrite -v
-```
-
-Run the intent-preservation tests:
-
-```bash
-python -m unittest tests.test_intent_guard -v
-```
-
-Run the complete project test suite:
+Run the complete dependency-free core test suite with:
 
 ```bash
 python -m unittest discover -s tests -v
 ```
-
-**Latest test results:**
-
-- 31 tests executed.
-- 31 tests passed.
-- 0 failures.
-
-### 7. Relevant Implementation Files
-
-| File | Description |
-|---|---|
-| `bloom_search/rewrite.py` | Rewrite-benefit prediction and local/hosted rewriting |
-| `bloom_search/intent_guard.py` | Intent-preservation validation |
-| `bloom_search/api.py` | Hosted language-model API client |
-| `bloom_search/engine.py` | Hosted rewriting and retrieval orchestration |
-| `tests/test_hosted_rewrite.py` | Hosted rewriting and safety tests |
-| `tests/test_intent_guard.py` | Context-aware entity-preservation tests |
-| `data/qrecc/system_rewrite_evaluation_final.json` | Final local-model retrieval evaluation results |
-
-### 8. Limitations and Future Improvements
-
-The current implementation uses heuristic intent-preservation rules, which may miss subtle entity substitutions, changed constraints, or newly introduced dates and numbers.
-
-Future improvements include more comprehensive named-entity recognition, stronger semantic consistency checks, and evaluating hosted-model rewriting on the same retrieval benchmark.
-
-The hosted API path has passed mock-client tests, but live hosted-provider connectivity and end-to-end evaluation have not yet been verified.
 
 ### 🧩 LoRA and QLoRA Support
 
@@ -380,14 +283,17 @@ bloom_filter/
  └── __main__.py          # python -m bloom_filter entry point
 
 bloom_search/
+ ├── ambiguity.py         # Optional trained ambiguity-detector runtime adapter
  ├── collections.py       # Persistent named document collections
  ├── crawler.py           # Bounded, domain-limited, robots-aware crawler
  ├── api.py               # Provider-neutral hosted-model API client
  ├── cli.py               # Index build, statistics, and search commands
  ├── engine.py            # Query rewriting and candidate reranking workflow
  ├── index.py             # Segmented index, deduplication, tokenization, and BM25
+ ├── intent_guard.py      # Rejects unsafe hosted query rewrites
  ├── nlp_policy.py        # Joint keep/rewrite/clarify/rerank action policy
  ├── research.py          # Learned cascade, benchmark, and evaluation metrics
+ ├── rewrite.py           # Hosted-only conversational query rewriting
  ├── web.py               # FastAPI routes and per-request user API configuration
  └── __main__.py          # python -m bloom_search entry point
 
@@ -404,13 +310,19 @@ tests/
  ├── test_bloom_filter.py # Data-structure and persistence tests
  ├── test_bloom_search.py # Index, BM25, Bloom skipping, and API workflow tests
  ├── test_crawler.py      # Offline crawler, collection, and search tests
+ ├── test_hosted_rewrite.py # Hosted rewriting and safe-fallback tests
+ ├── test_intent_guard.py # Intent-preservation tests
  ├── test_nlp_policy.py   # Action policy and trainable classifier tests
  └── test_research.py     # Counting filter and learned-cascade tests
 
 research/
  ├── README.md            # Research question, baselines, and limitations
+ ├── QUERY_REWRITE_RESULTS.md # Consolidated historical rewriting results
  ├── RESULTS.md           # Human-readable latest result
- └── results/latest.json  # Reproducible machine-readable metrics
+ └── results/             # Reproducible aggregate machine-readable metrics
+
+data/qrecc/
+ └── README.md            # QReCC download and reproduction instructions
 ```
 
 ## 🚀 Getting Started
