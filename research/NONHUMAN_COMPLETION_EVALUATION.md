@@ -17,6 +17,11 @@ python research/evaluate_nonhuman_completion.py --measure-latency
 The machine-readable result is
 `research/results/nonhuman_completion.json`.
 
+The historical QReCC Hit@10 summary below is retained for the original action
+ablation. The authoritative RQ2 retrieval values were later recomputed from
+the checked-in deduplicated test index and mapping over 2,765 present targets;
+see [`FINAL_RESEARCH_QUESTION_RESULTS.md`](FINAL_RESEARCH_QUESTION_RESULTS.md).
+
 ## Layer 1: QReCC Query Processing
 
 The quality analysis uses 2,803 held-out QReCC queries. When a policy selects

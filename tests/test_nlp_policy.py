@@ -46,6 +46,18 @@ class JointActionPolicyTests(unittest.TestCase):
         self.assertEqual(decision.action, "keep")
         self.assertGreater(decision.features.bm25_confidence, 0)
 
+    def test_layer_one_can_reuse_precomputed_bm25_candidates(self):
+        query = "How does BM25 ranking work?"
+        candidates, _ = self.index.search_bm25(query, limit=10)
+        ordinary = self.policy.decide_layer_one(self.index, query)
+        reused = self.policy.decide_layer_one(
+            self.index,
+            query,
+            initial_candidates=candidates,
+        )
+        self.assertEqual(reused.action, ordinary.action)
+        self.assertEqual(reused.features, ordinary.features)
+
     def test_underspecified_query_requests_clarification(self):
         decision = self.policy.decide_layer_one(self.index, "What is it?")
         self.assertEqual(decision.action, "clarify")

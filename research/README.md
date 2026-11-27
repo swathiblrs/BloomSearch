@@ -34,3 +34,9 @@ completed two-participant evaluation of intent preservation, clarification
 usefulness, perceived task success, trust, and action agreement is documented
 in [`HUMAN_STUDY_RESULTS.md`](HUMAN_STUDY_RESULTS.md).
 
+The authoritative synthesis for the four official NLP research questions is
+[`FINAL_RESEARCH_QUESTION_RESULTS.md`](FINAL_RESEARCH_QUESTION_RESULTS.md).
+It includes recomputed QReCC Recall@10 and NDCG@10, SciFact retrieval results,
+the hierarchical action-policy evaluation, call/token/latency trade-offs, and
+the remaining paired human baseline required for the exact semantic RQ3 claim.
+

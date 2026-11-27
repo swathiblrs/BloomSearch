@@ -119,5 +119,36 @@ python research/human_study/analyze_responses.py \
 P01 and P02 completed all 30 items. The final machine-readable metrics are in
 `research/results/human_study.json`, and their interpretation, research-
 question conclusions, and limitations are documented in
-`research/HUMAN_STUDY_RESULTS.md`. The two-participant pilot is complete; no
+`research/HUMAN_STUDY_RESULTS.md`. The two-participant pilot is complete. No
 P03 response is required by the study protocol.
+
+## RQ3 always-rewrite extension
+
+The original pilot rated intent preservation only when the selective policy
+showed a rewrite. To answer the official comparison against rewriting every
+query, P01 and P02 must complete one short Phase C over the 20 QReCC study
+items. This is an extension for the same participants, not a P03 study.
+
+Generate the packets with:
+
+```bash
+python research/human_study/prepare_always_rewrite_baseline.py P01
+python research/human_study/prepare_always_rewrite_baseline.py P02
+```
+
+Each participant rates `always_rewrite_preserves_intent` as `yes` or `no` for
+every item without changing their earlier answers. After both response sheets
+are returned, run:
+
+```bash
+python research/human_study/analyze_always_rewrite_baseline.py \
+  research/human_study/participant_packets/P01_phase_c_always_rewrite_responses.csv \
+  research/human_study/participant_packets/P02_phase_c_always_rewrite_responses.csv \
+  --original-responses \
+  research/human_study/participant_packets/P01_responses.csv \
+  research/human_study/participant_packets/P02_responses.csv
+```
+
+This produces the paired selective-versus-always semantic harmful-rewrite
+rates and an exact McNemar comparison. Do not invent or pre-fill Phase C
+responses.

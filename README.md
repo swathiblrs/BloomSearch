@@ -86,6 +86,13 @@ BloomSearch investigates this question through a cascade that progressively narr
 
 The project measures the trade-off between efficiency and retrieval quality using segment checks, searched-document count, latency, Bloom-filter memory, Recall@10, and estimated hosted-model input tokens. The current bundled results come from a deterministic synthetic benchmark and are preliminary rather than publication-level evidence.
 
+The NLP course evaluation uses four operational research questions covering
+two-stage action selection, retrieval effectiveness, intent preservation, and
+efficiency. Their final evidence and conclusions are reported in
+[`research/FINAL_RESEARCH_QUESTION_RESULTS.md`](research/FINAL_RESEARCH_QUESTION_RESULTS.md),
+with machine-readable results in
+`research/results/final_research_questions.json`.
+
 ## 🏗️ Architecture Overview
 
 High-level search workflow:

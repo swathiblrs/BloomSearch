@@ -282,7 +282,11 @@ class JointActionPolicy:
             )
 
     def _extract_features_and_ambiguity(
-        self, index: SearchIndex, query: str, context: str = ""
+        self,
+        index: SearchIndex,
+        query: str,
+        context: str = "",
+        initial_candidates: Sequence[tuple[object, float]] | None = None,
     ) -> tuple[PolicyFeatures, AmbiguityResult]:
         terms = tokenize(query)
         unique_terms = tuple(dict.fromkeys(terms))
@@ -297,7 +301,10 @@ class JointActionPolicy:
         )
         ambiguity_result = self.ambiguity_result(query, heuristic_ambiguity)
 
-        initial, _ = index.search_bm25(query, limit=2)
+        if initial_candidates is None:
+            initial, _ = index.search_bm25(query, limit=2)
+        else:
+            initial = list(initial_candidates[:2])
         top_score = initial[0][1] if initial else 0.0
         second_score = initial[1][1] if len(initial) > 1 else 0.0
         bm25_confidence = 1.0 - math.exp(-max(0.0, top_score))
@@ -331,9 +338,19 @@ class JointActionPolicy:
         return features
 
     def decide_layer_one(
-        self, index: SearchIndex, query: str, *, context: str = ""
+        self,
+        index: SearchIndex,
+        query: str,
+        *,
+        context: str = "",
+        initial_candidates: Sequence[tuple[object, float]] | None = None,
     ) -> ActionDecision:
-        features, ambiguity = self._extract_features_and_ambiguity(index, query, context)
+        features, ambiguity = self._extract_features_and_ambiguity(
+            index,
+            query,
+            context,
+            initial_candidates,
+        )
         if self.classifier is not None and self.classifier.fitted:
             action, confidence = self.classifier.predict(features.values())
             return ActionDecision(

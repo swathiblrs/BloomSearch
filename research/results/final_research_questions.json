@@ -1,0 +1,349 @@
+{
+  "evaluation": "Final BloomSearch research-question evidence",
+  "new_hosted_api_calls": 0,
+  "rq1_action_selection": {
+    "status": "answered as a two-stage policy",
+    "architecture_note": "Keep/rewrite/clarify is Layer 1; rerank/return-BM25 is Layer 2. Reranking is not mutually exclusive with rewriting.",
+    "layer_one_human_three_class": {
+      "macro_f1": 0.3818138971903553,
+      "per_action_f1": {
+        "keep": 0.30434782608695654,
+        "rewrite": 0.7804878048780488,
+        "clarify": 0.06060606060606061
+      },
+      "confusion_matrix_system_by_selected": {
+        "keep": {
+          "keep": 7,
+          "rewrite": 5,
+          "clarify": 8
+        },
+        "rewrite": {
+          "keep": 0,
+          "rewrite": 16,
+          "clarify": 4
+        },
+        "clarify": {
+          "keep": 19,
+          "rewrite": 0,
+          "clarify": 1
+        }
+      },
+      "per_participant": {
+        "P01": {
+          "macro_f1": 0.37606837606837606,
+          "per_action_f1": {
+            "keep": 0.46153846153846156,
+            "rewrite": 0.6666666666666666,
+            "clarify": 0.0
+          }
+        },
+        "P02": {
+          "macro_f1": 0.3666666666666667,
+          "per_action_f1": {
+            "keep": 0.1,
+            "rewrite": 0.9,
+            "clarify": 0.1
+          }
+        }
+      },
+      "unanimous_action_agreement_rate": 0.5666666666666667,
+      "pairwise_participant_agreement": [
+        {
+          "participant_a": "P01",
+          "participant_b": "P02",
+          "compared_items": 30,
+          "exact_agreement_rate": 0.5666666666666667,
+          "cohen_kappa": 0.35000000000000003
+        }
+      ]
+    },
+    "layer_one_rewrite_benefit_signal_ablation": {
+      "protocol": "5-fold stratified cross-validation repeated 10 times",
+      "target": "whether the QReCC gold rewrite improves Hit@10",
+      "feature_order": [
+        "token_count",
+        "meaningful_ratio",
+        "context_dependence",
+        "ambiguity",
+        "bm25_confidence",
+        "bm25_margin",
+        "bloom_coverage"
+      ],
+      "results": {
+        "linguistic_only": {
+          "features": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "roc_auc_mean": 0.6744634956171522,
+          "roc_auc_std": 0.02093039348739669,
+          "average_precision_mean": 0.5527700088890638,
+          "positive_f1_mean": 0.5894446110320931,
+          "macro_f1_mean": 0.6252286259917182,
+          "fold_evaluations": 50
+        },
+        "bm25_only": {
+          "features": [
+            4,
+            5
+          ],
+          "roc_auc_mean": 0.52387413843481,
+          "roc_auc_std": 0.02262645405063998,
+          "average_precision_mean": 0.4262479617431133,
+          "positive_f1_mean": 0.40667067489376246,
+          "macro_f1_mean": 0.5146345057274945,
+          "fold_evaluations": 50
+        },
+        "bloom_only": {
+          "features": [
+            6
+          ],
+          "roc_auc_mean": 0.5014897832267236,
+          "roc_auc_std": 0.0012983133444374052,
+          "average_precision_mean": 0.402074142432074,
+          "positive_f1_mean": 0.5735415523915748,
+          "macro_f1_mean": 0.28973482096246583,
+          "fold_evaluations": 50
+        },
+        "linguistic_plus_bm25": {
+          "features": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "roc_auc_mean": 0.674057937297639,
+          "roc_auc_std": 0.020253591577521896,
+          "average_precision_mean": 0.5516776681012285,
+          "positive_f1_mean": 0.5882688862969008,
+          "macro_f1_mean": 0.6251845586129576,
+          "fold_evaluations": 50
+        },
+        "all_signals": {
+          "features": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "roc_auc_mean": 0.6748355737187081,
+          "roc_auc_std": 0.020232624557852266,
+          "average_precision_mean": 0.5521126338149156,
+          "positive_f1_mean": 0.589117428420267,
+          "macro_f1_mean": 0.6258229819711504,
+          "fold_evaluations": 50
+        }
+      }
+    },
+    "layer_two_rerank_benefit": {
+      "classification": {
+        "accuracy": 0.65,
+        "precision": 0.3384615384615385,
+        "recall": 0.6984126984126984,
+        "f1": 0.455958549222798,
+        "macro_f1": 0.59898664561877,
+        "true_positive": 44,
+        "false_positive": 86,
+        "false_negative": 19,
+        "true_negative": 151
+      },
+      "feature_ablation": {
+        "BM25 scores only": {
+          "auc": 0.7046982787489118,
+          "auc_std": 0.00839756346622515,
+          "avg_precision": 0.3724152417282573
+        },
+        "Query features only": {
+          "auc": 0.6226809992632776,
+          "auc_std": 0.0172588081118925,
+          "avg_precision": 0.285560306866402
+        },
+        "Scores + query features": {
+          "auc": 0.6811265153037305,
+          "auc_std": 0.015149636752196168,
+          "avg_precision": 0.33795386583351733
+        }
+      }
+    },
+    "conclusion": "Linguistic features drive Layer 1; Bloom coverage is near chance. BM25 score features are the strongest tested Layer 2 predictor."
+  },
+  "rq2_retrieval_effectiveness": {
+    "status": "answered per layer on task-appropriate public datasets",
+    "qrecc_layer_one": {
+      "dataset": "QReCC held-out retrieval set",
+      "queries": 2765,
+      "excluded_missing_targets_after_index_deduplication": 38,
+      "recomputation_note": "Metrics were recomputed from the checked-in test index and mapping. Targets removed by index deduplication were excluded.",
+      "relevance_note": "Each query has one designated relevant passage, so Recall@10 equals Hit@10.",
+      "methods": {
+        "bm25_original": {
+          "recall_at_10": 0.3996383363471971,
+          "ndcg_at_10": 0.28886710556789774,
+          "hosted_rewrite_calls": 0
+        },
+        "always_gold_rewrite": {
+          "recall_at_10": 0.8882459312839059,
+          "ndcg_at_10": 0.6010780434801398,
+          "hosted_rewrite_calls_if_generated": 2765
+        },
+        "selective_gold_rewrite_replay": {
+          "recall_at_10": 0.7616636528028933,
+          "ndcg_at_10": 0.5184751349520015,
+          "actions": {
+            "keep": 1215,
+            "rewrite": 1549,
+            "clarify": 1
+          },
+          "hosted_rewrite_calls_if_api_supplied": 1549
+        }
+      },
+      "estimated_rewrite_usage": {
+        "method": "ceil((query characters + context characters) / 4); fixed prompts excluded",
+        "always_input_tokens": 477514,
+        "selective_input_tokens": 268298,
+        "call_reduction_vs_always": 0.4397830018083183,
+        "input_token_reduction_vs_always": 0.43813584523176285
+      },
+      "paired_comparisons": {
+        "selective_minus_bm25": {
+          "recall_at_10": {
+            "mean_difference": 0.3620253164556962,
+            "confidence_interval_95": [
+              0.34430379746835443,
+              0.3801084990958409
+            ],
+            "bootstrap_iterations": 10000,
+            "mcnemar": {
+              "first_only_successes": 1006,
+              "second_only_successes": 5,
+              "discordant_pairs": 1011,
+              "p_value_two_sided": 7.982453799253819e-292
+            }
+          },
+          "ndcg_at_10": {
+            "mean_difference": 0.2296080293841037,
+            "confidence_interval_95": [
+              0.2174821276762407,
+              0.2417379156121703
+            ],
+            "bootstrap_iterations": 10000,
+            "sign_flip_p_value_two_sided": 9.999000099990002e-05
+          }
+        },
+        "selective_minus_always_rewrite": {
+          "recall_at_10": {
+            "mean_difference": -0.12658227848101267,
+            "confidence_interval_95": [
+              -0.13924050632911392,
+              -0.11428571428571428
+            ],
+            "bootstrap_iterations": 10000,
+            "mcnemar": {
+              "first_only_successes": 3,
+              "second_only_successes": 353,
+              "discordant_pairs": 356,
+              "p_value_two_sided": 1.0246309594939703e-100
+            }
+          },
+          "ndcg_at_10": {
+            "mean_difference": -0.08260290852813842,
+            "confidence_interval_95": [
+              -0.09174005730058397,
+              -0.07412832931602574
+            ],
+            "bootstrap_iterations": 10000,
+            "sign_flip_p_value_two_sided": 9.999000099990002e-05
+          }
+        }
+      }
+    },
+    "scifact_layer_two": {
+      "dataset": "BEIR SciFact test split",
+      "recall_at_10": {
+        "bm25_only": 0.7805,
+        "rerank_all": 0.7805,
+        "selective_reranking": 0.7805,
+        "note": "All methods reorder the same top-10 pool, so recall is identical."
+      },
+      "standard_ndcg_at_10": {
+        "bm25_only": 0.663454305453947,
+        "rerank_all": 0.7015109698689124,
+        "selective_reranking_held_out": 0.7023
+      }
+    },
+    "cross_dataset_limitation": "No single public artifact supplies conversational rewrites, clarification responses, and stored hosted reranking for the same queries."
+  },
+  "rq3_intent_preservation": {
+    "status": "retrieval comparison answered; semantic comparison remains unidentifiable",
+    "retrieval_harm_comparison": {
+      "dataset": "QReCC stored generated-rewrite evaluation",
+      "queries": 2803,
+      "selective_rewrite_calls": 766,
+      "always_rewrite_retrieval_harm": {
+        "lost_hit_at_5_count": 17,
+        "lost_hit_at_5_rate_per_query": 0.006064930431680342,
+        "reduced_reciprocal_rank_count": 34,
+        "reduced_reciprocal_rank_rate_per_query": 0.012129860863360684
+      },
+      "selective_rewrite_retrieval_harm": {
+        "lost_hit_at_5_count": 17,
+        "lost_hit_at_5_rate_per_query": 0.006064930431680342,
+        "reduced_reciprocal_rank_count": 34,
+        "reduced_reciprocal_rank_rate_per_query": 0.012129860863360684
+      },
+      "finding": "Selection did not reduce retrieval-harm counts in the stored run; every observed lost hit and reciprocal-rank decrease occurred among accepted rewrites.",
+      "semantic_limitation": "P01/P02 measured 45% semantic harm for selected rewrites, but no human always-rewrite baseline exists. Retrieval harm is not equivalent to intent harm."
+    },
+    "human_selected_rewrite_harmful_rate": {
+      "evaluated_rewrites": 20,
+      "harmful_rewrite_rate": 0.45
+    },
+    "conclusion": "The stored selective policy did not reduce retrieval-harm events, and 45% of selected rewrites were judged semantically harmful. A human always-rewrite baseline was not collected and cannot be reconstructed honestly."
+  },
+  "rq4_efficiency": {
+    "status": "answered per layer with a mixed latency result",
+    "layer_one_rewriting": {
+      "method": "ceil((query characters + context characters) / 4); fixed prompts excluded",
+      "always_input_tokens": 477514,
+      "selective_input_tokens": 268298,
+      "call_reduction_vs_always": 0.4397830018083183,
+      "input_token_reduction_vs_always": 0.43813584523176285,
+      "local_latency": {
+        "scope": "local Python decision and BM25 time; hosted generation is excluded",
+        "sample_size": 300,
+        "sampling": "deterministic random sample with seed 42",
+        "bm25_original": {
+          "mean_ms": 78.87687821445675,
+          "median_ms": 76.20837551075965,
+          "p95_ms": 131.18785172700885
+        },
+        "joint_policy_gold_rewrite_replay": {
+          "mean_ms": 178.8034703648494,
+          "median_ms": 176.561291445978,
+          "p95_ms": 269.7788500285242
+        }
+      }
+    },
+    "layer_two_reranking": {
+      "reranking_calls": 130,
+      "reranking_call_rate": 0.43333333333333335,
+      "reranking_call_reduction_vs_always": 0.5666666666666667,
+      "selected_tokens": 188619,
+      "always_rerank_tokens": 439147,
+      "token_reduction_vs_always": 0.5704877865498341,
+      "average_hosted_latency_across_all_queries_seconds": 1.144133333333334,
+      "average_latency_per_selected_call_seconds": 2.640307692307694,
+      "always_rerank_average_latency_seconds": 2.929533333333333,
+      "average_hosted_latency_reduction_vs_always": 0.6094486038731992
+    },
+    "conclusion": "Selective policies reduce hosted calls and tokens. Layer 2 also reduces average hosted latency while preserving retrieval quality, but Layer 1 adds local decision latency and therefore is not faster than BM25 alone."
+  },
+  "overall_conclusion": "RQ1, RQ2, and RQ4 are answered at the architecture's two layers. RQ3 has a negative retrieval-harm result and a 45% selected-rewrite semantic-harm result, but the semantic always-rewrite comparison was never collected."
+}
