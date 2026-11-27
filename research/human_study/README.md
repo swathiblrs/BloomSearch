@@ -83,16 +83,18 @@ Participants may reasonably disagree with the system. Clear-looking ambiguity
 items and context-dependent keep items must not be explained or relabeled
 during a session; those disagreements are study findings.
 
-## Combine responses
+## Analyze completed responses
 
-After every participant completes the study, combine the participant response
-files into one CSV with a single header. Do not add `system_action`; the
-analysis joins it from the private key.
+After every participant completes the study, pass each response file to the
+analysis command. Do not add `system_action`; the analysis joins it from the
+private key.
 
 Run:
 
 ```bash
-python research/human_study/analyze_responses.py combined_responses.csv \
+python research/human_study/analyze_responses.py \
+  research/human_study/participant_packets/P01_responses.csv \
+  research/human_study/participant_packets/P02_responses.csv \
   --study-key research/human_study/study_items.csv \
   --output research/results/human_study.json
 ```
@@ -112,6 +114,10 @@ python research/human_study/analyze_responses.py combined_responses.csv \
 - **Agreement:** fraction of items for which participants unanimously chose the
   same action.
 
-The pilot is complete only after real responses are collected and the report
-states the participant count, sampling method, blinding procedure, and
-limitations.
+## Completion status
+
+P01 and P02 completed all 30 items. The final machine-readable metrics are in
+`research/results/human_study.json`, and their interpretation, research-
+question conclusions, and limitations are documented in
+`research/HUMAN_STUDY_RESULTS.md`. The two-participant pilot is complete; no
+P03 response is required by the study protocol.

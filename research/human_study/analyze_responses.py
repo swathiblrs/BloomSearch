@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 from collections import defaultdict
 import csv
+from itertools import combinations
 import json
 from pathlib import Path
 from statistics import mean
@@ -31,6 +32,55 @@ def optional_int(row: dict[str, str], field: str) -> int | None:
 
 def _safe_rate(numerator: int, denominator: int) -> float | None:
     return numerator / denominator if denominator else None
+
+
+def action_confusion_matrix(rows: list[dict[str, str]]) -> dict[str, dict[str, int]]:
+    """Count participant-selected actions for each hidden system action."""
+    return {
+        system_action: {
+            selected_action: sum(
+                row["system_action"] == system_action
+                and row["correct_action"].strip().lower() == selected_action
+                for row in rows
+            )
+            for selected_action in ACTIONS
+        }
+        for system_action in ACTIONS
+    }
+
+
+def pairwise_agreement(rows: list[dict[str, str]]) -> list[dict[str, object]]:
+    """Calculate exact agreement and Cohen's kappa for participant pairs."""
+    by_participant: dict[str, dict[str, str]] = defaultdict(dict)
+    for row in rows:
+        by_participant[row["participant_id"]][row["item_id"]] = row[
+            "correct_action"
+        ].strip().lower()
+
+    results: list[dict[str, object]] = []
+    for participant_a, participant_b in combinations(sorted(by_participant), 2):
+        labels_a = by_participant[participant_a]
+        labels_b = by_participant[participant_b]
+        shared_items = sorted(set(labels_a) & set(labels_b))
+        if not shared_items:
+            continue
+        observed = mean(labels_a[item] == labels_b[item] for item in shared_items)
+        expected = sum(
+            mean(labels_a[item] == action for item in shared_items)
+            * mean(labels_b[item] == action for item in shared_items)
+            for action in ACTIONS
+        )
+        kappa = (observed - expected) / (1 - expected) if expected < 1 else 1.0
+        results.append(
+            {
+                "participant_a": participant_a,
+                "participant_b": participant_b,
+                "compared_items": len(shared_items),
+                "exact_agreement_rate": observed,
+                "cohen_kappa": kappa,
+            }
+        )
+    return results
 
 
 def join_private_key(
@@ -127,6 +177,19 @@ def analyze(
         action: _task_success_summary([row for row in rows if row["system_action"] == action])
         for action in ACTIONS
     }
+    per_participant_action = {}
+    for participant in sorted(participants):
+        participant_rows = [
+            row for row in rows if row["participant_id"].strip() == participant
+        ]
+        participant_macro, participant_per_action = macro_f1(
+            [row["correct_action"].strip().lower() for row in participant_rows],
+            [row["system_action"].strip().lower() for row in participant_rows],
+        )
+        per_participant_action[participant] = {
+            "macro_f1": participant_macro,
+            "per_action_f1": participant_per_action,
+        }
     return {
         "participants": len(participants),
         "responses": len(rows),
@@ -135,7 +198,10 @@ def analyze(
         "action_policy": {
             "macro_f1": overall_macro_f1,
             "per_action_f1": per_action_f1,
+            "confusion_matrix_system_by_selected": action_confusion_matrix(rows),
+            "per_participant": per_participant_action,
             "unanimous_action_agreement_rate": agreement,
+            "pairwise_participant_agreement": pairwise_agreement(rows),
         },
         "intent_preservation": {
             "evaluated_rewrites": len(intent_labels),
@@ -162,7 +228,12 @@ def analyze(
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("responses", type=Path)
+    parser.add_argument(
+        "responses",
+        type=Path,
+        nargs="+",
+        help="One or more blinded participant response CSV files.",
+    )
     parser.add_argument(
         "--study-key",
         type=Path,
@@ -171,8 +242,10 @@ def main() -> int:
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
 
-    with args.responses.open(newline="", encoding="utf-8") as handle:
-        responses = list(csv.DictReader(handle))
+    responses: list[dict[str, str]] = []
+    for response_path in args.responses:
+        with response_path.open(newline="", encoding="utf-8-sig") as handle:
+            responses.extend(csv.DictReader(handle))
     with args.study_key.open(newline="", encoding="utf-8") as handle:
         study_items = list(csv.DictReader(handle))
     result = analyze(responses, study_items)

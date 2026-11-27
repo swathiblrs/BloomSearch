@@ -13,7 +13,51 @@
       "rewrite": 0.7804878048780488,
       "clarify": 0.06060606060606061
     },
-    "unanimous_action_agreement_rate": 0.5666666666666667
+    "confusion_matrix_system_by_selected": {
+      "keep": {
+        "keep": 7,
+        "rewrite": 5,
+        "clarify": 8
+      },
+      "rewrite": {
+        "keep": 0,
+        "rewrite": 16,
+        "clarify": 4
+      },
+      "clarify": {
+        "keep": 19,
+        "rewrite": 0,
+        "clarify": 1
+      }
+    },
+    "per_participant": {
+      "P01": {
+        "macro_f1": 0.37606837606837606,
+        "per_action_f1": {
+          "keep": 0.46153846153846156,
+          "rewrite": 0.6666666666666666,
+          "clarify": 0.0
+        }
+      },
+      "P02": {
+        "macro_f1": 0.3666666666666667,
+        "per_action_f1": {
+          "keep": 0.1,
+          "rewrite": 0.9,
+          "clarify": 0.1
+        }
+      }
+    },
+    "unanimous_action_agreement_rate": 0.5666666666666667,
+    "pairwise_participant_agreement": [
+      {
+        "participant_a": "P01",
+        "participant_b": "P02",
+        "compared_items": 30,
+        "exact_agreement_rate": 0.5666666666666667,
+        "cohen_kappa": 0.35000000000000003
+      }
+    ]
   },
   "intent_preservation": {
     "evaluated_rewrites": 20,

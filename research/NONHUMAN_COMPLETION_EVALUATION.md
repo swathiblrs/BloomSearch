@@ -140,7 +140,7 @@ human judgments.
 **The automatic portion is answered.** Calls, tokens, local latency, and stored
 hosted latency are measured. User task success remains part of the human study.
 
-## Remaining Work
+## Work Remaining at This Evaluation Stage
 
 After this evaluation, the remaining required work is human annotation and
 analysis for:
@@ -153,3 +153,10 @@ analysis for:
 The final paper should also discuss the negative Bloom ablation result and
 avoid claiming that Bloom certainty improves NLP decisions until it is tested
 with a more informative certainty feature on a suitable collection.
+
+## Subsequent completion
+
+P01 and P02 later completed the planned human evaluation. The final human
+metrics and research-question conclusions are reported in
+[`HUMAN_STUDY_RESULTS.md`](HUMAN_STUDY_RESULTS.md). No P03 response is required
+by the two-participant pilot protocol.

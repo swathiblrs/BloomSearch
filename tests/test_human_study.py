@@ -1,6 +1,6 @@
 import unittest
 
-from research.human_study.analyze_responses import analyze, macro_f1
+from research.human_study.analyze_responses import analyze, macro_f1, pairwise_agreement
 from research.human_study.prepare_items import (
     parse_interpretations,
     targeted_clarification,
@@ -94,6 +94,22 @@ class HumanStudyMetricTests(unittest.TestCase):
             result["clarification"]["primary_perceived_task_success"]["success_rate"],
             0.0,
         )
+        self.assertEqual(
+            result["action_policy"]["confusion_matrix_system_by_selected"]["keep"]["keep"],
+            1,
+        )
+
+    def test_pairwise_agreement_reports_exact_agreement_and_kappa(self):
+        rows = [
+            {"participant_id": "P01", "item_id": "Q01", "correct_action": "keep"},
+            {"participant_id": "P01", "item_id": "Q02", "correct_action": "rewrite"},
+            {"participant_id": "P02", "item_id": "Q01", "correct_action": "keep"},
+            {"participant_id": "P02", "item_id": "Q02", "correct_action": "clarify"},
+        ]
+        result = pairwise_agreement(rows)
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0]["compared_items"], 2)
+        self.assertEqual(result[0]["exact_agreement_rate"], 0.5)
 
 
 if __name__ == "__main__":

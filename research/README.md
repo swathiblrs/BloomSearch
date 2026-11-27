@@ -30,6 +30,7 @@ No hosted-model API is called. Reranker tokens are estimated as payload characte
 The automatic single-signal versus combined-signal ablation, paired confidence
 intervals, significance tests, and local timing are documented in
 [`NONHUMAN_COMPLETION_EVALUATION.md`](NONHUMAN_COMPLETION_EVALUATION.md). The
-human study remains separate because intent preservation, clarification
-usefulness, and user task success cannot be inferred from retrieval metrics.
+completed two-participant evaluation of intent preservation, clarification
+usefulness, perceived task success, trust, and action agreement is documented
+in [`HUMAN_STUDY_RESULTS.md`](HUMAN_STUDY_RESULTS.md).
 
