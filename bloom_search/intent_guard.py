@@ -9,8 +9,41 @@ QUESTION_WORDS = {
 
 RESTRICTIONS = {
     "city", "country", "state", "year", "month",
-    "before", "after", "only", "exactly",
+    "before", "after", "only", "exactly", "first",
+    "last", "most", "least",
 }
+
+CONTENT_STOPWORDS = {
+    "a", "an", "the", "and", "or", "but", "of", "for", "to",
+    "in", "on", "at", "by", "with", "from", "about", "is", "are",
+    "was", "were", "be", "been", "being", "do", "does", "did",
+    "have", "has", "had", "can", "could", "should", "would", "will",
+    "may", "might", "must", "what", "who", "when", "where", "why",
+    "how", "which", "this", "that", "these", "those", "it", "he",
+    "she", "they", "him", "her", "them", "his", "hers", "their",
+    "its", "i", "you", "we", "me", "us", "my", "your", "our",
+}
+
+
+def _content_stem(token: str) -> str:
+    """Apply small, dependency-free normalization for anchor comparison."""
+    token = token.lower().rstrip("'s")
+    if len(token) > 6 and token.endswith("ing"):
+        return token[:-3]
+    if len(token) > 5 and token.endswith("ed"):
+        return token[:-2]
+    if len(token) > 4 and token.endswith("s") and not token.endswith("ss"):
+        return token[:-1]
+    return token
+
+
+def _content_anchors(text: str) -> set[str]:
+    return {
+        _content_stem(token)
+        for token in re.findall(r"\b[a-zA-Z][a-zA-Z']+\b", text)
+        if token.lower() not in CONTENT_STOPWORDS
+        and token.lower() not in RESTRICTIONS
+    }
 
 
 def _numbers_and_dates(text: str) -> set[str]:
@@ -210,6 +243,59 @@ def preserves_intent(
             "Unsupported restrictions added: "
             + ", ".join(sorted(added_restrictions))
         )
+
+    missing_restrictions = (
+        original_words & RESTRICTIONS
+    ) - (
+        rewritten_words & RESTRICTIONS
+    )
+
+    if missing_restrictions:
+        problems.append(
+            "Original restrictions removed: "
+            + ", ".join(sorted(missing_restrictions))
+        )
+
+    # Preserve the query's main lexical anchors. Contextual rewrites may add an
+    # entity, but they should not silently discard half or more of a query's
+    # topic-bearing words (for example, dropping "moves" from "What moves was
+    # he known for?").
+    original_anchors = _content_anchors(original_query)
+    rewritten_anchors = _content_anchors(rewritten_query)
+    missing_anchors = original_anchors - rewritten_anchors
+    if (
+        len(original_anchors) >= 2
+        and bool(original_anchors & rewritten_anchors)
+        and len(missing_anchors) / len(original_anchors) >= 0.5
+    ):
+        problems.append(
+            "Rewrite dropped important query terms: "
+            + ", ".join(sorted(missing_anchors))
+        )
+
+    # "Else" signals that the user wants an additional fact, not a repetition
+    # of a previous question. A standalone rewrite must retain that constraint.
+    if (
+        "else" in original_words
+        and not rewritten_words.intersection({"else", "other", "another", "additional"})
+    ):
+        problems.append("Rewrite removed the continuation meaning of 'else'")
+
+    # Protect the semantic roles in a common but damaging reversal:
+    # "Who was he accused of assaulting?" asks for the object, whereas
+    # "Who was accused of assaulting Jack White?" asks for the subject.
+    original_object_question = re.match(
+        r"^\s*who\s+was\s+(?!accused\b).+?\s+accused\s+of\b",
+        original_query,
+        flags=re.IGNORECASE,
+    )
+    rewritten_subject_question = re.match(
+        r"^\s*who\s+was\s+accused\s+of\b",
+        rewritten_query,
+        flags=re.IGNORECASE,
+    )
+    if original_object_question and rewritten_subject_question:
+        problems.append("Rewrite reversed who performed and received the action")
 
     # Check whether the question form changed.
     original_form = _question_form(original_query)

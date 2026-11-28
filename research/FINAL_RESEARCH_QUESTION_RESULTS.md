@@ -112,12 +112,15 @@ on the 20 QReCC items in the blinded pilot:
 
 | Condition | Rewrites checked | Guard-rejected | Automatic harmful-rewrite rate |
 |---|---:|---:|---:|
-| Always rewrite | 20 | 1 | **5.00%** |
-| Selective rewrite | 10 | 1 | **10.00%** |
+| Always rewrite | 20 | 5 | **25.00%** |
+| Selective rewrite | 10 | 5 | **50.00%** |
 
-The rejected item was Q25 in both conditions. The selective rate was 5
-percentage points higher, so this common automatic semantic proxy also does
-not support the hypothesis that selection reduces harmful rewrites.
+The improved guard rejected Q01, Q10, Q11, Q18, and Q25 for dropping important
+topic terms, removing continuation meaning, reversing semantic roles, or
+removing constraints. These are the same five failure patterns identified in
+the participant study. The selective rate was 25 percentage points higher, so
+this common automatic semantic proxy also does not support the hypothesis that
+selection reduces harmful rewrites.
 
 P01/P02 judged 45% of the shown selected rewrites semantically harmful. They
 were not originally shown rewrites for the policy's keep cases, so a human
